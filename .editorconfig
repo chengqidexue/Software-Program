@@ -14,3 +14,5 @@ indent_size = 4
 # indent_size: 缩进的宽度，即列数，整数。如果indent_style为tab，则此属性默认为tab_width。
 # tab_width: 设置tab的列数。默认是indent_size。
 # 上传文件的代码格式中，一个tab均应表示4个空格，而浏览器默认显示8个空格。
+# 还有一个办法，在Chrome浏览器中安装插件，即下方的.rar包，使得在Chrome中打开GitHub页面代码显示Tab为4空格。
+# 将.rar解压到电脑，然后Chrome-更多工具-扩展程序中加载工具，选定解压出的一整个文件夹，插件即加载完成。
