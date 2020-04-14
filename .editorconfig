@@ -5,3 +5,12 @@ root = true
 [*]
 indent_style = tab
 indent_size = 4
+
+# GitHub是支持EditorConfig的。只需在你的Repository根目录下(注意不是.git文件夹下)新建文件
+# .editorconfig
+# 将上面的代码粘贴进去。
+# 不仅仅对浏览有效，在线编辑时也是有效的。
+# indent_style: 可以是tab或space。tab是hard tab，space为soft tab(按下的是Tab键，出来的实际是空格)。
+# indent_size: 缩进的宽度，即列数，整数。如果indent_style为tab，则此属性默认为tab_width。
+# tab_width: 设置tab的列数。默认是indent_size。
+# 上传文件的代码格式中，一个tab均应表示4个空格，而浏览器默认显示8个空格。
