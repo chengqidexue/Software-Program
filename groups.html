@@ -12,47 +12,39 @@
     <script src="./js/Move.js"></script>
     <script src="./iconfont/iconfont.js"></script>
     <script>
-        window.onload=function()
-		{
+        window.onload=function () {
             var hot_group=document.getElementById('hot-group');
-            var ohot_group_items=hot_group.getElementsByTagName('img');
-            var ohot_group_myborders=hot_group.getElementsByClassName('myborder');
-            for(var j=0;j<ohot_group_items.length;j++)
-			{
-                ohot_group_items[j].index=j;
-                ohot_group_items[j].onmouseover=function()
-				{
-                    ohot_group_myborders[this.index].target=ohot_group_myborders[this.index].offsetWidth;
-                    ohot_group_myborders[this.index].style.width='0';
-                    Mouse(ohot_group_myborders[this.index],ohot_group_myborders[this.index].target,'width')
+                var ohot_group_items=hot_group.getElementsByTagName('img');
+                var ohot_group_myborders=hot_group.getElementsByClassName('myborder');
+                for(var j=0;j<ohot_group_items.length;j++){
+                    ohot_group_items[j].index=j;
+                    ohot_group_items[j].onmouseover=function () {
+                        ohot_group_myborders[this.index].target=ohot_group_myborders[this.index].offsetWidth;
+                        ohot_group_myborders[this.index].style.width='0';
+                        Mouse(ohot_group_myborders[this.index],ohot_group_myborders[this.index].target,'width')
+                    }
+                    ohot_group_items[j].onmouseout=function () {
+                        ohot_group_myborders[this.index].style.width=ohot_group_myborders[this.index].target+'px';
+                    }
                 }
-                ohot_group_items[j].onmouseout=function()
-				{
-                    ohot_group_myborders[this.index].style.width=ohot_group_myborders[this.index].target+'px';
-                }
-            }
             var inter_group=document.getElementById('inter-group');
             var ointer_group_items=inter_group.getElementsByTagName('img');
             var ointer_group_myborders=inter_group.getElementsByClassName('myborder');
-            for(var j=0;j<ohot_group_items.length;j++)
-			{
+            for(var j=0;j<ohot_group_items.length;j++){
                 ointer_group_items[j].index=j;
-                ointer_group_items[j].onmouseover=function()
-				{
+                ointer_group_items[j].onmouseover=function () {
                     ointer_group_myborders[this.index].target=ointer_group_myborders[this.index].offsetWidth;
                     ointer_group_myborders[this.index].style.width='0';
                     Mouse(ointer_group_myborders[this.index],ointer_group_myborders[this.index].target,'width')
                 };
-                ointer_group_items[j].onmouseout=function()
-				{
+                ointer_group_items[j].onmouseout=function () {
                     ointer_group_myborders[this.index].style.width=ointer_group_myborders[this.index].target+'px';
                 }
             }
         }
     </script>
     <style>
-        .hot-group
-		{
+        .hot-group{
             border-radius: 7px;
             overflow: hidden;
             height: auto;
@@ -61,251 +53,305 @@
             transition: width 1s;
             transition: height 1s;
         }
-        .hot-group:hover
-		{
+        .hot-group:hover{
             width: 103%;
             box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
         }
         .hot-group-item{position: relative;width: 100%;height: 90px}
         .hot-group .pic{position:absolute;width: 30%;height: 100%;left: 0;top: 0}
-        .hot-group .pic img
-		{
-            width: 70%;
-			height: 70%;
+        .hot-group .pic img{
+            width: 70%;height: 70%;
         }
         .hot-group .info{position:absolute;width:70%;height: 100%;left: 30%;top: 10px}
         .hot-group .info > a{position: absolute;left: 0;width:100%;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
-        .hot-group .myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
+        .myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
         .big-border{width: 100%;height:1px;background: cornflowerblue}
         .switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }
     </style>
 </head>
-
 <body>
-	<div class="container_fluid">
-    	<div class="row" style="background-color: #030e11;">
-        	<div class="col_md_12 " >
-            	<div id="menu">
-                	<li> <a href="#" >花瓣</a></li>
-                	<li> <a href="#" >书籍</a></li>
-                	<li> <a href="#" >影视</a></li>
-                	<li> <a href="#" >话题广场</a></li>
-               		<li> <a href="#" >小组</a></li>
-                	<li> <a href="#" >消息通知</a></li>
-                	<li id="drop1">
-                		<a href="#">账号</a>
-                    	<div id="dropdown1" class="dropdown_1">
-                    	    <div class="col_1">
-                        	    <ul class="simple">
-                            	    <li><a href="#">个人主页</a></li>
-                                	<li><a href="#">我的小组</a></li>
-                                	<li><a href="#">我参与的话题</a></li>
-                                	<li><a href="#">退出账号</a></li>
-                            	</ul>
-                        	</div>
-                    	</div>
-                	</li>
-                	<li><a href="" >联系我们</a></li>
-            	</div>
-        	</div>
-    	</div>
-    	<div class="row" style="background: cornflowerblue">
-        	<div class="col-md-4 offset-md-6" >
-            	<div class="input-group mb-3"  >
-                	<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
-                	<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
-                    	<div class="btn-group">
-                        	<button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
-                        	<div class="dropdown-menu">
-                            	<a class="dropdown-item" href="#">全部</a>
-                            	<a class="dropdown-item" href="#">书籍</a>
-                            	<a class="dropdown-item" href="#">影视</a>
-                            	<a class="dropdown-item" href="#">小组</a>
-                            	<a class="dropdown-item" href="#">话题</a>
-                        	</div>
-                    	</div>
-                	</div>
-            	</div>
-        	</div>
-    	</div>
-	</div>
-	<div class="container_fluid" style="margin: 30px 0">
-    	<div class="row">
-        	<div class="col-md-6 offset-md-1">
-            	<div style="background: #CC5C5D ;height: 400px;width: 100%">
-                	<ul>
-                    	<li>
-                        	<div class="d-flex" >
-                            	<div class="pic align-self-center" ><img src="fire2.jpg" style=";width: 70px;height: 70px;padding: 10px"></div>
-                            	<div class="info">
-                                	<span style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">hellowww.baidu.comhello@baidu.com</span>
-                                	<div class="d-flex p-2">
-                                    	<span class="num mr-auto">已有xx人入组</span>
-                                    	<a class="join" href="javascript:;">加入小组</a>
-                                	</div>
-                            	</div>
-                        	</div>
-                    	</li>
-                	</ul>
-            	</div>
-            	<div style="width: 100%;;margin: 30px">
-                	<div class="allcenter d-flex align-items-center">
-                    	<i class="iconfont icon-shangyiyeqianyiye" style="font-size: 30px;color: cornflowerblue"></i>
-                    	<div class="switch-item text-center">1</div>
-                    	<div class="switch-item text-center">2</div>
-                    	<div class="switch-item text-center">3</div>
-                    	<div class="switch-item text-center">4</div>
-                    	<div class="switch-item text-center">...</div>
-                    	<div class="switch-item text-center">10</div>
-                    	<i class="iconfont icon-xiayiyehouyiye" style="font-size: 30px;color: cornflowerblue"></i>
-                	</div>
-            	</div>
-        	</div>
-        	<div class="col-md-3 offset-md-1" >
-        		<div class="hot-group" id="hot-group" >
-            		<div class="big-border"></div>
-            		<h4 class=" text-center p-4" style="color: blue; ">热门小组</h4>
-            		<ul>
-                		<li>
-                    		<div class="hot-group-item">
-                        		<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                        		<div class="info">
-                            		<span >hellowww.baidu.comhello@baidu.com</span>
-                            		<div style="position: relative;width: 100%;padding-top: 21px">
-                                		<span >已有xx人入组</span>
-                                		<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                            		</div>
-                        		</div>
-                    		</div>
-                    		<div class="myborder"></div>
-                		</li>
-                		<li>
-                    		<div class="hot-group-item">
-                        		<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                        		<div class="info">
-                            		<span >hellowww.baidu.comhello@baidu.com</span>
-                            		<div style="position: relative;width: 100%;padding-top: 21px">
-                                		<span >已有xx人入组</span>
-                                		<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                            		</div>
-                        		</div>
-                    		</div>
-                    		<div class="myborder"></div>
-                		</li>
-                    	<li>
-                			<div class="hot-group-item">
-                    			<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                    			<div class="info">
-                        			<span >hellowww.baidu.comhello@baidu.com</span>
-                        			<div style="position: relative;width: 100%;padding-top: 21px">
-                        	    		<span >已有xx人入组</span>
-                        	    		<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                        			</div>
-                    			</div>
-                			</div>
-                			<div class="myborder"></div>
-            			</li>
-                    	<li>
-                			<div class="hot-group-item">
-                    			<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                    			<div class="info">
-                        			<span >hellowww.baidu.comhello@baidu.com</span>
-                        			<div style="position: relative;width: 100%;padding-top: 21px">
-                            			<span >已有xx人入组</span>
-                            			<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                        			</div>
-                    			</div>
-                			</div>
-                			<div class="myborder"></div>
-            			</li>
-                    	<li>
-                			<div class="hot-group-item">
-                    			<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                    			<div class="info">
-                        			<span >hellowww.baidu.comhello@baidu.com</span>
-                        			<div style="position: relative;width: 100%;padding-top: 21px">
-                            			<span >已有xx人入组</span>
-                            			<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                        			</div>
-                    			</div>
-                			</div>
-                			<div class="myborder"></div>
-            			</li>
-            		</ul>
-        		</div>
-        		<div id="inter-group" class="hot-group" >
-            		<div class="big-border"></div>
-            		<h4 class=" text-center p-4" style="color: blue; ">猜你喜欢</h4>
-            		<ul>
-                		<li>
-                    		<div class="hot-group-item">
-                        		<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                        		<div class="info">
-                            		<span >hellowww.baidu.comhello@baidu.com</span>
-                            		<div style="position: relative;width: 100%;padding-top: 21px">
-                                		<span >已有xx人入组</span>
-                                		<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                            		</div>
-                        		</div>
-                    		</div>
-                    		<div class="myborder"></div>
-                		</li>
-                		<li>
-                    		<div class="hot-group-item">
-                        		<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                        		<div class="info">
-                            		<span >hellowww.baidu.comhello@baidu.com</span>
-                            		<div style="position: relative;width: 100%;padding-top: 21px">
-                                		<span >已有xx人入组</span>
-                                		<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                            		</div>
-                        		</div>
-                    		</div>
-                    		<div class="myborder"></div>
-                		</li>
-                    	<li>
-                			<div class="hot-group-item">
-                    			<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                    			<div class="info">
-                        			<span >hellowww.baidu.comhello@baidu.com</span>
-                        			<div style="position: relative;width: 100%;padding-top: 21px">
-                            			<span >已有xx人入组</span>
-                            			<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                        			</div>
-                    			</div>
-                			</div>
-                			<div class="myborder"></div>
-            			</li>
-                		<li>
-                			<div class="hot-group-item">
-                    			<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                    			<div class="info">
-                        			<span >hellowww.baidu.comhello@baidu.com</span>
-                        			<div style="position: relative;width: 100%;padding-top: 21px">
-                            			<span >已有xx人入组</span>
-                            			<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                        			</div>
-                    			</div>
-                			</div>
-                			<div class="myborder"></div>
-            			</li>
-                		<li>
-                			<div class="hot-group-item">
-                    			<div class="pic"><img src="fire2.jpg" class="allcenter"></div>
-                    			<div class="info">
-                        			<span >hellowww.baidu.comhello@baidu.com</span>
-                        			<div style="position: relative;width: 100%;padding-top: 21px">
-                            			<span >已有xx人入组</span>
-                            			<a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
-                        			</div>
-                    			</div>
-                			</div>
-                			<div class="myborder"></div>
-            			</li>
-            		</ul>
-        		</div>
-    		</div>
-    	</div>
-	</div>
+<div class="container_fluid">
+    <div class="row" style="background-color: #030e11;">
+        <div class="col_md_12 " >
+            <div id="menu">
+                <li> <a href="#" >花瓣</a></li>
+                <li> <a href="#" >书籍</a></li>
+                <li> <a href="#" >影视</a></li>
+                <li> <a href="#" >话题广场</a></li>
+                <li> <a href="#" >小组</a></li>
+                <li > <a href="#" >消息通知</a></li>
+                <li id="drop1"><a href="#">账号</a>
+                    <div id="dropdown1" class="dropdown_1">
+                        <div class="col_1">
+                            <ul class="simple">
+                                <li><a href="#">个人主页</a></li>
+                                <li><a href="#">我的小组</a></li>
+                                <li><a href="#">我参与的话题</a></li>
+                                <li><a href="#">退出账号</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="" >联系我们</a></li>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background: cornflowerblue">
+        <div class="col-md-5 offset-md-1">
+            <div class="d-flex">
+                <h1 class="p-2" style="font-size: 40px;font-weight: bold;line-height: 74px">小组</h1>
+                <p class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;">热点</p>
+                <p class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;">书籍</p>
+                <p class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;">影视</p>
+                <p class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;">文化</p>
+                <p class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;">生活</p>
+                <p class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;">科技</p>        
+            </div>
+        </div>
+        <div class="col-md-4" >
+            <div class="input-group mb-3 allcenter"  >
+                <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+                <div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">全部</a>
+                            <a class="dropdown-item" href="#">书籍</a>
+                            <a class="dropdown-item" href="#">影视</a>
+                            <a class="dropdown-item" href="#">文化</a>
+                            <a class="dropdown-item" href="#">生活</a>
+                            <a class="dropdown-item" href="#">科技</a>
+                        </div></div></div></div></div></div>
+</div>
+<div class="container_fluid" style="margin: 30px 0">
+    <div class="row">
+        <div class="col-md-6 offset-md-1">
+            <h1 >
+                <span class="head-title">文化</span>
+                <span class="head-info" style="font-size: 18px;;margin-left: 20px">宗教 火狐</span>
+            </h1>
+            <div class="channel-item mb-2" style="position: relative">
+                <div style="position: absolute;right: 0;color: #bd2c00"><i class="iconfont icon-icon-" style="color: #bd2c00;padding-right: 3px"></i>热度</div>
+                <h3 ><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
+                <div class="block-info p-2" style="width: 100%;background: snow">
+                    <p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                </div>
+                <div class="source d-flex">
+                    <span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
+                    <span class="pubtime p-2 mr-auto">今天0 8：21</span>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">点赞</i> </div>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">评论</i> </div>
+                </div>
+                <div class="myborder"></div>
+            </div>
+            <div class="channel-item mb-2" style="position: relative">
+                <div style="position: absolute;right: 0;color: #bd2c00"><i class="iconfont icon-icon-" style="color: #bd2c00;padding-right: 3px"></i>热度</div>
+                <h3 ><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
+                <div class="block-info p-2" style="width: 100%;background: snow">
+                    <p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                </div>
+                <div class="source d-flex">
+                    <span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
+                    <span class="pubtime p-2 mr-auto">今天0 8：21</span>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">点赞</i> </div>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">评论</i> </div>
+                </div>
+                <div class="myborder"></div>
+            </div>
+            <div class="channel-item mb-2" style="position: relative">
+                <div style="position: absolute;right: 0;color: #bd2c00"><i class="iconfont icon-icon-" style="color: #bd2c00;padding-right: 3px"></i>热度</div>
+                <h3 ><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
+                <div class="block-info p-2" style="width: 100%;background: snow">
+                    <p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                </div>
+                <div class="source d-flex">
+                    <span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
+                    <span class="pubtime p-2 mr-auto">今天0 8：21</span>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">点赞</i> </div>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">评论</i> </div>
+                </div>
+                <div class="myborder"></div>
+            </div>
+            <div class="channel-item mb-2" style="position: relative">
+                <div style="position: absolute;right: 0;color: #bd2c00"><i class="iconfont icon-icon-" style="color: #bd2c00;padding-right: 3px"></i>热度</div>
+                <h3 ><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
+                <div class="block-info p-2" style="width: 100%;background: snow">
+                    <p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                </div>
+                <div class="source d-flex">
+                    <span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
+                    <span class="pubtime p-2 mr-auto">今天0 8：21</span>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">点赞</i> </div>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">评论</i> </div>
+                </div>
+                <div class="myborder"></div>
+            </div>
+            <div class="channel-item mb-2" style="position: relative">
+                <div style="position: absolute;right: 0;color: #bd2c00"><i class="iconfont icon-icon-" style="color: #bd2c00;padding-right: 3px"></i>热度</div>
+                <h3 ><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
+                <div class="block-info p-2" style="width: 100%;background: snow">
+                    <p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                </div>
+                <div class="source d-flex">
+                    <span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
+                    <span class="pubtime p-2 mr-auto">今天0 8：21</span>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">点赞</i> </div>
+                    <div class="p-2"><i class="iconfont icon-xiayiyehouyiye">评论</i> </div>
+                </div>
+                <div class="myborder"></div>
+            </div>
+            <div style="width: 100%;margin: 30px;position: relative">
+                <div class="allcenter d-flex align-items-center">
+                    <i class="iconfont icon-shangyiyeqianyiye" style="font-size: 30px;color: cornflowerblue"></i>
+                    <div class="switch-item text-center">1</div>
+                    <div class="switch-item text-center">2</div>
+                    <div class="switch-item text-center">3</div>
+                    <div class="switch-item text-center">4</div>
+                    <div class="switch-item text-center">...</div>
+                    <div class="switch-item text-center">10</div>
+                    <i class="iconfont icon-xiayiyehouyiye" style="font-size: 30px;color: cornflowerblue"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 offset-md-1" >
+        <div class="hot-group" id="hot-group" >
+            <div class="big-border"></div>
+            <h4 class=" text-center p-4" style="color: blue; ">热门小组</h4>
+            <ul>
+                <li>
+                    <div class="hot-group-item">
+                        <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                        <div class="info">
+                            <span >hellowww.baidu.comhello@baidu.com</span>
+                            <div style="position: relative;width: 100%;padding-top: 21px">
+                                <span >已有xx人入组</span>
+                                <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="myborder"></div>
+                </li>
+                <li>
+                    <div class="hot-group-item">
+                        <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                        <div class="info">
+                            <span >hellowww.baidu.comhello@baidu.com</span>
+                            <div style="position: relative;width: 100%;padding-top: 21px">
+                                <span >已有xx人入组</span>
+                                <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="myborder"></div>
+                </li>  <li>
+                <div class="hot-group-item">
+                    <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                    <div class="info">
+                        <span >hellowww.baidu.comhello@baidu.com</span>
+                        <div style="position: relative;width: 100%;padding-top: 21px">
+                            <span >已有xx人入组</span>
+                            <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="myborder"></div>
+            </li>  <li>
+                <div class="hot-group-item">
+                    <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                    <div class="info">
+                        <span >hellowww.baidu.comhello@baidu.com</span>
+                        <div style="position: relative;width: 100%;padding-top: 21px">
+                            <span >已有xx人入组</span>
+                            <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="myborder"></div>
+            </li>  <li>
+                <div class="hot-group-item">
+                    <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                    <div class="info">
+                        <span >hellowww.baidu.comhello@baidu.com</span>
+                        <div style="position: relative;width: 100%;padding-top: 21px">
+                            <span >已有xx人入组</span>
+                            <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="myborder"></div>
+            </li>
+            </ul>
+        </div>
+        <div id="inter-group" class="hot-group" >
+            <div class="big-border"></div>
+            <h4 class=" text-center p-4" style="color: blue; ">猜你喜欢</h4>
+            <ul>
+                <li>
+                    <div class="hot-group-item">
+                        <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                        <div class="info">
+                            <span >hellowww.baidu.comhello@baidu.com</span>
+                            <div style="position: relative;width: 100%;padding-top: 21px">
+                                <span >已有xx人入组</span>
+                                <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="myborder"></div>
+                </li>
+                <li>
+                    <div class="hot-group-item">
+                        <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                        <div class="info">
+                            <span >hellowww.baidu.comhello@baidu.com</span>
+                            <div style="position: relative;width: 100%;padding-top: 21px">
+                                <span >已有xx人入组</span>
+                                <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="myborder"></div>
+                </li>  <li>
+                <div class="hot-group-item">
+                    <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                    <div class="info">
+                        <span >hellowww.baidu.comhello@baidu.com</span>
+                        <div style="position: relative;width: 100%;padding-top: 21px">
+                            <span >已有xx人入组</span>
+                            <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="myborder"></div>
+            </li>  <li>
+                <div class="hot-group-item">
+                    <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                    <div class="info">
+                        <span >hellowww.baidu.comhello@baidu.com</span>
+                        <div style="position: relative;width: 100%;padding-top: 21px">
+                            <span >已有xx人入组</span>
+                            <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="myborder"></div>
+            </li>  <li>
+                <div class="hot-group-item">
+                    <div class="pic"><img src="fire2.jpg" class="allcenter"></div>
+                    <div class="info">
+                        <span >hellowww.baidu.comhello@baidu.com</span>
+                        <div style="position: relative;width: 100%;padding-top: 21px">
+                            <span >已有xx人入组</span>
+                            <a class="join" href="javascript:;" style="position:absolute;right: 8%">加入小组</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="myborder"></div>
+            </li>
+            </ul>
+        </div >
+    </div>
+    </div>
+</div>
 </body>
 </html>
