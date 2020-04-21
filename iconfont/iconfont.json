@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2468956",
+      "name": "发布",
+      "font_class": "fabu",
+      "unicode": "e7d9",
+      "unicode_decimal": 59353
+    },
+    {
+      "icon_id": "13213183",
+      "name": "评 论",
+      "font_class": "pinglun",
+      "unicode": "e750",
+      "unicode_decimal": 59216
+    },
+    {
+      "icon_id": "1089296",
+      "name": "点赞",
+      "font_class": "buoumaotubiao16",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "2308449",
+      "name": "反对",
+      "font_class": "fandui",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "5045142",
+      "name": "举报",
+      "font_class": "ziyuan",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "10446124",
+      "name": "实心五角星",
+      "font_class": "shixinwujiaoxing",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
       "icon_id": "5709070",
       "name": "icon_hot",
       "font_class": "icon-",
