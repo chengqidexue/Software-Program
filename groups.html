@@ -41,15 +41,7 @@
             var inter_group=document.getElementById('inter-group');
             var ointer_group_items=inter_group.getElementsByTagName('img');
             var ointer_group_myborders=inter_group.getElementsByClassName('myborder');
-            var omengban=document.getElementById("mengban");
-            var ologing=document.getElementById("loging");
-            var oclose=document.getElementById("closeloging");
-            var osubmitloging=document.getElementById("submitloging");
-            oclose.onclick=osubmitloging.onclick=function(){
-                omengban.style.display="none";
-                ologing.style.display="none";
-            }
-            for(var j=0;j<ohot_group_items.length;j++){
+            for(var j=0;j<ointer_group_items.length;j++){
                 ointer_group_items[j].index=j;
                 ointer_group_items[j].onmouseover=function () {
                     ointer_group_myborders[this.index].target=ointer_group_myborders[this.index].offsetWidth;
@@ -60,6 +52,15 @@
                     ointer_group_myborders[this.index].style.width=ointer_group_myborders[this.index].target+'px';
                 }
             }
+            var omengban=document.getElementById("mengban");
+            var ologing=document.getElementById("loging");
+            var oclose=document.getElementById("closeloging");
+            var osubmitloging=document.getElementById("submitloging");
+            oclose.onclick=osubmitloging.onclick=function(){
+                omengban.style.display="none";
+                ologing.style.display="none";
+            }
+            
             var oinputgroups=document.getElementsByClassName("inputgroup");
             for(var i=0;i<oinputgroups.length;i++){
                 oinputgroups[i].getElementsByTagName("p")[0].target=oinputgroups[i].getElementsByTagName("p")[0].offsetTop;
@@ -110,8 +111,8 @@
    </style>
 </head>
 <body>
-<div id="mengban"  class="disable" style=" display: none;position: fixed;height: 100%;width: 100%;background: rgba(0,0,0,0.5);z-index: 5000;"></div>
-<div id="loging" class="p-4" style="display: none;border-radius: 7px;position: fixed;top: 30%;width: 450px;left: 30%;z-index:5001 ;background: whitesmoke;border:cornflowerblue 6px;">
+<div id="mengban"  class="disable" style=" display: block;position: fixed;height: 100%;width: 100%;background: rgba(0,0,0,0.5);z-index: 5000;"></div>
+<div id="loging" class="p-4" style="display: block;border-radius: 7px;position: fixed;top: 30%;width: 450px;left: 30%;z-index:5001 ;background: whitesmoke;border:cornflowerblue 6px;">
     <button id="closeloging" type="button" class="close" style="position: absolute;right: 30px;padding-right: 5px;font-size: 30px;">&times;</button>
     <h3 class=" text-center" style="color: cornflowerblue;">登录</h3>
     <form class="p-3"> 
@@ -172,7 +173,7 @@
         <div class="col-md-4" >
             <div class="input-group mb-3 allcenter"  >
                 <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
-				<div class="input-group-append" style="background-color;border:0;margin: 10px">
+				<div class="input-group-append" style="background:transparent;border:0;margin: 10px">
 					    <button id="searchtype" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
 		        </div>
 			</div>

@@ -53,6 +53,22 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.vertical-center{
+    position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+}
+.level-center{
+    position: relative;
+        top: 50%;
+        transform: translateX(-50%);
+}
 * {list-style-type: none;}
 li{padding: 0;margin: 0}
 ul{padding: 0}
+#searchtheitem a:hover{
+    background:rgba(0,0,0,0.05);
+    }
+.break-word{
+    word-wrap: break-word;word-break: break-all
+}

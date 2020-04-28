@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+    <script>
+        window.onload=function(){
+            var osearchtype=document.getElementById("searchtype");
+			var osearchtheitem=document.getElementById("searchtheitem");
+			var timerdropitem;
+			osearchtheitem.onmouseover=osearchtype.onmouseover=function(){
+				osearchtheitem.style.display="block";
+				closeTimeout(timerdropitem);
+			}
+            osearchtheitem.onmouseout=osearchtype.onmouseout=function(){
+                closeTimeout(timerdropitem);
+                timerdropitem=setTimeout(function(){
+                    osearchtheitem.style.display="none";
+                },500);
+            }
+			osearchtheitem.onclick=osearchtype.onclick=function(){
+                if(osearchtheitem.style.display=="block")
+				osearchtheitem.style.display="none";
+                else osearchtheitem.style.display="none";
+            }
+            var oBtnPing=document.getElementById("ping");
+            var opinglun=document.getElementById("inputPingLun");
+            oBtnPing.onclick=function(){
+                if(opinglun.offsetHeight==0)
+                     Mouse(opinglun,140,'height');
+                else Mouse(opinglun,0,'height');
+            }
+        }
+    </script>
+    <style>
+        #canDo {
+            background: rgba(105, 113, 216, 0.05);
+        }
+        #canDo button:hover{
+            background: rgba(105, 113, 216, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container_fluid">
+        <div class="row" style="background-color: #030e11;">
+            <div class="col_md_12 " >
+                <div id="menu">
+                    <li> <a href="#" >花瓣</a></li>
+                    <li> <a href="#" >书籍</a></li>
+                    <li> <a href="#" >影视</a></li>
+                    <li> <a href="#" >话题广场</a></li>
+                    <li> <a href="#" >小组</a></li>
+                    <li > <a href="#" >消息通知</a></li>
+                    <li id="drop1"><a href="#">账号</a>
+                        <div id="dropdown1" class="dropdown_1">
+                            <div class="col_1">
+                                <ul class="simple">
+                                    <li><a href="#">个人主页</a></li>
+                                    <li><a href="#">我的小组</a></li>
+                                    <li><a href="#">我参与的话题</a></li>
+                                    <li><a href="#">退出账号</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="" >联系我们</a></li>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="background: cornflowerblue;">
+            <div class="col-md-5 offset-md-1">
+                <div class="d-flex">
+                    <h1 class="p-2" style="font-size: 40px;font-weight: bold;line-height: 74px">小组</h1>
+                    <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">热点</a>
+                    <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">书籍</a>
+                    <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">影视</a>
+                    <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">文化</a>
+                    <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">生活</a>
+                    <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">科技</a>        
+                </div>
+            </div>
+            <div class="col-md-4" >
+                <div class="input-group mb-3 allcenter"  >
+                    <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+                    <div class="input-group-append" style="background:transparent;border:0;margin: 10px">
+                            <button id="searchtype" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
+                    </div>
+                </div>
+                   <div id="searchtheitem" style="display:none;background: white;border-radius:5px;position:absolute;z-index:9000;width:200px;border:black;left:67%;top: 68px;">
+                       <a href="javascript:;" style="padding-left:10%;display:block;color:black;font-size:17px;line-height: 20px;" >全部</a>
+                     <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >影视</a>
+                     <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >书籍</a>
+                     <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >文化</a>
+                     <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >生活</a>
+                    <a href="javascript:;" style="padding-left:10%;margin-top: 3px;;display:block;color:black;font-size:17px;" >科技</a> 
+                    <div style="background: black;width: 100%;height: 1px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-md-6 offset-md-1">
+                <div class="article" style="width:100%">
+					<h1 style="font-size: 29px;font-weight: bold;word-wrap: break-word">自由职业，流浪远方，自驾AA自由职业</h1>
+                        <div class="topic-doc" style="width: 100%;">
+                            <div class="d-flex flex-row-reverse ">
+                                <span class="submit-time p-2" style="font-size: 16px;">2020-04-26 23:00:00</span>
+                            </div>
+							<div id="topic-content"style="margin:20px">
+								
+                                <p style="word-wrap: break-word">我从去年10月开始，从广州到福建厦门泉州，再到金华义乌，杭州，再去宁波舟山东极岛，接着北上江苏，再去山东泰山，济南，德州，现在河北沧州。接着继续往北走，去北京再去内蒙古看大草原，接着去大西北，去宁夏新疆再去西藏哈哈，自由职业时间不赶，我最多的就是时间，有和我一样的人么？进大西北还是要有个伴好一点。</p>
+                                <img src="jpg/fire2.jpg" width="200px" height="200px">
+							</div>
+						</div>
+					<div id="canDo" class="d-flex" style="height: 50px;margin-top: 20px;">
+                        <button id="ping" type="button" class="btn btn-link " style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-pinglun" ></i>评论</button>
+                        <button type="button" class="btn btn-link" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-buoumaotubiao16" ></i>点赞</button>
+                    </div>
+                    <div id="inputPingLun" class="d-flex" style="position: relative;width:80%;height:0;overflow: hidden">
+                        <textarea class="flex-grow-1" cols="40%" maxlength="100" style="height:100%">发布评论...</textarea>
+                        <div class="buu" style="position: relative;;margin: 0;width: 15% ;height:100%; background:rgba(0, 0, 0, 0.05)">
+                            <a href="javascript:;" class="iconfont icon-fabu allcenter" style="font-size: 30px;color: black"></a>
+                        </div>   
+                    </div>
+                </div>
+                <div class="topic-reply p-3" >
+                    <h4>评论</h4>
+                    <ul>
+                        <li>
+                            <div class="d-flex" style="width: 100%">
+                                <div class="p-2" style="width:130px;">
+                                    <img src="jpg/fire2.jpg" width="50px" height="50px" style="margin-left: 30px;">
+                                    <p class="text-center" style="margin-bottom: -2px;word-wrap: break-word"><a src="#">满囤儿</a></p>
+                                </div>
+                                <div style="width: 1px;height: 80px;;background: slategray;">
+                                </div>
+                                <div class="p-2" style="margin-left: 2%;width: 75%;">
+                                    <p style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhsdfdgdgdfh</p>
+                                    <div class="d-flex ">
+                                        <p class="flex-grow-1" style="margin-left: 15px;">2020-03-30 17:38:13</p>
+                                        <a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞</i></a>
+                                        <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对</i></a>
+                                        <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex" style="width: 100%">
+                                <div class="p-2" style="width:130px;">
+                                    <img src="jpg/fire2.jpg" width="50px" height="50px" style="margin-left: 30px;">
+                                    <p class="text-center" style="margin-bottom: -2px;word-wrap: break-word"><a src="#">满囤儿</a></p>
+                                </div>
+                                <div style="width: 1px;height: 80px;;background: slategray;">
+                                </div>
+                                <div class="p-2" style="margin-left: 2%;width: 75%;">
+                                    <p style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhsdfdgdgdfh</p>
+                                    <div class="d-flex ">
+                                        <p class="flex-grow-1" style="margin-left: 15px;">2020-03-30 17:38:13</p>
+                                        <a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞</i></a>
+                                        <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对</i></a>
+                                        <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex" style="width: 100%">
+                                <div class="p-2" style="width:130px;">
+                                    <img src="jpg/fire2.jpg" width="50px" height="50px" style="margin-left: 30px;">
+                                    <p class="text-center" style="margin-bottom: -2px;word-wrap: break-word"><a src="#">满囤儿</a></p>
+                                </div>
+                                <div style="width: 1px;height: 80px;;background: slategray;">
+                                </div>
+                                <div class="p-2" style="margin-left: 2%;width: 75%;">
+                                    <p style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhsdfdgdgdfh</p>
+                                    <div class="d-flex ">
+                                        <p class="flex-grow-1" style="margin-left: 15px;">2020-03-30 17:38:13</p>
+                                        <a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞</i></a>
+                                        <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对</i></a>
+                                        <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex" style="width: 100%">
+                                <div class="p-2" style="width:130px;">
+                                    <img src="jpg/fire2.jpg" width="50px" height="50px" style="margin-left: 30px;">
+                                    <p class="text-center" style="margin-bottom: -2px;word-wrap: break-word"><a src="#">满囤儿</a></p>
+                                </div>
+                                <div style="width: 1px;height: 80px;;background: slategray;">
+                                </div>
+                                <div class="p-2" style="margin-left: 2%;width: 75%;">
+                                    <p style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhsdfdgdgdfh</p>
+                                    <div class="d-flex ">
+                                        <p class="flex-grow-1" style="margin-left: 15px;">2020-03-30 17:38:13</p>
+                                        <a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞</i></a>
+                                        <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对</i></a>
+                                        <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 offset-md-1">
+                <div class="side-owner p-2" style="background: snow;">
+                    <div class="info-owner">
+                        <div class="d-flex">
+                            <div style="width: 60px; height: 60px;border-radius: 60px;overflow: hidden;">
+                            <img src="jpg/fire2.jpg" width="100%" height="100%">
+                        </div>
+                        <a href="javascript:;" class="break-word" style="margin-left: 20px;font-size: 25px;margin-top: 6px;">weixin_3003</a>
+                        </div>
+                        <div class="p-2 d-flex" style="margin-top:10px">
+                        <div style="width: 60px;height: 60px;">
+                        <p style="font-size: 20px;">123</p>
+                        <p style="margin-top: -10px;">评论</p>
+                        </div>
+                        <div style="width: 60px;height: 60px;">
+                            <p style="font-size: 20px;">123</p>
+                            <p style="margin-top: -10px;">看过</p>
+                        </div>
+                        <div style="width: 60px;height: 60px;">
+                            <p style="font-size: 20px;">123</p>
+                            <p style="margin-top: -10px;">小组</p>
+                        </div>
+                        </div> 
+                    </div>  
+                </div>
+                <div class="side-group-join p-2" style="background: snow;margin-top: 30px;">
+                    <div class="bd d-flex">
+                        <div style="width: 100px;height: 100px;border-radius: 10px;overflow: hidden;position: relative;">
+                            <img src="jpg/fire2.jpg" width="80px" height="80px" class="allcenter">
+                        </div>
+                        <a href="javascript:;" class="break-word p-2 lead font-weight-bold" style="color: black;">花好人间花好人间花好人间花好人间花好人间</a>
+                    </div>
+                    <div class="ft d-flex flex-row-reverse"  style="margin-right: 20px;position: relative;">
+                        <button type="button" class="btn btn-dark">加入小组</button>
+                        <span class="p-2">已有XXX人加入小组</span>
+                    </div>
+                </div>
+                <div class="may-like" style="margin-top: 50px;">
+                    <h4>猜你想看</h4>
+                    <ul>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                    </ul>
+                </div>a
+                <div class="more-topic" style="margin-top: 50px;">
+                    <a href="javascript:;" style="position: absolute;right: 10%;">更多评论</a>
+                    <h4>更多讨论</h4>
+                    <ul>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                        <li class="p-2" style="border-bottom: royalblue;">
+                            <a href="javascript:;">媒体团队</a>&nbsp;&nbsp;来自<a href="javascript:;" class="break-word" style="color: black;">&nbsp;&nbsp;泫然一波</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
