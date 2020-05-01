@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/daohang.css">
+	<link rel="stylesheet" href="iconfont/iconfont.css">
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="./js/Move.js"></script>
+	<script src="./iconfont/iconfont.js"></script>
+	<script>
+		window.onload=function () {
+			var hot_group=document.getElementById('hot-group1');
+                var ohot_group_items=hot_group.getElementsByTagName('a');
+                var ohot_group_myborders=hot_group.getElementsByClassName('myborder');
+                for(var j=0;j<ohot_group_items.length;j++){
+                    ohot_group_items[j].index=j;
+                    ohot_group_items[j].onmouseover=function () {
+                        ohot_group_myborders[this.index].target=ohot_group_myborders[this.index].offsetWidth;
+                        ohot_group_myborders[this.index].style.width='0';
+                        Mouse(ohot_group_myborders[this.index],ohot_group_myborders[this.index].target,'width')
+                    }
+                    ohot_group_items[j].onmouseout=function () {
+                        ohot_group_myborders[this.index].style.width=ohot_group_myborders[this.index].target+'px';
+                    }
+                }
+		}
+	</script>
+	<style>
+		.hot-group{
+			border-radius: 7px;
+			overflow: hidden;
+			height: auto;
+			width: 100%;
+			overflow: hidden;
+			position: relative;
+			z-index: 0;
+		}
+		.hot-group:hover{
+			width: 103%;
+			box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+		}
+		.hot-group-item{position: relative;width: 100%;height: 90px}
+		.hot-group .pic{position:absolute;width: 30%;height: 100%;left: 0;top: 0}
+		.hot-group .pic img{
+			width: 70%;height: 70%;
+		}
+		.hot-group .info{position:absolute;width:70%;height: 100%;left: 30%;top: 10px}
+		.hot-group .info > a{position: absolute;left: 0;width:100%;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+		.myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
+		.big-border{width: 100%;height:1px;background: cornflowerblue}
+		.switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }
+
+	</style>
+</head>
+<body>
+<div class="container_fluid">
+	<div class="row" style="background-color: #030e11;">
+		<div class="col_md_12">
+			<div id="menu">
+				<li><a href="#" >花瓣</a></li>
+				<li><a href="#" >书籍</a></li>
+				<li><a href="#" >影视</a></li>
+				<li><a href="#" >话题广场</a></li>
+				<li><a href="#" >小组</a></li>
+				<li><a href="#" >消息通知</a></li>
+				<li id="drop1">
+					<a href="#">账号</a>
+					<div id="dropdown1" class="dropdown_1">
+						<div class="col_1">
+							<ul class="simple">
+								<li><a href="#">个人主页</a></li>
+								<li><a href="#">我的小组</a></li>
+								<li><a href="#">我参与的话题</a></li>
+								<li><a href="#">退出账号</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li><a href="" >联系我们</a></li>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="background: cornflowerblue">
+		<div class="col-md-4 offset-md-6">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
+					<div class="btn-group">
+						<button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">全部</a>
+							<a class="dropdown-item" href="#">书籍</a>
+							<a class="dropdown-item" href="#">影视</a>
+							<a class="dropdown-item" href="#">小组</a>
+							<a class="dropdown-item" href="#">话题</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 60px;">
+		<div class=" col-md-10 offset-md-1" style="position: relative;;">
+			<div class="d-flex" style="position: absolute;background:snow;width: 120%;height: 120%;margin-left: -130px;margin-top: -30px;">
+			</div>
+			<div class="d-flex justify-content-around">
+				<div class="hot-group" style="width:20%;background: white;border-radius: 20px;" id="hot-group1">
+					<div class="big-border"></div>
+					<h4 class="text-center p-4" style="color: blue; ">热门书籍</h4>
+					<ul style="padding:0 20px;font-size: 18px;font-weight: bold;">
+						<li v-for="item in arr" :title="item">
+							<a href="javascript:;" style="color: black;;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="hot-group" style="width:20%;background: white;border-radius: 20px;">
+					<div class="big-border"></div>
+					<h4 class="text-center p-4" style="color: blue; ">热门影视</h4>
+					<ul style="padding:0 20px;font-size: 18px;font-weight: bold;">
+						<li v-for="item in arr" :title="item">
+							<a href="javascript:;" style="color: black;;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="hot-group" style="width:20%;background: white;border-radius: 20px;">
+					<div class="big-border"></div>
+					<h4 class="text-center p-4" style="color: blue; ">热门话题</h4>
+					<ul style="padding:0 20px;font-size: 18px;font-weight: bold;">
+						<li v-for="item in arr" :title="item">
+							<a href="javascript:;" style="color: black;;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+						<li v-for="item in arr" :title="item" style="margin-top:10px">
+							<a href="javascript:;" style="color: black;">小情书</a>
+							<div class="myborder"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div class="row" style="margin-top: 50px;">
+		<div class="col-md-10 offset-md-1">	
+			<div class="movie-content">
+				<div class="p-1" style="background:url(jpg/back.jpg);background-repeat:no-repeat ;background-size: 100% 100%;height:auto;width: 100%;" >
+				    <h1 style="margin-left: 30px;color: white;font-weight: bolder;font-size: 35px;">热门书评</h1>
+				</div>	
+				<ul style="margin-top: 30px;">
+					<li style="width: 100%;height: 200px;">
+						<div class="d-flex">
+							<img src="jpg/fire2.jpg" width="10%" height="120px">
+							<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
+								<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
+								<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
+							<div class="d-flex">
+								<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
+								<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
+								</div>		
+								<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
+								<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
+								<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
+                            <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
+                            <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+							</div>
+						</div>
+							
+						</div>
+					</li>
+					<li style="width: 100%;height: 200px;">
+						<div class="d-flex">
+							<img src="jpg/fire2.jpg" width="10%" height="120px">
+							<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
+								<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
+								<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
+							<div class="d-flex">
+								<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
+								<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
+								</div>		
+								<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
+								<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
+								<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
+                            <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
+                            <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+							</div>
+						</div>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="book-content">
+				<div class="p-1" style="background:url(jpg/back.jpg);background-repeat:no-repeat ;background-size: 100% 100%;height:auto;width: 100%;" >
+				    <h1 style="margin-left: 30px;color: white;font-weight: bolder;font-size: 35px;">热门书评</h1>
+				</div>		
+				<ul style="margin-top: 30px;">
+					<li style="width: 100%;height: 200px;">
+						<div class="d-flex">
+							<img src="jpg/fire2.jpg" width="10%" height="120px">
+							<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
+								<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
+								<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
+							<div class="d-flex">
+								<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
+								<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
+								</div>		
+								<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
+								<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
+								<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
+                            <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
+                            <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+							</div>
+						</div>
+							
+						</div>
+					</li>
+					<li style="width: 100%;height: 200px;">
+						<div class="d-flex">
+							<img src="jpg/fire2.jpg" width="10%" height="120px">
+							<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
+								<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
+								<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
+							<div class="d-flex">
+								<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
+								<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
+								</div>		
+								<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
+								<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
+								<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
+                            <a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
+                            <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
+							</div>
+						</div>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
