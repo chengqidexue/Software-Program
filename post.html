@@ -12,28 +12,33 @@
     <script src="./js/Move.js"></script>
     <script src="./iconfont/iconfont.js"></script>
     <script>
-        window.onload=function(){
+        window.onload=function()
+		{
             var osearchtype=document.getElementById("searchtype");
 			var osearchtheitem=document.getElementById("searchtheitem");
 			var timerdropitem;
-			osearchtheitem.onmouseover=osearchtype.onmouseover=function(){
+			osearchtheitem.onmouseover=osearchtype.onmouseover=function()
+			{
 				osearchtheitem.style.display="block";
 				closeTimeout(timerdropitem);
 			}
-            osearchtheitem.onmouseout=osearchtype.onmouseout=function(){
+            osearchtheitem.onmouseout=osearchtype.onmouseout=function()
+			{
                 closeTimeout(timerdropitem);
                 timerdropitem=setTimeout(function(){
                     osearchtheitem.style.display="none";
                 },500);
             }
-			osearchtheitem.onclick=osearchtype.onclick=function(){
+			osearchtheitem.onclick=osearchtype.onclick=function()
+			{
                 if(osearchtheitem.style.display=="block")
 				osearchtheitem.style.display="none";
                 else osearchtheitem.style.display="none";
             }
             var oBtnPing=document.getElementById("ping");
             var opinglun=document.getElementById("inputPingLun");
-            oBtnPing.onclick=function(){
+            oBtnPing.onclick=function()
+			{
                 if(opinglun.offsetHeight==0)
                      Mouse(opinglun,140,'height');
                 else Mouse(opinglun,0,'height');
@@ -41,14 +46,17 @@
         }
     </script>
     <style>
-        #canDo {
+        #canDo
+		{
             background: rgba(105, 113, 216, 0.05);
         }
-        #canDo button:hover{
+        #canDo button:hover
+		{
             background: rgba(105, 113, 216, 0.1);
         }
     </style>
 </head>
+
 <body>
     <div class="container_fluid">
         <div class="row" style="background-color: #030e11;">
@@ -115,7 +123,6 @@
                                 <span class="submit-time p-2" style="font-size: 16px;">2020-04-26 23:00:00</span>
                             </div>
 							<div id="topic-content"style="margin:20px">
-								
                                 <p style="word-wrap: break-word">我从去年10月开始，从广州到福建厦门泉州，再到金华义乌，杭州，再去宁波舟山东极岛，接着北上江苏，再去山东泰山，济南，德州，现在河北沧州。接着继续往北走，去北京再去内蒙古看大草原，接着去大西北，去宁夏新疆再去西藏哈哈，自由职业时间不赶，我最多的就是时间，有和我一样的人么？进大西北还是要有个伴好一点。</p>
                                 <img src="jpg/fire2.jpg" width="200px" height="200px">
 							</div>
@@ -151,7 +158,6 @@
                                         <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
                                     </div>
                                 </div>
-                                
                             </div>
                         </li>
                         <li>
@@ -171,7 +177,6 @@
                                         <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
                                     </div>
                                 </div>
-                                
                             </div>
                         </li>
                         <li>
@@ -191,7 +196,6 @@
                                         <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
                                     </div>
                                 </div>
-                                
                             </div>
                         </li>
                         <li>
@@ -211,7 +215,6 @@
                                         <a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
                                     </div>
                                 </div>
-                                
                             </div>
                         </li>
                     </ul>
