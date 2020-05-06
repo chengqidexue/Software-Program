@@ -85,159 +85,85 @@
             	</div>
         	</div>
     	</div>
-    	<div class="row" style="background: cornflowerblue">
-        	<div class="col-md-4 offset-md-6" >
-            	<div class="input-group mb-3"  >
-                	<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
-                	<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
-                	    <div class="btn-group">
-                    	    <button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
-                        	<div class="dropdown-menu">
-                            	<a class="dropdown-item" href="#">全部</a>
-                            	<a class="dropdown-item" href="#">书籍</a>
-                            	<a class="dropdown-item" href="#">影视</a>
-                            	<a class="dropdown-item" href="#">小组</a>
-                            	<a class="dropdown-item" href="#">话题</a>
-                        	</div>
-                    	</div>
-                	</div>
-            	</div>
-        	</div>
-    	</div>
+		<div style="background:linear-gradient(#68aadc,snow 200px,white 500px);position: absolute;z-index:-1;height: 500px;width: 100%;"></div>
+    	<div class="row" style="margin-top: 70px;">
+        	<div class="col-md-8 offset-md-2">      	
+				<div id="info" class="d-flex mb-3" style="background:url(jpg/backgroundgeren.jpg) no-repeat 0 0;background-size:100% 100%;;width: 100%;height: 200px;">
+						<div class="p-2" style="width: 25% ;height:80%;">
+							<div  style="position:relative;left:20%;top:30px;width: 100px;height:100px;border-radius:100px;-webkit-border-radius:100px; -moz-border-radius:100px;overflow: hidden" >
+							    <img :src="jpg" alt="头像" style="width:100px;height: 100px; display: block; ; border-radius:100px;">
+							</div>
+						</div>
+						<div class="p-2 flex-grow-1" style="margin-top:30px ">
+							<h4 class="lead">{{ name }}</h4>
+							<p>已发布过{{ pinglun }}条评论</p>
+							<p>已点过{{ saw }}个在看</p>
+							<p>已参加过{{ group }}个小组</p>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2" id="pinglun">
+						<p class="font-weight-bold ">留言墙</p>
+						<div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:140px;overflow: hidden">
+							<textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="写留言..." v-model="topeople"></textarea>
+							<button class="btn iconfont icon-fabu btn-dark" style="font-size: 30px;;margin: 0;width:80px ;height:100%;margin-right: 30px;" @click="submitliu"></button>   
+						</div>
+						<ul style="margin-top:50px">
+							<li v-for="item in arr">
+								<div class="d-flex" style="width: 100%">
+							    <div class="p-2" style="width:90px;">
+								<img :src="item.jpg"width="70px" height="70px">
+								<p class="text-center" style="margin-bottom: -2px;"><a :href="item.href" style="color: black;">{{ item.name }}</a></p>
+							</div>
+							<div style="margin-left: 3px;width: 0.5px;height: 80px;;background: slategray;">
+							</div>
+							<div class="p-2" style="margin-left: 2%;width: 75%;">
+						     	<p class="p-2" style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">{{ item.content }}</p>
+								<p style="margin-left: 15px;">{{ item.date }}</p>
+							</div>
+						</div>
+							</li>
+						</ul>
+			</div>
+		</div>	
 	</div>
-	<div class="container">
-    	<div class="row">
-        	<div class="col-lg-2" style="height: 100%">
-            	<nav class="navbar bg-light">
-                	<ul id="daohang" class="navbar-nav">
-                    	<li class="nav-nav-item">
-                        	<a class="nav-link" href="#">个人主页</a>
-                    	</li>
-                    	<li class="nav-item">
-                        	<a class="nav-link" href="#">我的评论</a>
-                    	</li>
-                    	<li class="nav-item">
-                        	<a class="nav-link" href="#">我的日记</a>
-                    	</li>
-                    	<li class="nav-item">
-                        	<a class="nav-link" href="#">我的相册</a>
-                    	</li>
-                    	<li class="nav-item">
-                        	<a class="nav-link" href="#">我参与的小组</a>
-                    	</li>
-                    	<li class="nav-item">
-                        	<a class="nav-link" href="#">我参与的话题</a>
-                    	</li>
-                	</ul>
-            	</nav>
-            </div>
-        	<div class="col-lg-10 ">
-            	<div style="position: relative;width: 100%">
-                	<ul id="daohangcontent">
-                    	<li>
-                        	<div style="position: absolute;width: 100%">
-                        		<div  class="d-flex mb-3" style="background:url(jpg/backgroundgeren.jpg) no-repeat 0 0;width: 100%;height: 200px;">
-                            		<div class="p-2" style="width: 25% ;height:80%;">
-                                		<div  style="
-                                    		position:relative;
-                                        	left:20%;
-                                        	top:30px;
-                                        	width: 100px;
-                                        	height:100px;
-                                        	border-radius:100px;
-                                        	-webkit-border-radius:100px; 
-                                        	-moz-border-radius:100px;
-                                        	overflow: hidden" >
-                                    	<img src="jpg/fire3.jpg" alt="头像" style="
-                                    		width:100px;
-                                        	height: 100px; 
-                                        	display: block; 
-                                        	; border-radius:100px; 
-                                        	-webkit-border-radius:100px; 
-                                        	-moz-border-radius:100px;">
-                                		</div>
-                            		</div>
-                            		<div class="p-2 flex-grow-1" style="margin-top:30px ">
-                                		<h4 class="lead">昵称</h4>
-                            		</div>
-                        		</div>
-                        		<div class="container-fluid">
-                            		<p class="font-weight-bold text-left">留言墙</p>
-                        		</div>
-                    		</div>
-                    	</li>
-                    	<li></li>
-                    	<li></li>
-                    	<li></li>
-                    	<li>
-                        	<div style="position: absolute;width: 100%">
-                        		<div class="d-flex mb-3 p-2" 
-                                	style="width:100%;height:200px;border-top: lightblue 1px solid;border-bottom: lightblue 1px solid">
-                            		<div class="p-2" >
-                                    	<div style="width:100px;height:100px ">
-                                        	<img src="jpg/fire2.jpg" style="width:100px;height:100px;border-radius: 20px;overflow: hidden">
-                                    	</div>
-                                    	<p class="font-weight-bold text-center">标题</p>
-                            		</div>
-                            		<div class="p-2 flex-grow-1 taolun" style="border: solid">
-                                		<ul style="width: 100%">
-                                    		<li ></li>
-                                    		<li>
-                                    			<div class="d-flex" style="border-bottom: lightsteelblue 1px" >
-                                        			<a href="javascript:;" class="mb-1 mr-auto" 
-                                            			style="width:550px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap ">hhh1</a>
-                                        			<a href="javascript:;" class="mb-1 tooupper" style="width: 65px">置顶</a>
-                                        			<a href="javascript:;" class="mb-1" style="width: 65px">取消置顶</a>
-                                    			</div>
-                                    		</li>
-                                    		<li>
-                                    			<div class="d-flex" style="border-bottom: lightsteelblue 1px" >
-                                        		<a href="javascript:;" class="mb-1 mr-auto" 
-                                        			style="width:550px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap ">hhh2</a>
-                                        		<a href="javascript:;" class="mb-1 tooupper" style="width: 65px">置顶</a>
-                                        		<a href="javascript:;" class="mb-1" style="width: 65px">取消置顶</a>
-                                    			</div>
-                                    		</li>
-                                		</ul>
-                            		</div>
-                        		</div>
-                        		<div class="d-flex mb-3 p-2" 
-                                	style="width:100%;height:200px;border-top: lightblue 1px solid;border-bottom: lightblue 1px solid">
-                            		<div class="p-2" >
-                                		<div style="width:100px;height:100px ">
-                                    		<img src="jpg/fire2.jpg" style="width:100px;height:100px;border-radius: 20px;overflow: hidden">
-                                		</div>
-                                		<p class="font-weight-bold text-center">标题</p>
-                            		</div>
-                            		<div class="p-2 flex-grow-1 taolun" style="border: solid">
-                                		<ul style="width: 100%">
-                                    		<li ></li>
-                                    		<li>
-                                        		<div class="d-flex" style="border-bottom: lightsteelblue 1px" >
-                                        			<a href="javascript:;" class="mb-1 mr-auto" 
-                                            			style="width:550px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap ">hhh3</a>
-                                        			<a href="javascript:;" class="mb-1 tooupper" style="width: 65px">置顶</a>
-                                        			<a href="javascript:;" class="mb-1" style="width: 65px">取消置顶</a>
-                                    			</div>
-                                    		</li>
-                                    		<li>
-                                        		<div class="d-flex" style="border-bottom: lightsteelblue 1px" >
-                                        			<a href="javascript:;" class="mb-1 mr-auto" 
-                                                		style="width:550px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap ">hhh4</a>
-                                        			<a href="javascript:;" class="mb-1 tooupper" style="width: 65px">置顶</a>
-                                        			<a href="javascript:;" class="mb-1" style="width: 65px">取消置顶</a>
-                                    			</div>
-                                    		</li>
-                                		</ul>
-                            		</div>
-                        		</div>
-                    		</div>
-                    	</li>
-                    	<li></li>
-                	</ul>
-            	</div>
-        	</div>
-    	</div>
-    </div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var info=new Vue({
+			el:"#info",
+			data:{
+				jpg:"jpg/book2.jpg",
+				name:"西瓜啊",
+				pinglun:12,
+				saw:1,
+				group:4
+			}
+		});
+		var pinglun=new Vue({
+			el:"#pinglun",
+			data:{
+				topeople:"",
+				arr:[{jpg:"jpg/book2.jpg",name:"是西瓜",content:"hh",date:"2020/05/05",href:"https://baidu.com"}]
+			},
+			methods:{
+				submitliu:function(){
+					var that=this;
+					axios.post("https://baidu.com",
+        {
+        })
+        .then(function(response){
+			var hh={jpg:"jpg/book2.jpg",name:"是西瓜",content:that.topeople,date:new Date().toLocaleString(),href:"https://baidu.com"}
+					that.arr.push(hh);
+					that.topeople="";
+        },function(error) {
+            console.log(err);
+        })
+				}
+			}
+		})
+	</script>
 </body>
 </html>

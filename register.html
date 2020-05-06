@@ -46,21 +46,21 @@
     	</div>
 		<div class="row">
 			<div class="col-md-4 offset-md-4" >
-				<div style="position: relative;top: 0;left: 0;width:100%;height:350px;">
+				<div id="loging" style="position: relative;top: 0;left: 0;width:100%;height:350px;">
 					<div style="height: 100%;width: 100%;background: #030e11;opacity: 0.3;filter: opacity(30);position: absolute;top: 0;left: 0"></div>
 					<div style="position: absolute;top: 10%;width: 100%"><h4 class="text-center" style="color: #F4F4F4">登录</h4> </div>
 					<div style="position: absolute;height: 70%;width: 100%;top: 30%;left: 0">
 						<form>
 							<div class="form-group" style="position: absolute;left: 5%;top: 0;width: 100%;" >
 								<label for="user" style="color: azure;position: absolute;left: 0;top: 0">用户名：</label>
-                                <input type="text" id="user" name="user" class="form-control" style="position: absolute;left: 20%;top: 0;width: 70%"  />
+                                <input type="text" v-model="user" id="user" name="user" class="form-control" style="position: absolute;left: 20%;top: 0;width: 70%"  />
 							</div>
 							<div style="position: absolute;left: 5%;top: 30%;width: 100%;" >
 								<label for="pass" style="color: azure;position: absolute;left: 0;top: 0">密码：</label>
-                                <input type="password" id="pass" name="user" class="form-control" style="position: absolute;left: 20%;top: 0;width: 70%"  />
+                                <input type="password" v-model="pass" id="pass" name="user" class="form-control" style="position: absolute;left: 20%;top: 0;width: 70%"  />
 							</div>
 							<div style="position: absolute;left: 65%;top: 50%;width: 100%;" >
-								<input type="submit" class="btn btn-primary" style="width: 30%" value="登录">
+								<input type="submit" class="btn btn-primary" style="width: 30%" value="登录" @click="loging">
 							</div>
 							<div style="position: absolute;left: 45%;top: 70%;width: 100%;" >
 								<a href="#">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">游客身份登入</a>
@@ -71,5 +71,21 @@
 			</div>
 		</div>
 	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var loging=new Vue({
+		el:"#loging",
+		data:{
+			user:"",
+			pass:"",
+		},
+		methods:{
+			loging:function(){
+				
+			}
+		}
+	})
+</script>
 </body>
 </html>

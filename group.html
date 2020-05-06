@@ -11,335 +11,386 @@
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="./js/Move.js"></script>
 	<script src="./iconfont/iconfont.js"></script>
+	<script>
+		window.onload=function(){
+		//////添加标签
+			var h=document.getElementById("submit_type");
+			h.onclick=function(){
+				group_info.arr.push(myModal.content);
+			myModal.content="";
+			axios.post("https://baidu.com",
+        {
+            username:myModal.content
+        })
+        .then(function(response){
+			group_info.arr.push(myModal.content);
+			myModal.content="";
+        },function(error) {
+            console.log(err);
+        })
+			};
+///////我的帖子
+var h=document.getElementById("submit_tiezi");
+			h.onclick=function(){
+			axios.post("https://baidu.com",
+        {
+            content:myModal2.content,
+			title:myModal2.title
+        })
+        .then(function(response){
+			var hh={tohref:"https://baidu.com",fromhref:"https://baidu.com",up:false,title:myModal2.title,name:"",number:0,time:new Date().toLocaleDateString()}
+			pinglun.arr.push(hh);	
+			group_info.tiezi+=1;
+			myModal2.content="";
+			myModal2.title="";
+        },function(error) {
+            console.log(err);
+        })
+			};
+		}
+	</script>
 </head>
 <body>
-	<div class="container_fluid">
-		<div class="row" style="background-color: #030e11;">
-			<div class="col_md_12">
-				<div id="menu">
-					<li><a href="#" >花瓣</a></li>
-					<li><a href="#" >书籍</a></li>
-					<li><a href="#" >影视</a></li>
-					<li><a href="#" >话题广场</a></li>
-					<li><a href="#" >小组</a></li>
-					<li><a href="#" >消息通知</a></li>
-					<li id="drop1">
-						<a href="#">账号</a>
-						<div id="dropdown1" class="dropdown_1">
-							<div class="col_1">
-								<ul class="simple">
-									<li><a href="#">个人主页</a></li>
-									<li><a href="#">我的小组</a></li>
-									<li><a href="#">我参与的话题</a></li>
-									<li><a href="#">退出账号</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-					<li><a href="" >联系我们</a></li>
+<div class="container_fluid">
+	<div class="modal fade" id="myModal" style="position: fixed;top: 30%;width: 630px;left: 30%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- 模态框头部 -->
+				<div class="modal-header">
+					<h4 class="modal-title">添加标签</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-			</div>
-		</div>
-		<div class="row" style="background: cornflowerblue;">
-			<div class="col-md-5 offset-md-1">
-				<div class="d-flex">
-					<h1 class="p-2" style="font-size: 40px;font-weight: bold;line-height: 74px">小组</h1>
-					<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">热点</a>
-					<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">书籍</a>
-					<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">影视</a>
-					<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">文化</a>
-					<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">生活</a>
-					<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">科技</a>
-				</div>
-			</div>
-			<div class="col-md-4" >
-				<div class="input-group mb-3 allcenter"  >
-					<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
-					<div class="input-group-append" style="background:transparent;border:0;margin: 10px">
-						    <button id="searchtype" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
-						        </div>
-				</div>
-				   <div id="searchtheitem" style="display:none;background: white;border-radius:5px;position:absolute;z-index:9000;width:200px;border:black;left:67%;top: 68px;">
-				   <a href="javascript:;" style="padding-left:10%;display:block;color:black;font-size:17px;line-height: 20px;" >全部</a>
-				 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >影视</a>
-				 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >书籍</a>
-				 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >文化</a>
-				 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >生活</a>
-				<a href="javascript:;" style="padding-left:10%;margin-top: 3px;;display:block;color:black;font-size:17px;" >科技</a> 
-				<div style="background: black;width: 100%;height: 1px;"></div>
-			</div>
-			</div>
-		</div>
-		<div class="row" style="margin-top: 60px;">
-			<div class="col-md-7 offset-md-1">
-				<div class="group-info d-flex">
-					<div>
-						<div style="width: 150px;height: 150px;padding:2px;background: black;border-radius: 3px;">
-					        <img src="jpg/fire2.jpg" style="width: 100%;height: 100%;">
-					    </div>
-					    <div class="d-flex inclue-info" style="margin-left: -15px;margin-top: 10%;background:snow;height: 70px;">
-						<div style="width: 70px;height: 70px;font-size: 20px;">
-						<p class="text-center" style="margin-top: 10px;margin-bottom: -3px;">942</p>
-						<p class="text-center small">成员</p>
-						</div>
-						<div style="width: 0.5px;height: 60%;margin-top:10%;background:rgba(0, 0, 0, 0.2);"></div>
-						<div style="width: 70px;height: 70px;font-size: 20px;">
-							<p class="text-center" style="margin-top: 10px;margin-bottom: -3px;">942</p>
-							<p class="text-center small">帖子</p>
-						</div>
-						<div style="width: 0.5px;height: 60%;margin-top:10%;background:rgba(0, 0, 0, 0.2);"></div>
-						<div style="width: 70px;height: 70px;font-size: 20px;">
-								<p class="text-center" style="margin-top: 10px;margin-bottom: -3px;">942</p>
-								<p class="text-center small">活跃度</p>
-						</div>
-					    </div>	
-					</div>
-					<div class="flex-grow-1" style="margin-left: 30px;background: snow">
-						<div class="d-flex" style="margin-top: 10px;">
-							<h3>花好人间</h3>
-							<span style="color: gray;margin-top: 7px;margin-left: 30px;">XXX的小组</span>
-							<span class="flex-grow-1" style="color: gray;margin-top: 7px;margin-left: 30px;">2020/04/30</span>
-							<button type="button" class="btn" style="color: orangered;">加入小组</button>
-							<button type="button" class="btn" style="color: royalblue;">申请成为管理员</button>
-						</div>
-						<div class="d-flex" style="font-size: 20px;">
-							<span>标签：</span>
-							<ul>
-								<li style="display: inline;">
-									<span class="small p-2" style="background: #bfa;border-radius: 5px">植物</span>
-								</li>
-								<li style="display: inline;">
-									<span class="small p-2" style="background: #bfa;border-radius: 5px">喜欢生活</span>
-								</li>
-							</ul>
-							<button type="submit" class="btn" style ="margin-left: 20px;margin-top:-11px">+添加标签</button>		
-						</div>
-						<pre class="break-word" style="width: 100%;font-size: 17px;line-height: 28px;">
-	喜爱植物，不求甚。
-	专家知识
-	二u过 
-	</pre>
-					</div>
-				</div>
-				<div class="pinglun" style="width: 100%;margin-top: 40px;">
-					<button type="button" class="btn btn-dark" href="javascript:;" style="margin-left: 5px;margin-bottom: 20px;">发布我的帖子</button>
-					<div class="d-flex">
-						<span style="width:52%;">帖子</span>
-						<span style="width:17%;">发布者</span>
-						<span style="width: 8%;">回复</span>
-						<span class="flex-grow-1">发布时间</span>
-						<button type="button" class="btn" style="color: darkgray;margin-top: -6px;">举报小组</button>
-					</div>
-					<ul style="font-size: 17px;line-height: 20px;">
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-						<li style="margin-top: 10px;">
-							<div style="position: relative;height: 20px;" >	
-							<a href="javascript:;" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;"></i>iconfont icon-pinglu</a>
-							<a href="javascript:;" class="break-word" style="position: absolute;left: 52%;width: 17%;">西瓜要开花</a>
-							<span style="position: absolute;left: 69%;color: gray;width: 5%">233</span>
-							<span style="position: absolute;left: 77%;color: gray;width: 17%;">2020/04/30 14:20</span>
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" ></button>	
-							<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;"></button>	
-							</div>	
-							<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-3 offset-md-1" style="height: 100px">
-			<div class="controler-info">
-				<h4>组主</h4>
-				<div class="d-flex">
-				<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
-				    <img src="jpg/fire2.jpg" width="100%" height="100%">
-			    </div>	
-				<div class="flex-grow-1" >
-					<div class="d-flex" style="margin-left: 14px;">
-						<span style="font-size: 17px;margin-top: 4px;">是鸡蛋啊</span>
-						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
-					</div>
-					<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">个人简介hzhang张hhhhhhhhhhhh</p>	
-				</div>	
-			</div>
-			</div>
-			<div class="xiaodi-info">
-				<h4>管理员</h4>
-				<ul>
-					<li>
-						<div class="d-flex">
-				<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
-				    <img src="jpg/fire2.jpg" width="100%" height="100%">
-			    </div>	
-				<div class="flex-grow-1" >
-					<div class="d-flex" style="margin-left: 14px;">
-						<span style="font-size: 17px;margin-top: 4px;">是鸡蛋啊</span>
-						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
-					</div>
-					<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">个人简介hzhang张hhhhhhhhhhhh</p>	
-				</div>	
-			</div>
-					</li>
-					<li>
-						<div class="d-flex">
-				<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
-				    <img src="jpg/fire2.jpg" width="100%" height="100%">
-			    </div>	
-				<div class="flex-grow-1" >
-					<div class="d-flex" style="margin-left: 14px;">
-						<span style="font-size: 17px;margin-top: 4px;">是鸡蛋啊</span>
-						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
-					</div>
-					<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">个人简介hzhang张hhhhhhhhhhhh</p>	
-				</div>	
-			</div>
-					</li>
-					<li>
-						<div class="d-flex">
-				<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
-				    <img src="jpg/fire2.jpg" width="100%" height="100%">
-			    </div>	
-				<div class="flex-grow-1" >
-					<div class="d-flex" style="margin-left: 14px;">
-						<span style="font-size: 17px;margin-top: 4px;">是鸡蛋啊</span>
-						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
-					</div>
-					<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">个人简介hzhang张hhhhhhhhhhhh</p>	
-				</div>	
-			</div>
-					</li>
-					<li>
-						<div class="d-flex">
-				<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
-				    <img src="jpg/fire2.jpg" width="100%" height="100%">
-			    </div>	
-				<div class="flex-grow-1" >
-					<div class="d-flex" style="margin-left: 14px;">
-						<span style="font-size: 17px;margin-top: 4px;">是鸡蛋啊</span>
-						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
-					</div>
-					<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">个人简介hzhang张hhhhhhhhhhhh</p>	
-				</div>	
-			</div>
-					</li>
-				</ul>
-			</div>
-	        <div class="hot-group" >
-					<h4 >成员们也喜欢逛逛</h4>
-					<ul>
-						<li title="item" style="margin-top: 10px;">
-							<div class="hot-group-item d-flex">
-								<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img src="jpg/fire2.jpg" style="width:100%;height: 100%;"></div>
-								<div class="info flex-grow-1">
-									<a href="javascript:;" style="color:black" onclick="alert('hh')">{{ item.title }}</a>
-								</div>
-							</div>
-							<div class="myborder"></div>
-						</li>
-						<li title="item" style="margin-top: 10px;">
-							<div class="hot-group-item d-flex">
-								<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img src="jpg/fire2.jpg" style="width:100%;height: 100%;"></div>
-								<div class="info flex-grow-1">
-									<a href="javascript:;" style="color:black" onclick="alert('hh')">{{ item.title }}</a>
-								</div>
-							</div>
-							<div class="myborder"></div>
-						</li>
-						<li title="item" style="margin-top: 10px;">
-							<div class="hot-group-item d-flex">
-								<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img src="jpg/fire2.jpg" style="width:100%;height: 100%;"></div>
-								<div class="info flex-grow-1">
-									<a href="javascript:;" style="color:black" onclick="alert('hh')">{{ item.title }}</a>
-								</div>
-							</div>
-							<div class="myborder"></div>
-						</li>
-						<li title="item" style="margin-top: 10px;">
-							<div class="hot-group-item d-flex">
-								<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img src="jpg/fire2.jpg" style="width:100%;height: 100%;"></div>
-								<div class="info flex-grow-1">
-									<a href="javascript:;" style="color:black" onclick="alert('hh')">{{ item.title }}</a>
-								</div>
-							</div>
-							<div class="myborder"></div>
-						</li>
-						<li title="item" style="margin-top: 10px;">
-							<div class="hot-group-item d-flex">
-								<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img src="jpg/fire2.jpg" style="width:100%;height: 100%;"></div>
-								<div class="info flex-grow-1">
-									<a href="javascript:;" style="color:black" onclick="alert('hh')">{{ item.title }}</a>
-								</div>
-							</div>
-							<div class="myborder"></div>
-						</li>
-					</ul>
+				<!-- 模态框主体 -->
+				<div class="modal-body">
+					<div class="d-flex" style="width: 100%;">
+						<p>标签：</p>
+						<input type="text" maxlength="100" style="width: 80%;" v-model="content">
+					</div> 
+					<button type="button" class="btn btn-success" id="submit_type" data-dismiss="modal" style="margin-left: 80%;margin-top: 10px;">提交</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="myModal2" style="position: fixed">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- 模态框头部 -->
+				<div class="modal-header">
+					<h4 class="modal-title">发布我的帖子</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- 模态框主体 -->
+				<div class="modal-body">
+					<input type="text" style="width: 100%;font-size: 30px;border: none;" v-model="title" placeholder="标题" >
+					<div style="height: 1px;margin-bottom: 20px;background: cornflowerblue;"></div>
+					<textarea style="height: 400px;width: 100%;font-size: 25px;" maxlength="600" placeholder="内容" v-model="content"></textarea>
+					<button type="button" class="btn btn-success" id="submit_tiezi" data-dismiss="modal" style="margin-left: 80%;margin-top: 10px;width: 130px;">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="background-color: #030e11;">
+		<div class="col_md_12">
+			<div id="menu">
+				<li><a href="#" >花瓣</a></li>
+				<li><a href="#" >书籍</a></li>
+				<li><a href="#" >影视</a></li>
+				<li><a href="#" >话题广场</a></li>
+				<li><a href="#" >小组</a></li>
+				<li><a href="#" >消息通知</a></li>
+				<li id="drop1">
+					<a href="#">账号</a>
+					<div id="dropdown1" class="dropdown_1">
+						<div class="col_1">
+							<ul class="simple">
+								<li><a href="#">个人主页</a></li>
+								<li><a href="#">我的小组</a></li>
+								<li><a href="#">我参与的话题</a></li>
+								<li><a href="#">退出账号</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li><a href="" >联系我们</a></li>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="background: cornflowerblue;">
+		<div class="col-md-5 offset-md-1">
+			<div class="d-flex">
+				<h1 class="p-2" style="font-size: 40px;font-weight: bold;line-height: 74px">小组</h1>
+				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">热点</a>
+				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">书籍</a>
+				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">影视</a>
+				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">文化</a>
+				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">生活</a>
+				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">科技</a>
+			</div>
+		</div>
+		<div class="col-md-4" >
+			<div class="input-group mb-3 allcenter"  >
+				<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+				<div class="input-group-append" style="background:transparent;border:0;margin: 10px">
+					    <button id="searchtype" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
+					        </div>
+			</div>
+			   <div id="searchtheitem" style="display:none;background: white;border-radius:5px;position:absolute;z-index:9000;width:200px;border:black;left:67%;top: 68px;">
+			   <a href="javascript:;" style="padding-left:10%;display:block;color:black;font-size:17px;line-height: 20px;" >全部</a>
+			 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >影视</a>
+			 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >书籍</a>
+			 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >文化</a>
+			 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >生活</a>
+			<a href="javascript:;" style="padding-left:10%;margin-top: 3px;;display:block;color:black;font-size:17px;" >科技</a> 
+			<div style="background: black;width: 100%;height: 1px;"></div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="row" style="margin-top: 60px;">
+		<div class="col-md-7 offset-md-1"  >
+			<div class="group-info d-flex" id="groupInfo">
+				<div>
+					<div style="width: 150px;height: 150px;padding:2px;background: black;border-radius: 3px;">
+				        <img :src="jpg" style="width: 100%;height: 100%;">
+				    </div>
+				    <div class="d-flex inclue-info" style="margin-left: -15px;margin-top: 10%;background:snow;height: 70px;">
+					<div style="width: 70px;height: 70px;font-size: 20px;">
+					<p class="text-center" style="margin-top: 10px;margin-bottom: -3px;">{{ chengyuan }}</p>
+					<p class="text-center small">成员</p>
+					</div>
+					<div style="width: 0.5px;height: 60%;margin-top:10%;background:rgba(0, 0, 0, 0.2);"></div>
+					<div style="width: 70px;height: 70px;font-size: 20px;">
+						<p class="text-center" style="margin-top: 10px;margin-bottom: -3px;">{{ tiezi }}</p>
+						<p class="text-center small">帖子</p>
+					</div>
+					<div style="width: 0.5px;height: 60%;margin-top:10%;background:rgba(0, 0, 0, 0.2);"></div>
+					<div style="width: 70px;height: 70px;font-size: 20px;">
+							<p class="text-center" style="margin-top: 10px;margin-bottom: -3px;">{{ hot }}</p>
+							<p class="text-center small">活跃度</p>
+					</div>
+				    </div>	
+				</div>
+				<div class="flex-grow-1" style="margin-left: 30px;background: snow">
+					<div class="d-flex" style="margin-top: 10px;">
+						<h3>{{ name }}</h3>
+						<span style="color: gray;margin-top: 7px;margin-left: 30px;">{{ own }}的小组</span>
+						<span class="flex-grow-1" style="color: gray;margin-top: 7px;margin-left: 30px;">{{ settime }}</span>
+						<button type="button" class="btn" style="color: orangered;" @click="addGroup">{{ add }}</button>
+						<button type="button" class="btn" style="color: royalblue;" @click="addControler">{{ controler }}</button>
+					</div>
+					<div class="d-flex" style="font-size: 20px;">
+						<span>标签：</span>
+						<ul>
+							<li style="display: inline;" v-for="item in arr" :title="item">
+								<span class="small p-2" style="background: #bfa;border-radius: 5px;margin-left: 5px;">{{ item }}</span>
+							</li>
+						</ul>
+						<button type="submit" class="btn" data-target="#myModal" data-toggle="modal" style ="margin-left: 20px;margin-top:-11px" @click="addtitle">+添加标签</button>		
+					</div>
+					<pre class="break-word" style="width: 100%;font-size: 17px;line-height: 28px;">
+  {{ jieshao }}
+                    </pre>
+				</div>
+			</div>
+			<div class="pinglun" style="width: 100%;margin-top: 40px;" id="pinglun">
+				<button type="button" class="btn btn-dark" href="javascript:;" style="margin-left: 5px;margin-bottom: 20px;" data-target="#myModal2" data-toggle="modal">发布我的帖子</button>
+				<div class="d-flex">
+					<span style="width:52%;">帖子</span>
+					<span style="width:17%;">发布者</span>
+					<span style="width: 8%;">回复</span>
+					<span class="flex-grow-1">发布时间</span>
+				</div>
+				<ul style="font-size: 17px;line-height: 20px;">
+					<li style="margin-top: 10px;" v-for="(item,index) in arr" :title="item">
+						<div style="position: relative;height: 20px;" >	
+						<a :href="item.tohref" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;" v-show="item.up"></i>{{ item.title }}</a>
+						<a :href="item.fromhref" class="break-word" style="position: absolute;left: 52%;width: 17%;">{{ item.name }}</a>
+						<span style="position: absolute;left: 69%;color: gray;width: 5%">{{ item.number }}</span>
+						<span style="position: absolute;left: 77%;color: gray;width: 17%;">{{ item.time }}</span>
+						<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" @click="toUp(index)"></button>	
+						<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;" @click="remove(index)"></button>	
+						</div>	
+						<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
+					</li>
+				
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-3 offset-md-1" style="height: 100px">
+		<div class="controler-info" id="owner">
+			<h4>组主</h4>
+			<div class="d-flex">
+				<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
+					<img :src="jpg" width="100%" height="100%">
+				</div>
+				<div class="flex-grow-1" >
+					<div class="d-flex" style="margin-left: 14px;">
+						<a :href="href" style="font-size: 17px;margin-top: 4px;color: black">{{ name }}</a>
+						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
+					</div>
+					<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">{{ content }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="xiaodi-info" id="controler">
+			<h4>管理员</h4>
+			<ul>
+				<li v-for="item in arr" :title="item">
+					<div class="d-flex">
+			<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
+			    <img :src="item.jpg" width="100%" height="100%">
+		    </div>	
+			<div class="flex-grow-1" >
+				<div class="d-flex" style="margin-left: 14px;">
+					<a :href="item.href" style="font-size: 17px;margin-top: 4px;color: black;">{{ item.name }}</a>
+					<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
+				</div>
+				<p class="elli" style="font-size: 14px;width: 150px;color: darkgray;">{{ item.content }}</p>	
+			</div>	
+		</div>
+				</li>
+			</ul>
+		</div>
+        <div class="hot-group" id="hot_group_info">
+				<h4 >成员们也喜欢逛逛</h4>
+				<ul>
+					<li v-for="item in arr" :title="item" style="margin-top: 10px;">
+						<div class="hot-group-item d-flex">
+							<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img :src="item.jpg" style="width:100%;height: 100%;"></div>
+							<a :href="item.href" class="break-word" style="color:black;margin-left: 10px;" >{{ item.title }}</a>
+						</div>
+						<div class="myborder"></div>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var group_info=new Vue({
+			el:"#groupInfo",
+			data:{
+				chengyuan:123,
+				tiezi:942,
+				hot:444,
+				jpg:"jpg/fire2.jpg",
+				name:"花好人间",
+				own:"鸡蛋啊",
+				settime:"2020/05/05",
+				arr:["生活中","快乐"],
+				jieshao:"hioajfijdasdod",
+				add:"加入小组",
+				controler:"申请成为管理员",
+				newtitle:"hhh"
+			},
+			methods:{
+			    addGroup:function(){
+					var that=this;
+					axios.post("check.html",
+        {
+			name:that.name,
+			user:""
+        })
+        .then(function(response){
+        },function(error) {
+        })
+				},
+			    addControler:function(){
+					var that=this;
+					axios.post("check.html",
+        {
+			name:that.name,
+			user:""
+        })
+        .then(function(response){
+        },function(error) {
+        })
+				},
+				addtitle:function(){
+					var that=this;
+					axios.post("check.html",
+        {
+			name:that.name,
+			user:"",
+			title:that.newtitle
+        })
+        .then(function(response){
+			that.arr.add(that.newtitle);
+        },function(error) {
+        })
+				}
+			}
+		})
+		var pinglun=new Vue({
+			el:"#pinglun",
+			data:{
+				arr:[{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"},{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"},{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"}]
+			},
+			methods:{
+				toUp:function(index){
+					var that=this;
+					axios.post("check.html",
+        {
+            inde:index
+        })
+        .then(function(response){
+			var hh=that.arr[index];
+					that.arr.splice(0,0,hh);
+					that.arr[0].up=true;
+					that.arr.splice(index+1,1);
+        },function(error) {
+        })
+				},
+				remove:function(index){
+					var that=this;
+					axios.post("check.html",
+        {
+            inde:index
+        })
+        .then(function(response){
+			this.arr.splice(index,1);
+        },function(error) {
+        })
+				}
+			}
+		})
+		var owner=new Vue({
+			el:"#owner",
+			data:{
+				jpg:"jpg/fire2.jpg",
+				name:"是鸡蛋啊",
+				content:"哇哦哦",
+				href:"https://baidu.com"
+			}
+		});
+		var controler=new Vue({
+			el:"#controler",
+			data:{
+				arr:[{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"}]
+			}
+		})
+		var hot_group_info=new Vue({
+			el:"#hot_group_info",
+			data:{
+				arr:[{jpg:"jpg/fire2.jpg",title:"asadasdaada",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",title:"asadasdaada",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",title:"asadasdaada",href:"https://baidu.com"}]
+			}
+		});
+		var myModal=new Vue({
+			el:"#myModal",
+			data:{
+				content:""
+			},
+		});
+		var myModal2=new Vue({
+			el:"#myModal2",
+			data:{
+				title:"",
+				content:""
+			},
+		});
+	</script>
 </body>
 </html>
