@@ -62,9 +62,8 @@
             <div class="col-md-12" style="width: 100%;" id="tishi">
                 <div class="alert alert-primary fade show" v-if="hasshow">
                     <button type="button" class="close" @click="close">&times;</button>
-                    <strong>{{  hh }}</strong> 
+                    <strong>{{ hh }}</strong> 
                 </div>
-                
             </div>
         </div>
     	<div class="row">
@@ -95,38 +94,57 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-    var tishi=new Vue({
-        el:"#tishi",
-        data:{
-            hasshow:false,
-            hh:"您的建议我们已收到，我们会认真考虑"
-        },
-        methods:{
-            close:function(){
-                this.hasshow=false;
-            }
-        }
-    });
-        var feedback=new Vue({
+		var tishi=new Vue
+		({
+			el:"#tishi",
+			data:
+			{
+				hasshow:false,
+				hh:"您的建议我们已收到，我们会认真考虑"
+			},
+			methods:
+			{
+				close:function()
+				{
+					this.hasshow=false;
+				}
+			}
+		});
+        var feedback=new Vue
+		({
             el:"#feedback",
-            data:{
+            data:
+			{
                 content:"",     
             },
-            methods:{
-                submit:function(){
+            methods:
+			{
+                submit:function()
+				{
                     var that=this;
-                    axios.post("check.html",
-        {
-            content:that.content
-        })
-        .then(function(response){
-            tishi.hasshow=true;
-            setTimeout(function(){
-                tishi.hasshow=false;
-            },2000);
-        },function(error) {
-        })
-    
+                    axios.post
+					(
+						"check.html",
+        				{
+            				content:that.content
+        				}
+					)
+        			.then
+					(
+						function(response)
+						{
+            				tishi.hasshow=true;
+            				setTimeout
+							(
+								function()
+								{
+                					tishi.hasshow=false;
+            					}
+								,2000
+							);
+        				}
+						,function(error){}
+					)
                 }
             }
         });
