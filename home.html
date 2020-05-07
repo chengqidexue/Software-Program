@@ -62,6 +62,7 @@
 		.switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }
 	</style>
 </head>
+
 <body>
 	<div class="container_fluid">
 		<div class="row" style="background-color: #030e11;">
@@ -110,178 +111,95 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 60px;">
-			<div class=" col-md-10 offset-md-1" style="position: relative;;">
-				<div class="d-flex" style="position: absolute;background:snow;width: 120%;height: 120%;margin-left: -130px;margin-top: -30px;"></div>
+			<div class=" col-md-10 offset-md-1" style="position: relative;">
+				<div class="d-flex" style="position: absolute;background:snow;width: 120%;height: 120%;margin-left: -130px;margin-top: -30px;">
+				</div>
 				<div class="d-flex justify-content-around">
 					<div class="hot-group" style="width:20%;background: white;border-radius: 20px;" id="hot-group1">
 						<div class="big-border"></div>
 						<h4 class="text-center p-4" style="color: blue; ">热门书籍</h4>
 						<ul style="padding:0 20px;font-size: 18px;font-weight: bold;">
-							<li v-for="item in arr" :title="item">
-								<a href="javascript:;" style="color: black;;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
+							<li v-for="item in arr" :title="item" style="margin-top: 10px;">
+								<a :href="item.href" style="color: black;;">{{ item.name }}</a>
 								<div class="myborder"></div>
 							</li>
 						</ul>
 					</div>
-					<div class="hot-group" style="width:20%;background: white;border-radius: 20px;">
+					<div class="hot-group" style="width:20%;background: white;border-radius: 20px;" id="hot-group2">
 						<div class="big-border"></div>
 						<h4 class="text-center p-4" style="color: blue; ">热门影视</h4>
 						<ul style="padding:0 20px;font-size: 18px;font-weight: bold;">
-							<li v-for="item in arr" :title="item">
-								<a href="javascript:;" style="color: black;;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
+							<li v-for="item in arr" :title="item" style="margin-top: 10px;">
+								<a :href="item.href" style="color: black;;">{{ item.name }}</a>
 								<div class="myborder"></div>
 							</li>
 						</ul>
 					</div>
-					<div class="hot-group" style="width:20%;background: white;border-radius: 20px;">
+					<div class="hot-group" style="width:20%;background: white;border-radius: 20px;" id="hot-group3">
 						<div class="big-border"></div>
 						<h4 class="text-center p-4" style="color: blue; ">热门话题</h4>
 						<ul style="padding:0 20px;font-size: 18px;font-weight: bold;">
-							<li v-for="item in arr" :title="item">
-								<a href="javascript:;" style="color: black;;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
-								<div class="myborder"></div>
-							</li>
-							<li v-for="item in arr" :title="item" style="margin-top:10px">
-								<a href="javascript:;" style="color: black;">小情书</a>
+							<li v-for="item in arr" :title="item" style="margin-top: 10px;">
+								<a :href="item.href" style="color: black;;">{{ item.name }}</a>
 								<div class="myborder"></div>
 							</li>
 						</ul>
 					</div>
 				</div>
-			</div>
+		</div>
 		</div>
 		<div class="row" style="margin-top: 50px;">
 			<div class="col-md-10 offset-md-1">	
-				<div class="movie-content">
+				<div class="movie-content" id="movie_content">
 					<div class="p-1" style="background:url(jpg/back.jpg);background-repeat:no-repeat ;background-size: 100% 100%;height:auto;width: 100%;" >
-					    <h1 style="margin-left: 30px;color: white;font-weight: bolder;font-size: 35px;">热门书评</h1>
+					    <h1 style="margin-left: 30px;color: white;font-weight: bolder;font-size: 35px;">热门影评</h1>
 					</div>	
 					<ul style="margin-top: 30px;">
-						<li style="width: 100%;height: 200px;">
+						<li v-for="item in arr" style="width: 100%;height: 200px;">
 							<div class="d-flex">
-								<img src="jpg/fire2.jpg" width="10%" height="120px">
+								<img :src="item.tojpg" width="10%" height="120px">
 								<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
-									<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
-									<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
-									<div class="d-flex">
-										<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
-											<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
-										</div>		
-										<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
-										<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
-										<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
-		                            	<a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
-		                            	<a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
-									</div>
+									<a :href="item.tohref" style="font-size: 25px;">{{ item.toname }}</a>
+									<p class="break-word" style="height: 60px;overflow: hidden;">{{ item.content }}</p>
+								<div class="d-flex">
+									<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
+									<img :src="item.ownjpg" style="width: 100%;height: 100%;margin-top:-9px;">
+									</div>		
+									<a :href="item.ownhref" style="margin-left: 10px;">{{ item.ownname }}</a>
+									<p class="flex-grow-1" style="margin-left: 20px;">{{ item.time }}</p>
+									<button type="button" class="btn"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞({{ item.like }})</i></button>
+	                                <button type="button" class="btn"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对({{ item.disLike }})</i></button>
+	                                <button type="button" class="btn"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></button>
 								</div>
 							</div>
-						</li>
-						<li style="width: 100%;height: 200px;">
-							<div class="d-flex">
-								<img src="jpg/fire2.jpg" width="10%" height="120px">
-								<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
-									<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
-									<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
-									<div class="d-flex">
-										<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
-										<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
-										</div>		
-										<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
-										<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
-										<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
-		                            	<a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
-		                            	<a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
-									</div>
-								</div>
+								
 							</div>
 						</li>
 					</ul>
 				</div>
-				<div class="book-content">
+				<div class="book-content" id="book_content">
 					<div class="p-1" style="background:url(jpg/back.jpg);background-repeat:no-repeat ;background-size: 100% 100%;height:auto;width: 100%;" >
 					    <h1 style="margin-left: 30px;color: white;font-weight: bolder;font-size: 35px;">热门书评</h1>
-					</div>		
+					</div>	
 					<ul style="margin-top: 30px;">
-						<li style="width: 100%;height: 200px;">
+						<li v-for="item in arr" style="width: 100%;height: 200px;">
 							<div class="d-flex">
-								<img src="jpg/fire2.jpg" width="10%" height="120px">
+								<img :src="item.tojpg" width="10%" height="120px">
 								<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
-									<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
-									<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
-									<div class="d-flex">
-										<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
-										<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
-										</div>		
-										<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
-										<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
-										<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
-		                            	<a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
-		                            	<a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
-									</div>
+									<a :href="item.tohref" style="font-size: 25px;">{{ item.toname }}</a>
+									<p class="break-word" style="height: 60px;overflow: hidden;">{{ item.content }}</p>
+								<div class="d-flex">
+									<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
+									<img :src="item.ownjpg" style="width: 100%;height: 100%;margin-top:-9px;">
+									</div>		
+									<a :href="item.ownhref" style="margin-left: 10px;">{{ item.ownname }}</a>
+									<p class="flex-grow-1" style="margin-left: 20px;">{{ item.time }}</p>
+									<button type="button" class="btn"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞({{ item.like }})</i></button>
+	                                <button type="button" class="btn"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对({{ item.disLike }})</i></button>
+	                                <button type="button" class="btn"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></button>
 								</div>
 							</div>
-						</li>
-						<li style="width: 100%;height: 200px;">
-							<div class="d-flex">
-								<img src="jpg/fire2.jpg" width="10%" height="120px">
-								<div class="p-2 flex-grow-1" style="margin-top: -15px;margin-left: 10px;">
-									<a href="javascript:;" style="font-size: 25px;">冰与火之歌</a>
-									<p class="break-word">条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> 要等条件的基础上，在对各种价值主客体关系深刻认识的前提下，对不同价值取向选择性接受并确立自身价值观的过程。从一定意义上说，价值选择的完成也可以说是价值观形成的标志。查看全部>> </p>
-									<div class="d-flex">
-										<div style="width: 20px;height: 20px;border-radius: 20px;overflow: hidden;margin-top: 3px;">
-										<img src="jpg/fire3.jpg" style="width: 100%;height: 100%;margin-top:-9px;">
-										</div>		
-										<a href="javascript:;" style="margin-left: 10px;">花好人间</a>
-										<p class="flex-grow-1" style="margin-left: 20px;">2020/04/30 17:05</p>
-										<a href="javascript:;"><i class="iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;">点赞(100)</i></a>
-		                            	<a href="javascript:;"><i class="iconfont icon-fandui  " style="font-size:16px;margin-left:13px;color: black;">反对(12)</i></a>
-		                            	<a href="javascript:;" data-target="#myModal" data-toggle="modal"><i class="iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;">举报</i></a>
-									</div>
-								</div>
+								
 							</div>
 						</li>
 					</ul>
@@ -289,5 +207,49 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var hot_group1=new Vue
+		({
+			el:"#hot-group1",
+			data:
+			{
+				arr:[{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"}]
+			}
+		});
+		var hot_group2=new Vue
+		({
+			el:"#hot-group2",
+			data:
+			{
+				arr:[{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"}]
+			}
+		});
+		var hot_group3=new Vue
+		({
+			el:"#hot-group3",
+			data:
+			{
+				arr:[{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"},{href:"https://baidu.com",name:"小情书"}]
+			}
+		});
+		var movie_content=new Vue
+		({
+			el:"#movie_content",
+			data:
+			{
+				arr:[{tojpg:"jpg/fire2.jpg",toname:"冰与火之歌",tohref:"https://baidu.com",content:"hhh",ownjpg:"jpg/fire2.jpg",ownname:"西瓜啊",ownhref:"https://baidu.com",time:"2020/01/01 22:03",like:12,disLike:20},{tojpg:"jpg/fire2.jpg",toname:"冰与火之歌",tohref:"https://baidu.com",content:"hhh",ownjpg:"jpg/fire2.jpg",ownname:"西瓜啊",ownhref:"https://baidu.com",time:"2020/01/01 22:03",like:12,disLike:20}]
+			}
+		});
+		var book_content=new Vue
+		({
+			el:"#book_content",
+			data:
+			{
+				arr:[{tojpg:"jpg/fire2.jpg",toname:"冰与火之歌",tohref:"https://baidu.com",content:"hhh",ownjpg:"jpg/fire2.jpg",ownname:"西瓜啊",ownhref:"https://baidu.com",time:"2020/01/01 22:03",like:12,disLike:20},{tojpg:"jpg/fire2.jpg",toname:"冰与火之歌",tohref:"https://baidu.com",content:"hhh",ownjpg:"jpg/fire2.jpg",ownname:"西瓜啊",ownhref:"https://baidu.com",time:"2020/01/01 22:03",like:12,disLike:20}]
+			}
+		});
+	</script>
 </body>
 </html>
