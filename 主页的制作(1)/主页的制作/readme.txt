@@ -1,1 +1,0 @@
-文件在blog.my.net的主页.html里
