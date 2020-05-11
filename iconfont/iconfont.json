@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3510058",
+      "name": "置顶",
+      "font_class": "zhiding",
+      "unicode": "e6ea",
+      "unicode_decimal": 59114
+    },
+    {
+      "icon_id": "6665743",
+      "name": "关  闭",
+      "font_class": "guanbi",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
       "icon_id": "2468956",
       "name": "发布",
       "font_class": "fabu",

@@ -72,3 +72,38 @@ ul{padding: 0}
 .break-word{
     word-wrap: break-word;word-break: break-all
 }
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    }
+.elli{
+    white-space:nowrap;
+   overflow:hidden;
+   text-overflow:ellipsis;
+}
+
+
+
+.hot-group{
+    border-radius: 7px;
+    overflow: hidden;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+.hot-group:hover{
+    width: 103%;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+}
+.hot-group-item{position: relative;width: 100%;height: 90px}
+.hot-group .pic{position:absolute;width: 30%;height: 100%;left: 0;top: 0}
+.hot-group .pic img{
+    width: 70%;height: 70%;
+}
+.hot-group .info{position:absolute;width:70%;height: 100%;left: 30%;top: 10px}
+.hot-group .info > a{position: absolute;left: 0;width:100%;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+.myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
+.big-border{width: 100%;height:1px;background: cornflowerblue}
+.switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }

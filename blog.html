@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+</head>
+<body>
+    <div class="container_fluid">
+    <div class="row" style="background-color: #030e11;">
+        <div class="col_md_12 " >
+            <div id="menu">
+                <li> <a href="#" >花瓣</a></li>
+                <li> <a href="#" >书籍</a></li>
+                <li> <a href="#" >影视</a></li>
+                <li> <a href="#" >话题广场</a></li>
+                <li> <a href="#" >小组</a></li>
+                <li> <a href="#" >消息通知</a></li>
+                <li id="drop1">
+                    <a href="#">账号</a>
+                    <div id="dropdown1" class="dropdown_1">
+                        <div class="col_1">
+                            <ul class="simple">
+                                <li><a href="#">个人主页</a></li>
+                                <li><a href="#">我的小组</a></li>
+                                <li><a href="#">我参与的话题</a></li>
+                                <li><a href="#">退出账号</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="" >联系我们</a></li>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background: cornflowerblue">
+        <div class="col-md-4 offset-md-6" >
+            <div class="input-group mb-3"  >
+                <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+                <div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">全部</a>
+                            <a class="dropdown-item" href="#">推理</a>
+                            <a class="dropdown-item" href="#">言情</a>
+                            <a class="dropdown-item" href="#">历史</a>
+                            <a class="dropdown-item" href="#">文化</a>
+                            <a class="dropdown-item" href="#">书籍</a>
+                            <a class="dropdown-item" href="#">影视</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 30px;background: #f4f3f3;">
+        <div class="col-md-7 offset-md-1" >
+            <div class="title" style="background: white;">
+                <div class="d-flex p-4">
+                <div style="width: 100px;height: 100px;border-radius: 5px;overflow: hidden;">
+                    <img src="jpg/fire2.jpg" width="100%" height="100%">
+                </div>
+                <div style="margin-left: 30px;">
+                  <h1 class="break-word" style="font-size: 30px;font-weight: bold;">#是事实哇就是宿迁#</h1>
+                <div style="color: gray;margin-top: 25px;">
+                    <span>阅读量10</span>
+                    <span style="margin-left: 13px;">讨论47</span>
+                    <span style="margin-left: 13px;">相关书籍或影视：<a href="#" style="font-weight: bold;color: black;">指环王</a></span>
+                </div>  
+                </div>
+            </div>
+            <p class="break-word p-4">宿迁一名小学老师公开组织全班学生为肖战跳舞应援，还录下视频发到了网上。宿迁市沭阳县教育局已对此事作出调查处理，学校对当事老师作出停职停课的处理，教育局对该教师所在学校的校长进行了诫勉谈话。</p>
+            <div id="canDo" class="d-flex" style="height: 50px;margin-top: 20px;">
+                <button id="ping" @click="ping" type="button" class="btn btn-link " style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-pinglun" ></i>评论</button>
+                <button type="button" @click="dianzan" class="btn btn-link" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: crimson;"><i class="iconfont iconfont icon-ziyuan" ></i>举报</button>
+            </div>
+            <div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:0;overflow: hidden">
+                <textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="发布评论" v-model="myping"></textarea>
+                <button class="btn iconfont icon-fabu btn-dark" style="font-size: 30px;;margin: 0;width: 15% ;height:100%" @click="submitping"></button>   
+            </div>
+            </div>
+            <div class="taolun" style="margin-top: 30px;" style="background: white;">
+                <ul>
+                                <li class="p-4" style="margin-top: 10px;margin-bottom: 10px;background: white;">
+                                <div class="d-flex">
+                                    <div style="width: 40px;height: 40px;border-radius: 3px;overflow: hidden;">
+                                        <img src="jpg/fire1.jpg" width="100%" height="100%">
+                                    </div>
+                                    <a href="#" style="margin-left: 14px;font-weight: bold;color: black;">豆豆先生</a>
+                                    <span style="margin-left:14px;color: gray;">编辑于2020/02/02 3：02</span>
+                                </div>
+                                <pre style="margin-top: 10px;margin-left: 5px;">
+                Welcome to Your Vue.js App
+                For a guide and recipes on how to configure / customize this project,
+                check out the vue-cli documentation. 
+                Installed CLI Plugins
+                babeleslint
+                Essential Links
+                Core DocsForumCommunity ChatTwitterNews
+                Ecosystem
+                                </pre>
+                                </pre>
+                                <div class="d-flex">
+                                    <button id="ping" @click="ping" type="button" class="btn " style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-buoumaotubiao16" ></i>赞成</button>
+                                    <button id="ping" @click="ping" type="button" class="btn" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-fandui " ></i>反对</button>
+                                    <button id="ping" @click="ping" type="button" class="btn" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: firebrick;"><i class="iconfont icon-ziyuan" ></i>举报</button>
+                                </div>
+                                </li>
+                                <li class="p-4" style="margin-top: 10px;margin-bottom: 10px;background: white;">
+                                    <div class="d-flex">
+                                        <div style="width: 40px;height: 40px;border-radius: 3px;overflow: hidden;">
+                                            <img src="jpg/fire1.jpg" width="100%" height="100%">
+                                        </div>
+                                        <a href="#" style="margin-left: 14px;font-weight: bold;color: black;">豆豆先生</a>
+                                        <span style="margin-left:14px;color: gray;">编辑于2020/02/02 3：02</span>
+                                    </div>
+                                    <pre style="margin-top: 10px;margin-left: 5px;">
+                    Welcome to Your Vue.js App
+                    For a guide and recipes on how to configure / customize this project,
+                    check out the vue-cli documentation. 
+                    Installed CLI Plugins
+                    babeleslint
+                    Essential Links
+                    Core DocsForumCommunity ChatTwitterNews
+                    Ecosystem
+                                    </pre>
+                                    </pre>
+                                    <div class="d-flex">
+                                        <button id="ping" @click="ping" type="button" class="btn " style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-buoumaotubiao16" ></i>赞成</button>
+                                        <button id="ping" @click="ping" type="button" class="btn" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-fandui " ></i>反对</button>
+                                        <button id="ping" @click="ping" type="button" class="btn" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: firebrick;"><i class="iconfont icon-ziyuan" ></i>举报</button>
+                                    </div>
+                                    </li>
+                                    <li class="p-4" style="margin-top: 10px;margin-bottom: 10px;background: white;">
+                                        <div class="d-flex">
+                                            <div style="width: 40px;height: 40px;border-radius: 3px;overflow: hidden;">
+                                                <img src="jpg/fire1.jpg" width="100%" height="100%">
+                                            </div>
+                                            <a href="#" style="margin-left: 14px;font-weight: bold;color: black;">豆豆先生</a>
+                                            <span style="margin-left:14px;color: gray;">编辑于2020/02/02 3：02</span>
+                                        </div>
+                                        <pre style="margin-top: 10px;margin-left: 5px;width: 100%;">
+                提交方式：一个压缩包
+                压缩包内包含一个文件夹：用“17373109_王宇轩”格式命名的vue项目（不要打包node_module文件夹和dist文件夹）
+                以及一个doc文档，命名为“项目截图”，内容为项目运行时几个状态的截图（按顺序操作后截图即可）：1.运行成功时的初始页面（输入框为空），2.输入内容不是自己学号时的页面显示，3.输入内容为学号时的页面显示，4.增加列表元素后的页面显示，5.点击自己学号项跳转到的第二个页面的显示，6.点击其他项跳转后的显示，7.从第二个页面返回到第一个页面时的显示
+                                        </pre>
+                                        </pre>
+                                        <div class="d-flex">
+                                            <button id="ping" @click="ping" type="button" class="btn " style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-buoumaotubiao16" ></i>赞成</button>
+                                            <button id="ping" @click="ping" type="button" class="btn" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-fandui " ></i>反对</button>
+                                            <button id="ping" @click="ping" type="button" class="btn" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: firebrick;"><i class="iconfont icon-ziyuan" ></i>举报</button>
+                                        </div>
+                                        </li>
+                            </ul>
+                            </div>  
+        </div>
+        <div class="col-md-3">
+            <div class="side-owner p-2" style="background: white;" id="own">
+                <p style="font-size: 15px;margin-left: 20px;">关于发布者</p>
+                <div class="d-flex">
+                    <div style="width: 60px; height: 60px;border-radius: 60px;overflow: hidden;">
+                    <img :src="jpg" width="100%" height="100%">
+                </div>
+                <a :href="href" class="break-word" style="margin-left: 20px;font-size: 25px;margin-top: 6px;">{{ name }}</a>
+                </div>
+                <div class="p-2 d-flex" style="margin-top:10px">
+                <div style="width: 60px;height: 60px;">
+                <p  style="font-size: 20px;font-weight: bold;">{{ pinglun }}</p>
+                <p style="margin-top: -10px;">评论</p>
+                </div>
+                <div style="width: 60px;height: 60px;">
+                    <p style="font-size: 20px;font-weight: bold;">{{ saw }}</p>
+                    <p style="margin-top: -10px;">看过</p>
+                </div>
+                <div style="width: 60px;height: 60px;">
+                    <p style="font-size: 20px;font-weight: bold;">{{ group }}</p>
+                    <p style="margin-top: -10px;">小组</p>
+                </div>
+                </div> 
+            </div>
+            <div class="info" style="position: relative;width: 100%;height: 500px;margin-top: 30px;">
+            <a href="#">
+                <img src="jpg/title.png" width="100%" height="100%">
+            </a>  
+            <div class="p-2" style="position: absolute;right: 20px;bottom: 20px;width: 50%;color:white;font-weight: lighter;;background:rgba(0, 0, 0, 0.2)">
+                <p class="break-word" style="opacity:1;font-size: 13px;">从前有座山，山上有座庙，庙里有个小和尚，小和尚说从前有座山，山上有座庙，庙里有个小和尚，小和尚说从前有座山，山上有座庙，庙里有个小和尚，小和尚说</p>
+            </div>
+            </div>
+            <div class="hot-group" style="margin-top: 30px;background: white;border-radius: 20px;" id="hot-group1">
+                <div class="big-border"></div>
+                <h4 class="p-4" style="font-size: 20px; ">相关话题</h4>
+                <ul style="padding:0 20px;font-size: 15px">
+                    <li v-for="item in arr" :title="item" style="margin-top: 10px;">
+                        <a :href="item.href" style="color: darkslateblue;">{{ item.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+            var own=new Vue({
+            el:"#own",
+            data:{
+                href:"https://baidu.com",
+                jpg:"jpg/fire2.jpg",
+                name:"西瓜啊",
+                pinglun:20,
+                saw:30,
+                group:40
+            }
+        });
+        var hot_group1=new Vue({
+		el:"#hot-group1",
+		data:{
+			arr:[{href:"https://baidu.com",name:"请问有人会做周黑鸭的卤味吗? "},{href:"https://baidu.com",name:"请问有人会做周黑鸭的卤味吗? "},{href:"https://baidu.com",name:"请问有人会做周黑鸭的卤味吗? "},{href:"https://baidu.com",name:"请问有人会做周黑鸭的卤味吗? "},{href:"https://baidu.com",name:"小情书"}]
+		}
+	});
+</script>
+</body>
+
+</html>

@@ -203,12 +203,12 @@ var h=document.getElementById("submit_tiezi");
 				<ul style="font-size: 17px;line-height: 20px;">
 					<li style="margin-top: 10px;" v-for="(item,index) in arr" :title="item">
 						<div style="position: relative;height: 20px;" >	
-						<a :href="item.tohref" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-pinglun" style="margin-right: 10px;color: brown;" v-show="item.up"></i>{{ item.title }}</a>
+						<a :href="item.tohref" class="break-word" style="width: 50%;position: absolute;left: 0;"><i class="iconfont icon-zhiding" style="margin-right: 10px;color: brown;position: absolute;left: -20px;" v-show="item.up"></i>{{ item.title }}</a>
 						<a :href="item.fromhref" class="break-word" style="position: absolute;left: 52%;width: 17%;">{{ item.name }}</a>
 						<span style="position: absolute;left: 69%;color: gray;width: 5%">{{ item.number }}</span>
 						<span style="position: absolute;left: 77%;color: gray;width: 17%;">{{ item.time }}</span>
-						<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 94%;top: -6px;" @click="toUp(index)"></button>	
-						<button type="button" class="btn iconfont icon-pinglun" style="position: absolute;left: 97%;top: -6px;" @click="remove(index)"></button>	
+						<button type="button"  class="btn iconfont icon-zhiding" style="position: absolute;left: 94%;top: -6px;" @click="toUp(index)" v-show="!item.up"></button>	
+						<button type="button" class="btn iconfont icon-guanbi" style="position: absolute;left: 97%;top: -6px;" @click="remove(index)"></button>	
 						</div>	
 						<div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
 					</li>
@@ -327,7 +327,7 @@ var h=document.getElementById("submit_tiezi");
 		var pinglun=new Vue({
 			el:"#pinglun",
 			data:{
-				arr:[{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"},{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"},{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"}]
+				arr:[{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"},{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:true,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"},{tohref:"https://baidu.com",fromhref:"https://baidu.com",up:false,title:"西瓜要开花",name:"zhe",number:123,time:"2020/05/05"}]
 			},
 			methods:{
 				toUp:function(index){
