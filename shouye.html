@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/daohang.css">
 	<link rel="stylesheet" href="iconfont/iconfont.css">
@@ -59,22 +59,20 @@
 <body>
 <div class="container_fluid">
 	<div class="row" style="background-color: #030e11;">
-		<div class="col_md_12">
+		<div class="col_md_12 " >
 			<div id="menu">
-				<li><a href="#" >花瓣</a></li>
-				<li><a href="#" >书籍</a></li>
-				<li><a href="#" >影视</a></li>
-				<li><a href="#" >话题广场</a></li>
-				<li><a href="#" >小组</a></li>
-				<li><a href="#" >消息通知</a></li>
+				<li> <a href="#" >花瓣</a></li>
+				<li> <a href="#" >书籍</a></li>
+				<li> <a href="#" >影视</a></li>
+				<li> <a href="#" >话题广场</a></li>
+				<li> <a href="#" >小组</a></li>
+				<li> <a href="#" >消息通知</a></li>
 				<li id="drop1">
 					<a href="#">账号</a>
 					<div id="dropdown1" class="dropdown_1">
 						<div class="col_1">
 							<ul class="simple">
 								<li><a href="#">个人主页</a></li>
-								<li><a href="#">我的小组</a></li>
-								<li><a href="#">我参与的话题</a></li>
 								<li><a href="#">退出账号</a></li>
 							</ul>
 						</div>
@@ -85,14 +83,14 @@
 		</div>
 	</div>
 	<div class="row" style="background: cornflowerblue">
-		<div class="col-md-4 offset-md-6">
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+		<div class="col-md-4 offset-md-6" >
+			<div class="input-group mb-3" id="searchContent">
+				<input type="text" v-model="content" @keyup.enter="entersearch1" class="form-control" placeholder="Search" style="margin: 10px" >
 				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
 					<div class="btn-group">
 						<button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">全部</a>
+							<a class="dropdown-item" href="#" @click="entersearch1">全部</a>
 							<a class="dropdown-item" href="#">书籍</a>
 							<a class="dropdown-item" href="#">影视</a>
 							<a class="dropdown-item" href="#">小组</a>
@@ -203,6 +201,41 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+	var search_content = new Vue({
+		el:"#searchContent",
+		data:{
+			content:'',
+			resultList:[]
+		},
+		methods:{
+			jump:function () {
+				var searchval = this.content;
+				window.location.href=' http://localhost:8080/primaryBird/html/search.html?q='+searchval;
+			},
+			entersearch1:function(){
+				if (this.content.keyCode == 13)
+				{
+					jump();
+				}
+			}
+		}
+
+		// methods:{
+		// 	ShouyeSearch:function () {
+		// 		//这里需要后端的网址
+		// 		var that = this;
+		// 		axios.get('http://wthrcdn.etouch.cn/weather_mini?content='+this.content)
+		// 		.then(function (response) {
+		// 			console.log(that.content);
+		// 			console.log(response);
+		// 			that.resultList = response.data.data.forecast;
+		// 		})
+		// 		.catch(function (err) {
+		//
+		// 		})
+		// 	}
+		// },
+	});
 	var hot_group1=new Vue({
 		el:"#hot-group1",
 		data:{

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="iconfont/iconfont.js"></script>	
+</head>
+
+<body>
+<div class="container_fluid">
+	<div class="row" style="background-color: #030e11;">
+        <div class="col_md_12 " >
+            <div id="menu">
+                <li> <a href="#" >花瓣</a></li>
+                <li> <a href="#" >书籍</a></li>
+                <li> <a href="#" >影视</a></li>
+                <li> <a href="#" >话题广场</a></li>
+                <li> <a href="#" >小组</a></li>
+                <li> <a href="#" >消息通知</a></li>
+                <li id="drop1">
+                    <a href="#">账号</a>
+                    <div id="dropdown1" class="dropdown_1">
+                        <div class="col_1">
+                            <ul class="simple">
+                                <li><a href="#">个人主页</a></li>
+                                <li><a href="#">退出账号</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="" >联系我们</a></li>
+            </div>
+        </div>
+    </div>
+	<div class="row" style="margin-top: 40px;">
+		<div class="col-md-8 offset-md-2" >
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link" href="#">小组</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link active" href="#">讨论</a>
+				</li>
+			</ul>
+			<div class="input-group mb-3"  >
+				<input type="text" id="search_btn" class="form-control" placeholder="Search" style="margin: 10px" >
+				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
+						<button type="button" class="btn btn-success">搜索</button>
+				</div>
+			</div>
+        </div>
+        <div class="col-md-8 offset-md-2" style="background: white;">
+            <ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link" href="#">热点</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link active" href="#">书籍</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link" href="#">影视</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link" href="#">文化</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link" href="#">生活</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link" href="#">科技</a>
+				</li>
+			</ul>
+            <p style="color: gray;">总共搜索到10条数据</p>
+            <div class="d-flex">
+                <span style="width:35%;">帖子</span>
+                <span style="width:17%;">来自</span>
+                <span style="width:17%;">发布者</span>
+                <span style="width: 8%;">回复</span>
+                <span class="flex-grow-1">发布时间</span>
+            </div>
+            <ul style="font-size: 17px;line-height: 20px;">
+                <li style="margin-top: 10px;" v-for="(item,index) in arr" :title="item">
+                    <div style="position: relative;height: 20px;" >	
+                    <a :href="item.tohref" class="break-word" style="width: 50%;position: absolute;left: 0;">{{ item.title }}</a>
+                    <a :href="item.fromhref" class="break-word" style="position: absolute;left: 35%;width: 17%;">{{ 火焰组 }}</a>
+                    <a :href="item.fromhref" class="break-word" style="position: absolute;left: 52%;width: 17%;">{{ item.name }}</a>
+                    <span style="position: absolute;left: 69%;color: gray;width: 5%">{{ item.number }}</span>
+                    <span style="position: absolute;left: 77%;color: gray;width: 17%;">{{ item.time }}</span>
+                     </div>	
+                    <div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
+                </li>
+            
+            </ul>
+        </div>
+	</div>
+</div>
+
+</body>
+
+</html>

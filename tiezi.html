@@ -46,30 +46,29 @@
 <body>
     <div class="container_fluid">
         <div class="row" style="background-color: #030e11;">
-            <div class="col_md_12 " >
-                <div id="menu">
-                    <li> <a href="#" >花瓣</a></li>
-                    <li> <a href="#" >书籍</a></li>
-                    <li> <a href="#" >影视</a></li>
-                    <li> <a href="#" >话题广场</a></li>
-                    <li> <a href="#" >小组</a></li>
-                    <li > <a href="#" >消息通知</a></li>
-                    <li id="drop1"><a href="#">账号</a>
-                        <div id="dropdown1" class="dropdown_1">
-                            <div class="col_1">
-                                <ul class="simple">
-                                    <li><a href="#">个人主页</a></li>
-                                    <li><a href="#">我的小组</a></li>
-                                    <li><a href="#">我参与的话题</a></li>
-                                    <li><a href="#">退出账号</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="" >联系我们</a></li>
-                </div>
-            </div>
-        </div>
+        	<div class="col_md_12 " >
+            	<div id="menu">
+                	<li> <a href="#" >花瓣</a></li>
+                	<li> <a href="#" >书籍</a></li>
+                	<li> <a href="#" >影视</a></li>
+                	<li> <a href="#" >话题广场</a></li>
+                	<li> <a href="#" >小组</a></li>
+                	<li> <a href="#" >消息通知</a></li>
+                	<li id="drop1">
+                    	<a href="#">账号</a>
+                    	<div id="dropdown1" class="dropdown_1">
+                        	<div class="col_1">
+                            	<ul class="simple">
+                                	<li><a href="#">个人主页</a></li>
+                                	<li><a href="#">退出账号</a></li>
+                            	</ul>
+                        	</div>
+                    	</div>
+                	</li>
+                	<li><a href="" >联系我们</a></li>
+            	</div>
+        	</div>
+    	</div>
         <div class="row" style="background: cornflowerblue;">
             <div class="col-md-5 offset-md-1">
                 <div class="d-flex">
@@ -182,16 +181,6 @@
                 </div>
                 <div class="may-like" style="margin-top: 50px;" id="may_like">
                     <h4>猜你想看</h4>
-                    <ul>
-                        <li class="p-2" style="border-bottom: royalblue;" v-for="item in arr">
-                            <a :href="item.tohref">{{ item.toname }}</a>&nbsp;&nbsp;来自<a :href="item.ownhref" class="break-word" style="color: black;">&nbsp;&nbsp;{{ item.ownname }}</a>
-                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="more-topic" style="margin-top: 50px;" id="more">
-                    <a :href="href" style="position: absolute;right: 10%;">更多评论</a>
-                    <h4>更多讨论</h4>
                     <ul>
                         <li class="p-2" style="border-bottom: royalblue;" v-for="item in arr">
                             <a :href="item.tohref">{{ item.toname }}</a>&nbsp;&nbsp;来自<a :href="item.ownhref" class="break-word" style="color: black;">&nbsp;&nbsp;{{ item.ownname }}</a>
@@ -325,13 +314,6 @@
                 arr:[{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"}]
             }
         });
-        var more=new Vue({
-            el:"#more",
-            data:{
-                href:"https://baidu.com",
-                arr:[{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"}]
-            }
-        })
 
     </script>
 </body>
