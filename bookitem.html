@@ -88,10 +88,9 @@
                 </div>
                 <div style="position: absolute;left: 40%;height: 100%;overflow: hidden">
                     <h1 class="p-2">{{ name }}</h1>
-                    <p class="p-2" style="background: black;color: white;font-size:19px;">{{ time }} - {{ type }} - {{ date }}{{ country }}上映</p>
+                    <p class="p-2" style="background: black;color: white;font-size:19px;">{{ type }} - {{ date }}{{ country }}上映</p>
                     <div class="d-flex flex-fill" style="background:#066591 ;position: relative;">
-                        <span class="p-2 " style="color: white;font-size: 17px;">{{ actor }}位演员</span>
-                        <span class="p-2 " style="color: white;font-size: 17px;">{{ number }}条影评</span>
+                        <span class="p-2 " style="color: white;font-size: 17px;">{{ number }}条书评</span>
                         <span class="p-2 " style="color: white;font-size: 17px;">{{ hot }}热度</span>
                         <div style="background: #030e11;width:80px;height: 80px;position: absolute;;right: 0;top: -15px;">
                             <p class="text-center font-weight-bold" style="font-size: 40px;color: white;">{{ pointx }}.<span class="small">{{ pointy }}</span></p>
@@ -142,46 +141,17 @@
             </div>
         </div>
         </div>
-        <div class="row" id="moreInfo">
-            <div class="col-md-6 offset-md-2" style="position: relative" >
+        <div class="row">
+            <div class="col-md-8 offset-md-2" style="position: relative" id="moreInfo">
             <div style="position: relative;width: 60%;height: auto;">
             <div class="d-flex-inline">
-                <span class="p-2 font-weight-bold">导演:</span>
+                <span class="p-2 font-weight-bold">作者:</span>
                 <span class="p-2" style="margin-left: 10px;">{{ director }}</span>
-            <div  class="d-flex-inline">
-                <span class="p-2 font-weight-bold">编剧:</span>
-                <span class="p-2" style="margin-left: 10px;">{{ writer }}</span>
-            </div>
-            <div  class="d-flex-inline">
-                <span class="p-2 font-weight-bold">国家地区:</span>
-                <span class="p-2" style="margin-left: 10px;">{{ country }}</span>
-            </div>
-            <div  class="d-flex-inline">
-                <span class="p-2 font-weight-bold">发行公司:</span>
-                <span class="p-2" style="margin-left: 10px;">{{ company }}</span>
-            </div>
-            <div  class="d-flex-inline">
-                <span class="p-2 font-weight-bold">更多片名:</span>
-                <span class="p-2" style="margin-left: 10px;">{{ otherName }}</span>
-            </div>
             <div  class="d-flex-inline">
                 <p class="p-2 font-weight-bold">剧情:</p>
                 <p class="p-2" style="margin-left: 10px;margin-top: -20px;">{{ plot }}</p>
             </div>   
             </div>
-            </div>
-            </div>
-            <div class="col-md-2" style="margin-top: -20px;">
-            <div >
-            <p style="font-size: 20px;font-weight: bold;">主演</p>
-            <ul>
-                <li v-for="item in arr" :title="item">
-                    <div class="d-flex" style="height:80px;width: 100%;;padding-top: 3%;">
-                        <img :src="item.jpg" width="30%" height="80%" >
-                        <p style="margin-left: 4px;font-weight: bolder;">{{ item.actor }}</br> 饰 {{ item.obj }}</p>
-                    </div>
-                </li>
-            </ul>
             </div>
         </div> 
         </div>
