@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>话题搜索</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/daohang.css">
     <link rel="stylesheet" href="iconfont/iconfont.css">
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-	<div class="row" style="margin-top: 40px;">
+	<div class="row" style="margin-top: 40px;"id="app">
 		<div class="col-md-8 offset-md-2" >
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
@@ -59,165 +59,59 @@
 					<a class="nav-link" href="#">影视</a>
 				</li>
 			</ul>
-			<div class="input-group mb-3"  >
-				<input type="text" id="search_btn" class="form-control" placeholder="Search" style="margin: 10px" >
+			</ul>
+			<div class="input-group mb-3" >
+				<input type="text" v-model="content" @keyup.enter="ShouyeSearch" class="form-control" placeholder="Search" style="margin: 10px" >
 				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
-						<button type="button" class="btn btn-success">搜索</button>
+						<button type="button" class="btn btn-success" @click="ShouyeSearch">搜索</button>
 				</div>
 			</div>
         </div>
         <div class="col-md-8 offset-md-2" style="background: white;">
-            <p style="color: gray;">总共搜索到10条数据</p>
+            <p style="color: gray;">总共搜索到{{resultList.length}}条数据</p>
             <ul>
-            <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
+            <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;" v-for="item in resultList">
              <div class="d-flex" style="height: 100px;">
                 <img src="jpg/book2.jpg" width="80px" height="100%">
                 <div class="d-flex flex-column p-2" >
                     <div>
-                          <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                       </div>
-                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
+						<a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">{{item.type}}</a>
+					</div>
+                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">{{item.low}}</p>
+                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;">{{item.high}}</p>
                 </div>
             </div>
             </li>
-            <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex" style="height: 100px;">
-                   <img src="jpg/book2.jpg" width="80px" height="100%">
-                   <div class="d-flex flex-column p-2" >
-                       <div>
-                             <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                          </div>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                   </div>
-               </div>
-               </li>
-               <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex" style="height: 100px;">
-                   <img src="jpg/book2.jpg" width="80px" height="100%">
-                   <div class="d-flex flex-column p-2" >
-                       <div>
-                             <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                          </div>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                   </div>
-               </div>
-               </li>
-               <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex" style="height: 100px;">
-                   <img src="jpg/book2.jpg" width="80px" height="100%">
-                   <div class="d-flex flex-column p-2" >
-                       <div>
-                             <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                          </div>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                   </div>
-               </div>
-               </li>
-               <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex" style="height: 100px;">
-                   <img src="jpg/book2.jpg" width="80px" height="100%">
-                   <div class="d-flex flex-column p-2" >
-                       <div>
-                             <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                          </div>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                   </div>
-               </div>
-               </li>
-               <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex" style="height: 100px;">
-                   <img src="jpg/book2.jpg" width="80px" height="100%">
-                   <div class="d-flex flex-column p-2" >
-                       <div>
-                             <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                          </div>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                   </div>
-               </div>
-               </li>
-               <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex" style="height: 100px;">
-                   <img src="jpg/book2.jpg" width="80px" height="100%">
-                   <div class="d-flex flex-column p-2" >
-                       <div>
-                             <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                          </div>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                      <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                   </div>
-               </div>
-               </li>
-               <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                   <div class="d-flex" style="height: 100px;">
-                      <img src="jpg/book2.jpg" width="80px" height="100%">
-                      <div class="d-flex flex-column p-2" >
-                          <div>
-                                <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                             </div>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                      </div>
-                  </div>
-                  </li>
-                  <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                   <div class="d-flex" style="height: 100px;">
-                      <img src="jpg/book2.jpg" width="80px" height="100%">
-                      <div class="d-flex flex-column p-2" >
-                          <div>
-                                <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                             </div>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                      </div>
-                  </div>
-                  </li>
-                  <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                   <div class="d-flex" style="height: 100px;">
-                      <img src="jpg/book2.jpg" width="80px" height="100%">
-                      <div class="d-flex flex-column p-2" >
-                          <div>
-                                <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                             </div>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                      </div>
-                  </div>
-                  </li>
-                  <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                   <div class="d-flex" style="height: 100px;">
-                      <img src="jpg/book2.jpg" width="80px" height="100%">
-                      <div class="d-flex flex-column p-2" >
-                          <div>
-                                <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                             </div>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                      </div>
-                  </div>
-                  </li>
-                  <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
-                   <div class="d-flex" style="height: 100px;">
-                      <img src="jpg/book2.jpg" width="80px" height="100%">
-                      <div class="d-flex flex-column p-2" >
-                          <div>
-                                <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                             </div>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论 15个关注</p>
-                         <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
-                      </div>
-                  </div>
-                  </li>
         </ul>
         </div>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var search_content = new Vue({
+		el: "#app",
+		data: {
+			content: '',
+			resultList: []
+		},
+		methods: {
+			ShouyeSearch: function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+				.then(function (response) {
+					console.log(that.content);
+					console.log(response);
+					that.resultList = response.data.data.forecast;
+				})
+				.catch(function (err) {
 
+				})
+			}
+		},
+	})
+</script>
 </body>
 
 </html>

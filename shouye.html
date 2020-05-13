@@ -224,7 +224,7 @@
 			ShouyeSearch:function () {
 				//这里需要后端的网址
 				var that = this;
-				axios.get('http://wthrcdn.etouch.cn/weather_mini?content='+that.content)
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+that.content)
 					.then(function (response) {
 						console.log(that.content);
 						console.log(response);
