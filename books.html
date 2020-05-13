@@ -142,13 +142,13 @@
             	</div>
         	</div>
     	</div>
-    	<div class="row" style="background: cornflowerblue">
-        	<div class="col-md-4 offset-md-6" >
-            	<div class="input-group mb-3"  >
-                	<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+    	<div class="row" style="background: cornflowerblue" id="app">
+        	<div class="col-md-4 offset-md-6">
+            	<div class="input-group mb-3">
+                	<input type="text" class="form-control" v-model="content" @keyup.enter="ShouyeSearch" placeholder="Search" style="margin: 10px" >
                 	<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
                 	    <div class="btn-group">
-                    	    <button type="button" class="btn btn-success">搜索内容</button>
+                    	    <button type="button" class="btn btn-success" @click="ShouyeSearch">搜索内容</button>
                     	</div>
                 	</div>
                 </div>
@@ -162,43 +162,19 @@
             <div class="col-md-12">
 				<div id="phospace" style="list-style: none;position: relative;top: 0;left: 0;width:100%;height: 300px;">
 					<ul id="redian" style="position: relative;;width: 100%;height: 90%;z-index: 2;">
-						<li ><img src="jpg/fire1.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display:block;"></li>
+						<li>
+							<img src="jpg/fire1.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display:block;">
+						</li>
 						<li ><img src="jpg/fire2.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display: none"></li>
 						<li ><img src="jpg/fire3.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display: none"></li>
-                        <li ><img src="jpg/book3.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display: none"></li>
+						<li ><img src="jpg/book3.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display: none"></li>
                         <li ><img src="jpg/fire3.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display: none"></li>
 						<li ><img src="jpg/book3.jpg" style="width: 100%;height: 85%;position: absolute;left: 0;top: 0;display: none"></li>
                     </ul>
 					<ul id="tiaomu" style="right: 0;padding-left: 10px;color: white;font-size: 16px;line-height: 35px;position: absolute;top: 0;z-index: 3;width:20%;">
-						<li>
+						<li v-for="item in arr">
                             <div class="tags" >
-                                <a href="#"style="padding-left: 10px;">天天向上</a>
-                            </div>
-                        	
-                        </li>
-                        <li class="tags">
-                        	<div class="tags" >
-                                <a href="#"style="padding-left: 10px;">天天向上</a>
-                            </div>
-                        </li class="tags">
-                        <li>
-                        	<div class="tags" >
-                                <a href="#"style="padding-left: 10px;">天天向上</a>
-                            </div>
-                        </li>
-                        <li class="tags">
-                        	<div class="tags" >
-                                <a href="#"style="padding-left: 10px;">天天向上</a>
-                            </div>
-                        </li>
-                        <li class="tags">
-                        	<div class="tags" >
-                                <a href="#"style="padding-left: 10px;">天天向上</a>
-                            </div>
-                        </li>
-                        <li class="tags">
-                        	<div class="tags" >
-                                <a href="#"style="padding-left: 10px;">天天向上</a>
+                                <a href="#"style="padding-left: 10px;">{{item.name}}</a>
                             </div>
                         </li>
 					</ul>
@@ -208,45 +184,71 @@
         <div class="row" style="margin-top: -60px;">
             <div class="col-md-12">
                 <div class="layout-box clearfix">
-        <div class="box-title">
-            <h3 class="m-0">中国大陆电影</h3>
-        </div>
-        <ul class="d-flex">
-            <li class="col-md-2 col-sm-3 col-xs-4 "><a class="video-pic loading" data-original="http://pic.huayude.com/uploads/vod/2020-04-08/72ffc768717c3549783bc8dbfb1e1d58.jpg" href="/video/46194.html" title="哥哥，谁带你回家"><span class="player"></span><span class="score">9.0</span><span class="note text-bg-r">HD</span></a>
-                <div
-                    class="title">
-                    <h5 class="text-overflow"><a href="/video/46194.html" title="哥哥，谁带你回家">哥哥，谁带你回家</a></h5>
-    </div>
-    </li>
-    <li class="col-md-2 col-sm-3 col-xs-4 "><a class="video-pic loading" data-original="http://pic.huayude.com/uploads/vod/2020-03-27/5758bc841a34d6ebbed9cc2b012cd665.jpg" href="/video/32021.html" title="合租男女"><span class="player"></span><span class="score">6.0</span><span class="note text-bg-r">HD</span></a>
-        <div
-            class="title">
-            <h5 class="text-overflow"><a href="/video/32021.html" title="合租男女">合租男女</a></h5>
-            </div>
-    </li>
-    <li class="col-md-2 col-sm-3 col-xs-4 "><a class="video-pic loading" data-original="https://images.cnblogsc.com/pic/upload/vod/2020-05/1589119504.jpg" href="/video/47071.html" title="扶桑有狐"><span class="player"></span><span class="score">7.0</span><span class="note text-bg-r">HD</span></a>
-        <div
-            class="title">
-            <h5 class="text-overflow"><a href="/video/47071.html" title="扶桑有狐">扶桑有狐</a></h5>
-            </div>
-    </li>
-    <li class="col-md-2 col-sm-3 col-xs-4 "><a class="video-pic loading" data-original="https://images.cnblogsc.com/pic/upload/vod/2020-05/1589091672.jpg" href="/video/47070.html" title="搜神记：南海美人鲛"><span class="player"></span><span class="score">8.0</span><span class="note text-bg-r">HD</span></a>
-        <div
-            class="title">
-            <h5 class="text-overflow"><a href="/video/47070.html" title="搜神记：南海美人鲛">搜神记：南海美人鲛</a></h5>
-            </div>
-    </li>
-    <li class="col-md-2 col-sm-3 col-xs-4 "><a class="video-pic loading" data-original="https://cn2.3days.cc/1556350633101782.jpeg" href="/video/20674.html" title="锦衣之下之血滴子"><span class="player"></span><span class="score">7.0</span><span class="note text-bg-r">HD</span></a>
-        <div class="title">
-            <h5 class="text-overflow"><a href="/video/20674.html" title="锦衣之下之血滴子">锦衣之下之血滴子</a></h5>
-        </div>
-    </li>
-    <li class="col-md-2 col-sm-3 col-xs-4 "><a class="video-pic loading" data-original="https://cn2.3days.cc/1589179577125769.png" href="/video/20579.html" title="锦衣卫之初露锋芒"><span class="player"></span><span class="score">5.0</span><span class="note text-bg-r">HD</span></a>
-        <div class="title">
-            <h5 class="text-overflow"><a href="/video/20579.html" title="锦衣卫之初露锋芒">锦衣卫之初露锋芒</a></h5>
-        </div>
-    </li>
+					<div class="box-title">
+						<h3 class="m-0">中国大陆电影</h3>
+					</div>
+					<ul class="d-flex" id="Chinese_movie">
+						<li class="col-md-2 col-sm-3 col-xs-4" v-for="item in arr">
+							<a class="video-pic loading" data-original="original" href="item.href" title="item.name"><span class="player"></span><span class="score">{{item.score}}</span><span class="note text-bg-r">{{clear}}</span></a>
+							<div class="title">
+								<h5 class="text-overflow"><a href="item.href" title="item.name">{{item.name}}</a></h5>
+							</div>
+						</li>
     </ul>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var search_content = new Vue({
+			el: "#app",
+			data: {
+				content: '',
+				resultList: []
+			},
+			methods: {
+				ShouyeSearch: function () {
+					//这里需要后端的网址
+					var that = this;
+					axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+						.then(function (response) {
+							console.log(that.content);
+							console.log(response);
+							that.resultList = response.data.data.forecast;
+						})
+						.catch(function (err) {
+
+						});
+					window.location.href=' http://www.baidu.com/s?wd='+this.content;
+				}
+			},
+		});
+		var tiaomu = new Vue({
+			el: "#tiaomu",
+			data: {
+				arr: [{href: "https://baidu.com", name: "天天向上"},
+					{href: "https://baidu.com",name: "天天向下"},
+					{href: "https://baidu.com", name: "天天向左"},
+					{href: "https://baidu.com", name: "天天向右"},
+					{href: "https://baidu.com", name: "天天向中"},
+					{href: "https://baidu.com", name: "天天向外"},
+				]
+			},
+		});
+		var Chinese_movie = new Vue({
+			el: "#Chinese_movie",
+			data: {
+				picture:'',
+				original:"http://pic.huayude.com/uploads/vod/2020-04-08/72ffc768717c3549783bc8dbfb1e1d58.jpg",
+				clear:'HD',
+				arr: [{href: "/video/46194.html", name: "哥哥，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "得到，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "弟弟，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "姐姐，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "妹妹，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "叔叔，谁带你回家",score:"9.0"}]
+			},
+		});
+
+	</script>
 </body>
 
 </html>

@@ -76,74 +76,21 @@
             <div class="col-md-6 offset-md-4">
         		<div>最近活动：有未读通知的页面</div>
             </div>
-            <div class="col-md-6 offset-md-3">
-            	<div class="channel-item mb-2" style="position: relative">
-                	<h3><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
+            <div class="col-md-6 offset-md-3" id="ak47">
+            	<div class="channel-item mb-2" style="position: relative" v-for="item in arr">
+                	<h3><a href="#" style="font-size: 25px;color:black; ">{{item.topic}}</a> </h3>
                 	<div class="block-info p-2" style="width: 100%;background: snow">
-                    	<p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-                        </p>
+                    	<p style="word-wrap: break-word">{{item.content}}</p>
                 	</div>
                 	<div class="source d-flex">
-                    	<span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
-                    	<span class="pubtime p-2 mr-auto">今天0 8：21</span>
-                	</div>
-                	<div class="myborder">
-                	</div>
-            	</div>
-                <div class="channel-item mb-2" style="position: relative">
-                	<h3><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
-                	<div class="block-info p-2" style="width: 100%;background: snow">
-                    	<p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-                        </p>
-                	</div>
-                	<div class="source d-flex">
-                    	<span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
-                    	<span class="pubtime p-2 mr-auto">今天0 8：21</span>
-                	</div>
-                	<div class="myborder">
-                	</div>
-            	</div>
-                <div class="channel-item mb-2" style="position: relative">
-                	<h3><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
-                	<div class="block-info p-2" style="width: 100%;background: snow">
-                    	<p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-                        </p>
-                	</div>
-                	<div class="source d-flex">
-                    	<span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
-                    	<span class="pubtime p-2 mr-auto">今天0 8：21</span>
-                	</div>
-                	<div class="myborder">
-                	</div>
-            	</div>
-                <div class="channel-item mb-2" style="position: relative">
-                	<h3><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
-                	<div class="block-info p-2" style="width: 100%;background: snow">
-                    	<p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-                        </p>
-                	</div>
-                	<div class="source d-flex">
-                    	<span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
-                    	<span class="pubtime p-2 mr-auto">今天0 8：21</span>
-                	</div>
-                	<div class="myborder">
-                	</div>
-            	</div>
-                <div class="channel-item mb-2" style="position: relative">
-                	<h3><a href="#" style="font-size: 25px;color:black; ">看别人换一地鸡毛</a> </h3>
-                	<div class="block-info p-2" style="width: 100%;background: snow">
-                    	<p style="word-wrap: break-word">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhvvvvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-                        </p>
-                	</div>
-                	<div class="source d-flex">
-                    	<span class="from p-2">来自<a href="#" class="fromhref p-2">[人生问题]</a></span>
-                    	<span class="pubtime p-2 mr-auto">今天0 8：21</span>
+                    	<span class="from p-2">来自<a href="#" class="fromhref p-2">{{item.source}}</a></span>
+                    	<span class="pubtime p-2 mr-auto">{{item.time}}</span>
                 	</div>
                 	<div class="myborder">
                 	</div>
             	</div>
             	<div style="width: 100%;margin: 30px;position: relative">
-                	<div class="allcenter d-flex align-items-center">
+                	<div class="allcenter d-flex align-items-center" id="page">
                     	<i class="iconfont icon-shangyiyeqianyiye" style="font-size: 30px;color: cornflowerblue"></i>
                     	<div class="switch-item text-center">1</div>
                     	<div class="switch-item text-center">2</div>
@@ -157,5 +104,24 @@
         	</div>
         </div>
     </div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var ak47=new Vue({
+			el:"#ak47",
+			data:{
+				arr:[{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"},
+					{topic:"天若有情天亦老",content:"垂死病中惊坐起",time:"今天08:21",source:"[人生问题]"}]
+			}
+		});
+	</script>
 </body>
 </html>
