@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-	<div class="row" style="margin-top: 40px;">
+	<div class="row" style="margin-top: 40px;" id="app">
 		<div class="col-md-8 offset-md-2" >
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
@@ -51,9 +51,9 @@
 				</li>
 			</ul>
 			<div class="input-group mb-3"  >
-				<input type="text" id="search_btn" class="form-control" placeholder="Search" style="margin: 10px" >
+				<input type="text" v-model="content" @keyup.enter="ShouyeSearch" class="form-control" placeholder="Search" style="margin: 10px" >
 				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
-						<button type="button" class="btn btn-success">搜索</button>
+						<button type="button" @click="ShouyeSearch" class="btn btn-success">搜索</button>
 				</div>
 			</div>
         </div>
@@ -78,53 +78,57 @@
 					<a class="nav-link" href="#">科技</a>
 				</li>
 			</ul>
-            <p style="color: gray;">总共搜索到10条数据</p>
+            <p style="color: gray;">总共搜索到{{ resultList.length }}条数据</p>
             <ul>
-            <li class="p-2" style="border: 1px black;border-bottom: 1px #f0f0f0 solid;">
+            <li class="p-2" style="border: 1px black;border-bottom: 1px #f0f0f0 solid;" v-for="item in resultList">
              <div class="d-flex">
                  <div>
                      <img src="jpg/book2.jpg" width="80px" height="80px">
                  </div>
-                
-                <div class="d-flex flex-column p-2 flex-grow-1 p-3 flex-grow-1"  style="margin-top: -10px;">
+                <div class="d-flex flex-column p-2 flex-grow-1 p-3 flex-grow-1"  style="margin-top: -10px;" >
                     <div class="d-flex">
-                          <a href="#" class="break-word" style="display: inline;font-weight: bolder;line-height: 16px;font-size: 17px;color: black;">标题标题标题标题标</a> 
+                          <a href="#" class="break-word" style="display: inline;font-weight: bolder;line-height: 16px;font-size: 17px;color: black;">{{item.date}}</a>
                           <ul>
-							<li style="display: inline;" v-for="item in arr" :title="item">
-								<span class="small p-2" style="background: #bfa;border-radius: 5px;margin-left: 5px;">{{ item }}</span>
+							<li style="display: inline;"  :title="item">
+								<span class="small p-2" style="background: #bfa;border-radius: 5px;margin-left: 5px;">{{ item.fengxiang }}</span>
 							</li>
 						</ul>
                         </div>
-                   <p class="break-word" style="width: 100%;color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 10px;">介绍hioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajasdodioajfijdasdodioajfijdasdodioajasdodioajfijdasdodioajfijdasdodioajasdodioajfijdasdodioajfijdasdodioajasdodioaodioajfijioajfijdasdod</p>
+                   <p class="break-word" style="width: 100%;color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 10px;">{{ item.high+item.low }}</p>
                  
                 </div>
             </div>
             </li>
-            <li class="p-2" style="border: 1px black;border-bottom: 1px #f0f0f0 solid;">
-                <div class="d-flex">
-                    <div>
-                        <img src="jpg/book2.jpg" width="80px" height="80px">
-                    </div>
-                   
-                   <div class="d-flex flex-column p-2 flex-grow-1 p-3 flex-grow-1"  style="margin-top: -10px;">
-                       <div class="d-flex">
-                             <a href="#" class="break-word" style="display: inline;font-weight: bolder;line-height: 16px;font-size: 17px;color: black;">标题标题标题标题标</a> 
-                             <ul>
-                               <li style="display: inline;" v-for="item in arr" :title="item">
-                                   <span class="small p-2" style="background: #bfa;border-radius: 5px;margin-left: 5px;">{{ item }}</span>
-                               </li>
-                           </ul>
-                           </div>
-                      <p class="break-word" style="width: 100%;color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 10px;">介绍hioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajfijdasdodioajasdodioajfijdasdodioajfijdasdodioajasdodioajfijdasdodioajfijdasdodioajasdodioajfijdasdodioajfijdasdodioajasdodioaodioajfijioajfijdasdod</p>
-                    
-                   </div>
-               </div>
-               </li>
         </ul>
         </div>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var search_content = new Vue({
+		el: "#app",
+		data: {
+			content: '',
+			resultList: []
+		},
+		methods: {
+			ShouyeSearch: function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
 
+					})
+			}
+		},
+	})
+</script>
 </body>
 
 </html>

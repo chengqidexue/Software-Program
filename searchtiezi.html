@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-	<div class="row" style="margin-top: 40px;">
+	<div class="row" style="margin-top: 40px;" id="app">
 		<div class="col-md-8 offset-md-2" >
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
@@ -51,9 +51,9 @@
 				</li>
 			</ul>
 			<div class="input-group mb-3"  >
-				<input type="text" id="search_btn" class="form-control" placeholder="Search" style="margin: 10px" >
+				<input type="text" v-model="content" @keyup.enter="ShouyeSearch" class="form-control" placeholder="Search" style="margin: 10px" >
 				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
-						<button type="button" class="btn btn-success">搜索</button>
+						<button type="button" class="btn btn-success" @click="ShouyeSearch">搜索</button>
 				</div>
 			</div>
         </div>
@@ -78,7 +78,7 @@
 					<a class="nav-link" href="#">科技</a>
 				</li>
 			</ul>
-            <p style="color: gray;">总共搜索到10条数据</p>
+            <p style="color: gray;">总共搜索到{{resultList.length}}条数据</p>
             <div class="d-flex">
                 <span style="width:35%;">帖子</span>
                 <span style="width:17%;">来自</span>
@@ -87,13 +87,13 @@
                 <span class="flex-grow-1">发布时间</span>
             </div>
             <ul style="font-size: 17px;line-height: 20px;">
-                <li style="margin-top: 10px;" v-for="(item,index) in arr" :title="item">
+                <li style="margin-top: 10px;" v-for="item in resultList">
                     <div style="position: relative;height: 20px;" >	
-                    <a :href="item.tohref" class="break-word" style="width: 50%;position: absolute;left: 0;">{{ item.title }}</a>
-                    <a :href="item.fromhref" class="break-word" style="position: absolute;left: 35%;width: 17%;">{{ 火焰组 }}</a>
-                    <a :href="item.fromhref" class="break-word" style="position: absolute;left: 52%;width: 17%;">{{ item.name }}</a>
-                    <span style="position: absolute;left: 69%;color: gray;width: 5%">{{ item.number }}</span>
-                    <span style="position: absolute;left: 77%;color: gray;width: 17%;">{{ item.time }}</span>
+                    <a :href="item.tohref" class="break-word" style="width: 50%;position: absolute;left: 0;">{{ item.type }}</a>
+                    <a :href="item.fromhref" class="break-word" style="position: absolute;left: 35%;width: 17%;">{{ item.high }}</a>
+                    <a :href="item.fromhref" class="break-word" style="position: absolute;left: 52%;width: 17%;">{{ item.low }}</a>
+                    <span style="position: absolute;left: 69%;color: gray;width: 5%">{{ item.fengxiang }}</span>
+                    <span style="position: absolute;left: 77%;color: gray;width: 17%;">{{ item.date }}</span>
                      </div>	
                     <div style="height: 0.2px;background: cornflowerblue;opacity: 0.4;;margin-top: 4px;"></div>
                 </li>
@@ -102,7 +102,32 @@
         </div>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var search_content = new Vue({
+		el: "#app",
+		data: {
+			content: '',
+			resultList: []
+		},
+		methods: {
+			ShouyeSearch: function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
 
+					})
+			}
+		},
+	})
+</script>
 </body>
 
 </html>
