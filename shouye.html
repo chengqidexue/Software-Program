@@ -85,12 +85,12 @@
 	<div class="row" style="background: cornflowerblue">
 		<div class="col-md-4 offset-md-6" >
 			<div class="input-group mb-3" id="searchContent">
-				<input type="text" v-model="content" @keyup.enter="entersearch1" class="form-control" placeholder="Search" style="margin: 10px" >
+				<input type="text" v-model="content" @keyup.enter="ShouyeSearch" class="form-control" placeholder="Search" style="margin: 10px" >
 				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
 					<div class="btn-group">
-						<button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
+						<button type="button" @click="ShouyeSearch" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#" @click="entersearch1">全部</a>
+							<a class="dropdown-item" href="#">全部</a>
 							<a class="dropdown-item" href="#">书籍</a>
 							<a class="dropdown-item" href="#">影视</a>
 							<a class="dropdown-item" href="#">小组</a>
@@ -207,34 +207,35 @@
 			content:'',
 			resultList:[]
 		},
-		methods:{
-			jump:function () {
-				var searchval = this.content;
-				window.location.href=' http://localhost:8080/primaryBird/html/search.html?q='+searchval;
-			},
-			entersearch1:function(){
-				if (this.content.keyCode == 13)
-				{
-					jump();
-				}
-			}
-		}
-
 		// methods:{
-		// 	ShouyeSearch:function () {
-		// 		//这里需要后端的网址
-		// 		var that = this;
-		// 		axios.get('http://wthrcdn.etouch.cn/weather_mini?content='+this.content)
-		// 		.then(function (response) {
-		// 			console.log(that.content);
-		// 			console.log(response);
-		// 			that.resultList = response.data.data.forecast;
-		// 		})
-		// 		.catch(function (err) {
-		//
-		// 		})
+		// 	jump:function () {
+		// 		var searchval = this.content;
+		// 		window.location.href=' http://localhost:8080/primaryBird/html/search.html?q='+searchval;
+		// 	},
+		// 	entersearch1:function(){
+		// 		if (this.content.keyCode == 13)
+		// 		{
+		// 			jump();
+		// 		}
 		// 	}
-		// },
+		// }
+
+		methods:{
+			ShouyeSearch:function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
+
+					})
+				window.location.href=' http://www.baidu.com/s?wd='+this.content;
+			}
+		},
 	});
 	var hot_group1=new Vue({
 		el:"#hot-group1",

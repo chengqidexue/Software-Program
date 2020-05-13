@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>无标题文档</title>
+    <title>用户主页</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/daohang.css">
     <link rel="stylesheet" href="iconfont/iconfont.css">
@@ -105,27 +105,26 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8 offset-md-2" id="pinglun">
-						<p class="font-weight-bold ">留言墙</p>
-						<div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:140px;overflow: hidden">
-							<textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="写留言..." v-model="topeople"></textarea>
-							<button class="btn iconfont icon-fabu btn-dark" style="font-size: 30px;;margin: 0;width:80px ;height:100%;margin-right: 30px;" @click="submitliu"></button>   
-						</div>
-						<ul style="margin-top:50px">
-							<li v-for="item in arr">
-								<div class="d-flex" style="width: 100%">
-							    <div class="p-2" style="width:90px;">
+				<p class="font-weight-bold ">留言墙</p>
+				<div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:140px;overflow: hidden">
+					<textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="写留言..." v-model="topeople"></textarea>
+					<button class="btn iconfont icon-fabu btn-dark" style="font-size: 30px;;margin: 0;width:80px ;height:100%;margin-right: 30px;" @click="submitliu"></button>
+				</div>
+				<ul style="margin-top:50px">
+					<li v-for="item in arr">
+						<div class="d-flex" style="width: 100%">
+							<div class="p-2" style="width:90px;">
 								<img :src="item.jpg"width="70px" height="70px">
-								<p class="text-center" style="margin-bottom: -2px;"><a :href="item.href" style="color: black;">{{ item.name }}</a></p>
+									<p class="text-center" style="margin-bottom: -2px;"><a :href="item.href" style="color: black;">{{ item.name }}</a></p>
 							</div>
-							<div style="margin-left: 3px;width: 0.5px;height: 80px;;background: slategray;">
-							</div>
+							<div style="margin-left: 3px;width: 0.5px;height: 80px;;background: slategray;"></div>
 							<div class="p-2" style="margin-left: 2%;width: 75%;">
-						     	<p class="p-2" style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">{{ item.content }}</p>
-								<p style="margin-left: 15px;">{{ item.date }}</p>
+							<p class="p-2" style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">{{ item.content }}</p>
+							<p style="margin-left: 15px;">{{ item.date }}</p>
 							</div>
 						</div>
-							</li>
-						</ul>
+					</li>
+				</ul>
 			</div>
 		</div>	
 	</div>
