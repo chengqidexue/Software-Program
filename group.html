@@ -125,12 +125,12 @@ var h=document.getElementById("submit_tiezi");
 				<a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">科技</a>
 			</div>
 		</div>
-		<div class="col-md-4" >
+		<div class="col-md-4" id="app">
 			<div class="input-group mb-3 allcenter"  >
-				<input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
-				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
+				<input type="text" class="form-control" v-model="content" @keyup.enter="ShouyeSearch" placeholder="Search" style="margin: 10px" >
+				<div class="input-group-append"  style= "background-color:transparent;border:0; margin: 10px">
 					<div class="btn-group">
-						<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
+						<button type="button" @click="ShouyeSearch"class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="#">小组</a>
 							<a class="dropdown-item" href="#">帖子</a>
@@ -261,7 +261,30 @@ var h=document.getElementById("submit_tiezi");
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script>
+<script>
+	var search_content = new Vue({
+		el:"#app",
+		data:{
+			content:'',
+			resultList:[]
+		},
+		methods:{
+			ShouyeSearch:function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
+
+					})
+				window.location.href=' http://www.baidu.com/s?wd='+this.content;
+			}
+		},
+	});
 		var group_info=new Vue({
 			el:"#groupInfo",
 			data:{
@@ -383,6 +406,6 @@ var h=document.getElementById("submit_tiezi");
 				content:""
 			},
 		});
-	</script>
+</script>
 </body>
 </html>

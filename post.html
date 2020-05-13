@@ -97,11 +97,11 @@
                     <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">科技</a>        
                 </div>
             </div>
-            <div class="col-md-4" >
+            <div class="col-md-4" id="app">
                 <div class="input-group mb-3 allcenter"  >
-                    <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+                    <input type="text" class="form-control" placeholder="Search" style="margin: 10px" v-model="content" @keyup.enter="ShouyeSearch">
                     <div class="input-group-append" style="background:transparent;border:0;margin: 10px">
-                            <button id="searchtype" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
+                            <button id="searchtype" type="button" @click="ShouyeSearch" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
                     </div>
                 </div>
                    <div id="searchtheitem" style="display:none;background: white;border-radius:5px;position:absolute;z-index:9000;width:200px;border:black;left:67%;top: 68px;">
@@ -220,6 +220,29 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+		var search_content = new Vue({
+			el:"#app",
+			data:{
+				content:'',
+				resultList:[]
+			},
+			methods:{
+				ShouyeSearch:function () {
+					//这里需要后端的网址
+					var that = this;
+					axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+that.content)
+						.then(function (response) {
+							console.log(that.content);
+							console.log(response);
+							that.resultList = response.data.data.forecast;
+						})
+						.catch(function (err) {
+
+						})
+					window.location.href=' http://www.baidu.com/s?wd='+this.content;
+				}
+			},
+		});
     	var pinglun=new Vue
 		({
             el:"#pinglun",
