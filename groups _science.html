@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+    <script>
+        window.onload=function () {
+
+        	var osearchtype=document.getElementById("searchtype");
+			var osearchtheitem=document.getElementById("searchtheitem");
+			var timerdropitem;
+			osearchtheitem.onmouseover=osearchtype.onmouseover=function(){
+				osearchtheitem.style.display="block";
+				closeTimeout(timerdropitem);
+			}
+			osearchtheitem.onclick=osearchtype.onclick=function(){
+				osearchtheitem.style.display="none";
+			}
+            var hot_group=document.getElementById('hot-group');
+                var ohot_group_items=hot_group.getElementsByTagName('img');
+                var ohot_group_myborders=hot_group.getElementsByClassName('myborder');
+                for(var j=0;j<ohot_group_items.length;j++){
+                    ohot_group_items[j].index=j;
+                    ohot_group_items[j].onmouseover=function () {
+                        ohot_group_myborders[this.index].target=ohot_group_myborders[this.index].offsetWidth;
+                        ohot_group_myborders[this.index].style.width='0';
+                        Mouse(ohot_group_myborders[this.index],ohot_group_myborders[this.index].target,'width')
+                    }
+                    ohot_group_items[j].onmouseout=function () {
+                        ohot_group_myborders[this.index].style.width=ohot_group_myborders[this.index].target+'px';
+                    }
+                }
+            var inter_group=document.getElementById('inter-group');
+            var ointer_group_items=inter_group.getElementsByTagName('img');
+            var ointer_group_myborders=inter_group.getElementsByClassName('myborder');
+            for(var j=0;j<ointer_group_items.length;j++){
+                ointer_group_items[j].index=j;
+                ointer_group_items[j].onmouseover=function () {
+                    ointer_group_myborders[this.index].target=ointer_group_myborders[this.index].offsetWidth;
+                    ointer_group_myborders[this.index].style.width='0';
+                    Mouse(ointer_group_myborders[this.index],ointer_group_myborders[this.index].target,'width')
+                };
+                ointer_group_items[j].onmouseout=function () {
+                    ointer_group_myborders[this.index].style.width=ointer_group_myborders[this.index].target+'px';
+                }
+            }
+            var omengban=document.getElementById("mengban");
+            var ologing=document.getElementById("loging");
+            var oclose=document.getElementById("closeloging");
+            var osubmitloging=document.getElementById("submitloging");
+            oclose.onclick=osubmitloging.onclick=function(){
+                omengban.style.display="none";
+                ologing.style.display="none";
+            }
+            
+            var oinputgroups=document.getElementsByClassName("inputgroup");
+            for(var i=0;i<oinputgroups.length;i++){
+                oinputgroups[i].getElementsByTagName("p")[0].target=oinputgroups[i].getElementsByTagName("p")[0].offsetTop;
+                oinputgroups[i].getElementsByTagName("input")[0].onmouseover=function(){
+                    if(this.value==""){
+                        this.parentNode.getElementsByTagName("p")[0].style.top=this.parentNode.getElementsByTagName("p")[0].target+"px";
+                        this.parentNode.getElementsByTagName("p")[0].target=this.parentNode.getElementsByTagName("p")[0].offsetTop-30;
+                        Mouse(this.parentNode.getElementsByTagName("p")[0],this.parentNode.getElementsByTagName("p")[0].target,"top");
+                        this.parentNode.getElementsByTagName("div")[0].style.width="0px"
+                        Mouse(this.parentNode.getElementsByTagName("div")[0],350,"width");
+                    }
+                }
+                oinputgroups[i].getElementsByTagName("input")[0].onmouseout=function(){
+                    if(this.value==""){
+                        this.parentNode.getElementsByTagName("p")[0].style.top=this.parentNode.getElementsByTagName("p")[0].target+"px";
+                        this.parentNode.getElementsByTagName("p")[0].target=this.parentNode.getElementsByTagName("p")[0].offsetTop+30;
+                        Mouse(this.parentNode.getElementsByTagName("p")[0],this.parentNode.getElementsByTagName("p")[0].target,"top");
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hot-group{
+            border-radius: 7px;
+            overflow: hidden;
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+			position: relative;
+			z-index: 0;
+        }
+        .hot-group:hover{
+            width: 103%;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+        }
+        .hot-group-item{position: relative;width: 100%;height: 90px}
+        .hot-group .pic{position:absolute;width: 30%;height: 100%;left: 0;top: 0}
+        .hot-group .pic img{
+            width: 70%;height: 70%;
+        }
+        .hot-group .info{position:absolute;width:70%;height: 100%;left: 30%;top: 10px}
+        .hot-group .info > a{position: absolute;left: 0;width:100%;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+        .myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
+        .big-border{width: 100%;height:1px;background: cornflowerblue}
+        .switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }
+
+   </style>
+</head>
+<body>
+<div id="mengban"  class="disable" style=" display: block;position: fixed;height: 100%;width: 100%;background: rgba(0,0,0,0.5);z-index: 5000;"></div>
+<div id="loging" class="p-4" style="display: block;border-radius: 7px;position: fixed;top: 30%;width: 450px;left: 30%;z-index:5001 ;background: whitesmoke;border:cornflowerblue 6px;">
+    <button id="closeloging" type="button" class="close" style="position: absolute;right: 30px;padding-right: 5px;font-size: 30px;">&times;</button>
+    <h3 class=" text-center" style="color: cornflowerblue;">登录</h3>
+    <form class="p-3"> 
+        <div class="inputgroup">
+            <p style="position: absolute;font-size: 20px;color: gray;">用户名</p>
+        <input type="text" id="user" style= "position:relative;z-index: 2;background-color:transparent;border:0;width:350px;font-size: 23px" >
+        <div style="width:350px;height:1px;background: cornflowerblue;margin-bottom: 27px;"></div>
+        </div>
+        <div class="inputgroup" style="padding-top: 13px;">
+             <p style="position: absolute;font-size: 20px;color: gray;">密码</p>
+        <input  type="password" id="pass" style= "position:relative;z-index: 2;background-color:transparent;border:0;width:350px;font-size: 23px" >
+        <div style="width:350px;height:1px;background: cornflowerblue;"></div>
+        </div>
+        <button type="button" class="btn"><i class="iconfont icon-shixinwujiaoxing"> 记住密码</i></button></br>
+        <button type="button" class="btn"><i class="iconfont icon-shixinwujiaoxing"> 七天内自动登录</i></button>
+        <input id="submitloging" type="button" class="btn btn-dark" value="登录" style="width: 150px;margin-left: 200px;margin-top: 20px;"> 
+    </form>
+
+</div>
+<div class="container_fluid">
+    <div class="row" style="background-color: #030e11;">
+        <div class="col_md_12 " >
+            <div id="menu">
+                <li> <a href="#" >花瓣</a></li>
+                <li> <a href="#" >书籍</a></li>
+                <li> <a href="#" >影视</a></li>
+                <li> <a href="#" >话题广场</a></li>
+                <li> <a href="#" >小组</a></li>
+                <li> <a href="#" >消息通知</a></li>
+                <li id="drop1">
+                    <a href="#">账号</a>
+                    <div id="dropdown1" class="dropdown_1">
+                        <div class="col_1">
+                            <ul class="simple">
+                                <li><a href="#">个人主页</a></li>
+                                <li><a href="#">退出账号</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="" >联系我们</a></li>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background: cornflowerblue;">
+        <div class="col-md-5 offset-md-1">
+            <div class="d-flex">
+                <h1 class="p-2" style="font-size: 40px;font-weight: bold;line-height: 74px">小组</h1>
+                <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">热点</a>
+                <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">书籍</a>
+                <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">影视</a>
+                <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">文化</a>
+                <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">生活</a>
+                <a href="javascript:;" class="p-2" style="font-size: 23px;font-weight: bold;line-height: 74px;color: black;">科技</a>
+            </div>
+        </div>
+        <div class="col-md-4" id="app">
+            <div class="input-group mb-3 allcenter" >
+                <input type="text" class="form-control" placeholder="Search" style="margin: 10px" v-model="content" @keyup.enter="ShouyeSearch">
+				<div class="input-group-append" style="background:transparent;border:0;margin: 10px">
+					    <button id="searchtype" type="button" @click="ShouyeSearch" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="height: 40px;">搜索内容</button>
+		        </div>
+			</div>
+			   <div id="searchtheitem" style="display:none;background: white;border-radius:5px;position:absolute;z-index:9000;width:200px;border:black;left:67%;top: 68px;">
+				   <a href="javascript:;" style="padding-left:10%;display:block;color:black;font-size:17px;line-height: 20px;" >小组</a>
+				 <a href="javascript:;" style="padding-left:10%;margin-top: -17px;display:block;color:black;font-size:17px;" >帖子</a>
+				<div style="background: black;width: 100%;height: 1px;"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin: 30px 0">
+		<div class="col-md-6 offset-md-1">
+			<h1 >
+				<span class="head-title">文化</span>
+			</h1>
+			<ul id="group_item">
+				<li v-for="(item,index) in arr" :title="item" class="channel-item mb-2" style="position: relative">
+					<div style="position: absolute;right: 0;color: #bd2c00"><i class="iconfont icon-icon-" style="color: #bd2c00;padding-right: 3px"></i>热度{{ item.hot }}</div>
+					<a href="https://baidu.com" style="font-size: 25px;color:black; ">{{ item.title }}</a> 
+					<div class="block-info p-2" style="width: 100%;background: snow">
+						<p style="word-wrap: break-word">{{ item.text }}</p>
+					</div>
+					<div class="source d-flex">
+						<span class="from p-2">来自<a :href="item.group" class="fromhref p-2">[{{ item.from }}]</a></span>
+						<span class="pubtime p-2 mr-auto">{{ item.time }}</span>
+						<div class="p-2"><a href="javascript:;" @click="dianzan(item,index)"class="iconfont icon-buoumaotubiao16 " :style="{'color':(item.hasdianzan ? '#bd2c00' :'black')}">点赞({{ item.likenumber }})</a> </div>
+					</div>
+					<div class="myborder"></div>
+				</li>
+			</ul>
+			<div style="width: 100%;margin: 30px;position: relative">
+				<div class="allcenter d-flex align-items-center">
+					<i class="iconfont icon-shangyiyeqianyiye" style="font-size: 30px;color: cornflowerblue"></i>
+					<div class="switch-item text-center">1</div>
+					<div class="switch-item text-center">2</div>
+					<div class="switch-item text-center">3</div>
+					<div class="switch-item text-center">4</div>
+					<div class="switch-item text-center">...</div>
+					<div class="switch-item text-center">10</div>
+					<i class="iconfont icon-xiayiyehouyiye" style="font-size: 30px;color: cornflowerblue"></i>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 offset-md-1" >
+			<div class="hot-group" id="hot-group"  >
+				<div class="big-border"></div>
+				<h4 class="text-center p-4" style="color: blue; ">热门小组</h4>
+				<button type="button" class="btn btn-link" @click="changeArr" style="position: absolute;right: 10px;top:60px">换一组</button>
+				<ul>
+					<li v-for="(item,index) in arr" :title="item">
+						<div class="hot-group-item">
+							<div class="pic"><img :src="item.src" class="allcenter"></div>
+							<div class="info">
+								<a href="https://baidu.com" style="color:black" @click="alert('进入小组界面')">{{ item.title }}</a>
+								<div class="d-flex" style="position: relative;width: 100%;padding-top: 21px">
+									<span >已有{{ item.number }}人入组</span>
+									<button type="button" class="btn btn-link" style="margin-top:-7px" @click="join(item.title,this,index)" onclick="this.style.display='none'">加入小组</button>
+								</div>
+							</div>
+						</div>
+						<div class="myborder"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="hot-group" id="inter-group"  >
+                <div class="big-border"></div>
+				<h4 class="text-center p-4" style="color: blue; ">猜你喜欢</h4>
+				<button type="button" class="btn btn-link" @click="changeArr" style="position: absolute;right: 10px;top:60px">换一组</button>
+				<ul>
+					<li v-for="(item,index) in arr" :title="item">
+						<div class="hot-group-item">
+							<div class="pic"><img :src="item.src" class="allcenter"></div>
+							<div class="info">
+								<a href="https://baidu.com" style="color:black" @click="alert('进入小组界面')">{{ item.title }}</a>
+								<div class="d-flex" style="position: relative;width: 100%;padding-top: 21px">
+									<span >已有{{ item.number }}人入组</span>
+									<button type="button" class="btn btn-link" style="margin-top:-7px" @click="join(item.title,this,index)" onclick="this.style.display='none'">加入小组</button>
+								</div>
+							</div>
+						</div>
+						<div class="myborder"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var search_content = new Vue({
+		el:"#app",
+		data:{
+			content:'',
+			resultList:[]
+		},
+		methods:{
+			ShouyeSearch:function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
+
+					})
+				window.location.href=' http://www.baidu.com/s?wd='+this.content;
+			}
+		},
+	});
+    var group_item=new Vue({
+        el:"#group_item",
+        data:{
+            arr:[{tiezi:'hh.html',title:"碎了一地鸡毛",text:"hh",from:"人间百味",hot:"12",time:"2020/4/27 18:48",hasdianzan:false,likenumber:20,group:"https://baidu.com"}],
+        },
+		methods:{
+			dianzan:function(item,index){
+                if(!item.hasdianzan){
+                    axios.post("check.html",
+        {
+            title:"title"
+        })   
+        .then(function(response){
+            item.hasdianzan=!item.hasdianzan;
+            item.likenumber+=1;
+        },function(error) {
+
+        });
+        }
+        else{          
+             axios.post("check.html",
+        {
+            title:"title"
+        })   
+        .then(function(response){
+            item.hasdianzan=!item.hasdianzan;
+            item.likenumber-=1;
+        },function(error) {
+
+        });
+        }
+			}
+		}
+    });
+	var hot_group=new Vue({
+	el:"#hot-group",
+	data:{
+		arr:[{href:"hh",src:"./jpg/fire.jpg",title:"人间百味",number:12},{src:"./jpg/fire.jpg",title:"人间百味",number:12}]
+	},
+	methods:{
+		changeArr:function(){
+			var that=this;
+			alert("改变小组")
+			axios.post("check.html",
+        {
+            changeGroup:"Hot"
+        })
+        .then(function(response){
+			that.arr=response.data;
+        },function(error) {
+        })
+		},
+		join:function(title,obj,index){
+			axios.post("'https://baidu.com",
+			{
+				join:title
+			})
+        .then(function(response){
+            this.arr[index].number+=1;
+             obj.style.display="none";
+        },function(error) {
+            console.log(err);
+        })
+		}
+		}
+	})
+var inter_group=new Vue({
+	el:"#inter-group",
+	data:{
+		arr:[{href:"hh",src:"./jpg/fire.jpg",title:"人间百味",number:12},{src:"./jpg/fire.jpg",title:"人间百味",number:12}]
+	},
+	methods:{
+		changeArr:function(){
+			var that=this;
+			alert("改变小组")
+			axios.post("check.html",
+        {
+            changeGroup:"Hot"
+        })
+        .then(function(response){
+			that.arr=response.data;
+        },function(error) {
+        })
+		},
+		join:function(title,obj,index){
+			axios.post("'https://baidu.com",
+			{
+				join:title
+			})
+        .then(function(response){
+            this.arr[index].number+=1;
+             obj.style.display="none";
+        },function(error) {
+            console.log(err);
+        })
+		}
+		}
+})
+</script>
+</body>
+</html>

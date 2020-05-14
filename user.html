@@ -59,7 +59,7 @@
 
 <body>
 	<div class="container_fluid">
-    	<div class="row" style="background-color: #030e11;">
+		<div class="row" style="background-color: #030e11;">
         	<div class="col_md_12 " >
             	<div id="menu">
                 	<li> <a href="#" >花瓣</a></li>
@@ -83,26 +83,48 @@
             	</div>
         	</div>
     	</div>
-		<div style="background:linear-gradient(#68aadc,snow 200px,white 500px);position: absolute;z-index:-1;height: 500px;width: 100%;"></div>
-    	<div class="row" style="margin-top: 70px;">
-        	<div class="col-md-8 offset-md-2">      	
-				<div id="info" class="d-flex mb-3" style="background:url(jpg/backgroundgeren.jpg) no-repeat 0 0;background-size:100% 100%;;width: 100%;height: 200px;">
-						<div class="p-2" style="width: 25% ;height:80%;">
-							<div  style="position:relative;left:20%;top:30px;width: 100px;height:100px;border-radius:100px;-webkit-border-radius:100px; -moz-border-radius:100px;overflow: hidden" >
-							    <img :src="jpg" alt="头像" style="width:100px;height: 100px; display: block; ; border-radius:100px;">
+		<div style="background:linear-gradient(#68aadc,snow 400px,white 600px);position: absolute;z-index:-1;height: 500px;width: 100%;"></div>
+		<div class="row" style="margin-top: 70px;">
+			<div class="col-md-3 offset-md-1">
+				<div class="side-owner p-2" style="background: snow;" id="own">
+							<div class="d-flex">
+								<div style="width: 60px; height: 60px;border-radius: 60px;overflow: hidden;">
+								<img :src="jpg" width="100%" height="100%">
 							</div>
-						</div>
-						<div class="p-2 flex-grow-1" style="margin-top:30px ">
-							<h4 class="lead">{{ name }}</h4>
-							<p>已发布过{{ pinglun }}条评论</p>
-							<p>已点过{{ saw }}个在看</p>
-							<p>已参加过{{ group }}个小组</p>
-						</div>
+							<p class="break-word" style="margin-left: 20px;font-size: 25px;margin-top: 6px;">{{ name }}</p>
+							</div>
+							<div class="p-2 d-flex" style="margin-top:10px">
+							<div style="width: 60px;height: 60px;">
+							<p class="text-center" style="font-size: 20px;">{{ pinglun }}</p>
+							<p style="margin-top: -10px;">评论</p>
+							</div>
+							<div style="width: 60px;height: 60px;">
+								<p style="font-size: 20px;">{{ saw }}</p>
+								<p style="margin-top: -10px;">看过</p>
+							</div>
+							<div style="width: 60px;height: 60px;">
+								<p style="font-size: 20px;">{{ group }}</p>
+								<p style="margin-top: -10px;">小组</p>
+							</div>
+							</div> 
+				</div>
+				<div class="p-2" style="background-color: snow;margin-top: 30px;" id="groups">
+					<h4 style="font-size: 21px;margin-bottom: 20px;">我的小组</h4>
+					<ul>
+						<li v-for="item in arr">
+							<div class="d-flex">
+								<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
+						        <img :src="item.jpg" style="width: 100%;height: 100%;">
+								</div>
+								<a :href="item.href" style="line-height: 50px;margin-left: 10px;color: black;">{{ item.name }}</a>
+							<div>
+						</li>
+					
+					</ul>
+					
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-8 offset-md-2" id="pinglun">
+			<div class="col-md-6 offset-md-1" id="pinglun">
 				<p class="font-weight-bold ">留言墙</p>
 				<div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:140px;overflow: hidden">
 					<textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="写留言..." v-model="topeople"></textarea>
@@ -124,7 +146,7 @@
 					</li>
 				</ul>
 			</div>
-		</div>	
+		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -159,6 +181,23 @@
             console.log(err);
         })
 				}
+			}
+		});
+		var own=new Vue({
+            el:"#own",
+            data:{
+                href:"https://baidu.com",
+                jpg:"jpg/fire2.jpg",
+                name:"西瓜啊",
+                pinglun:20,
+                saw:30,
+                group:40
+            }
+        });
+		var groups=new Vue({
+			el:"#groups",
+			data:{
+				arr:[{name:"hh",href:"hh",jpg:"hh"},{name:"hh",href:"hh",jpg:"hh"},{name:"hh",href:"hh",jpg:"hh"}]
 			}
 		})
 	</script>
