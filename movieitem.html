@@ -210,7 +210,7 @@
                                     <p class="flex-grow-1" style="margin-left: 15px;">{{ item.time }}</p>
                                     <button type="button" class="btn iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;" @click="tolike(index)">点赞({{ item.likeNumber }})</button>
                                     <button type="button" class="btn iconfont icon-fandui" style="font-size:16px;margin-left:13px;color: black;" @click="todislike(index)">反对({{ item.dislikeNumber }})</button>
-                                    <button type="button" class="btn iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;" data-target="#jubao" data-toggle="modal">举报</a>
+                                    <button type="button" class="btn iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;" data-target="#jubao" data-toggle="modal">举报</button>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +238,7 @@
                                     <p class="flex-grow-1" style="margin-left: 15px">{{ item.time }}</p>
                                     <button type="button" class="btn iconfont icon-buoumaotubiao16" style="font-size:16px;color: cornflowerblue;margin-left:13px;" @click="tolike(index)">点赞({{ item.likeNumber }})</button>
                                     <button type="button" class="btn iconfont icon-fandui" style="font-size:16px;margin-left:13px;color: black;" @click="todislike(index)">反对({{ item.dislikeNumber }})</button>
-                                    <button type="button" class="btn iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;" data-target="#jubao" data-toggle="modal">举报</a>
+                                    <button type="button" class="btn iconfont icon-ziyuan" style="font-size:16px;color:red;margin-left:13px;" data-target="#jubao" data-toggle="modal">举报</button>
                                 </div>
                             </div>
                         </div>
@@ -348,10 +348,7 @@
             star:that.star
         })
         .then(function(response){
-            that.like+=1;
-                    var hh={jpg:"jpg/fire2.jpg",own:"西瓜",like:0,pinglun:that.content,time:new Date().toLocaleString(),likeNumber:0,dislikeNumber:0,like:that.star}
-                    duanping.arr.push(hh);
-                    duanping.number+=1;
+            //更新界面
         },function(error) {
         })  
                 },

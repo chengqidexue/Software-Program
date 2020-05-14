@@ -89,6 +89,43 @@ var h=document.getElementById("submit_tiezi");
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="toOwn" style="position: fixed;top: 30%">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+	   
+			<!-- 模态框头部 -->
+			<div class="modal-header">
+			  <h4 class="modal-title">想要对他说点悄悄话</h4>
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	   
+			<!-- 模态框主体 -->
+			<div class="modal-body">
+			  <textarea maxlength="200" style="height: 80px;width: 100%;" v-model="content"></textarea>
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="position: relative;left:400px;" @click="submit">发送</button>
+			</div>	  
+		  </div>
+		</div>
+	  </div>
+	  <div class="modal fade" id="toControler" style="position: fixed;top: 30%">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+	   
+			<!-- 模态框头部 -->
+			<div class="modal-header">
+			  <h4 class="modal-title">想要对他说点悄悄话</h4>
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	   
+			<!-- 模态框主体 -->
+			<div class="modal-body">
+			  <textarea maxlength="200" style="height: 80px;width: 100%;" v-model="content"></textarea>
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="position: relative;left:400px;" @click="submit">发送</button>
+			</div>	  
+		  </div>
+		</div>
+	  </div>
+	</div>
 	<div class="row" style="background-color: #030e11;">
 		<div class="col_md_12 " >
 			<div id="menu">
@@ -210,7 +247,7 @@ var h=document.getElementById("submit_tiezi");
 				</ul>
 			</div>
 		</div>
-		<div class="col-md-3 offset-md-1" style="height: 100px">
+		<div class="col-md-2 offset-md-1" style="height: 100px">
 		<div class="controler-info" id="owner">
 			<h4>组主</h4>
 			<div class="d-flex">
@@ -220,7 +257,7 @@ var h=document.getElementById("submit_tiezi");
 				<div class="flex-grow-1" >
 					<div class="d-flex" style="margin-left: 14px;">
 						<a :href="href" style="font-size: 17px;margin-top: 4px;color: black">{{ name }}</a>
-						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
+						<button type="button" class="btn iconfont icon-pinglun" style="color: gray;" data-toggle="modal" data-target="#toOwn">发私信</button>
 					</div>
 				</div>
 			</div>
@@ -228,7 +265,7 @@ var h=document.getElementById("submit_tiezi");
 		<div class="xiaodi-info" id="controler">
 			<h4>管理员</h4>
 			<ul>
-				<li v-for="item in arr" :title="item">
+				<li v-for="(item,index) in arr" :title="item">
 					<div class="d-flex">
 			<div style="width: 50px;height: 50px;border-radius: 50px;overflow: hidden;">
 			    <img :src="item.jpg" width="100%" height="100%">
@@ -236,18 +273,18 @@ var h=document.getElementById("submit_tiezi");
 			<div class="flex-grow-1" >
 				<div class="d-flex" style="margin-left: 14px;">
 					<a :href="item.href" style="font-size: 17px;margin-top: 4px;color: black;">{{ item.name }}</a>
-					<button type="button" class="btn iconfont icon-pinglun" style="color: gray;">发私信</button>
+					<button type="button" class="btn iconfont icon-pinglun" style="color: gray;"  data-toggle="modal" data-target="#toControler" @click="ind(item.name)">发私信</button>
 				</div>	
 			</div>	
 		</div>
 				</li>
 			</ul>
 		</div>
-        <div class="hot-group" id="hot_group_info">
+        <div id="hot_group_info">
 				<h4 >成员们也喜欢逛逛</h4>
 				<ul>
 					<li v-for="item in arr" :title="item" style="margin-top: 10px;">
-						<div class="hot-group-item d-flex">
+						<div class="d-flex">
 							<div class="pic" style="width:30px;height: 30px;border-radius: 30px;overflow: hidden;"><img :src="item.jpg" style="width:100%;height: 100%;"></div>
 							<a :href="item.href" class="break-word" style="color:black;margin-left: 10px;" >{{ item.title }}</a>
 						</div>
@@ -255,8 +292,8 @@ var h=document.getElementById("submit_tiezi");
 					</li>
 					
 				</ul>
-			</div>
 		</div>
+	    </div>
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -384,7 +421,13 @@ var h=document.getElementById("submit_tiezi");
 		var controler=new Vue({
 			el:"#controler",
 			data:{
-				arr:[{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"}]
+				arr:[{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"},{jpg:"jpg/fire2.jpg",name:"是鸡蛋啊",content:"hhh",href:"https://baidu.com"}],
+			    to:""
+			},
+			methods:{
+				ind:function(name){
+					this.to=name;
+				}
 			}
 		})
 		var hot_group_info=new Vue({
@@ -405,6 +448,43 @@ var h=document.getElementById("submit_tiezi");
 				title:"",
 				content:""
 			},
+		});
+		var toOwn=new Vue({
+			el:"#toOwn",
+			data:{
+				content:"dd"
+			},
+			methods:{
+				submit:function(){
+					var that=this;
+					axios.post("check.html",
+        {
+            content:that.content
+        })
+        .then(function(response){
+        },function(error) {
+        })
+				}
+			}
+		});
+		var toControler=new Vue({
+			el:"#toControler",
+			data:{
+				content:"ddd"
+			},
+			methods:{
+				submit:function(){
+					var that=this;
+					axios.post("check.html",
+        {
+			content:that.content,
+			name:controler.to
+        })
+        .then(function(response){
+        },function(error) {
+        })
+				}
+			}
 		});
 </script>
 </body>

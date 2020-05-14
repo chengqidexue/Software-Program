@@ -14,6 +14,30 @@
 </head>
 <body>
     <div class="container_fluid">
+        <div class="modal fade" id="mytopic" style="position: fixed;top: 30%">
+            <div class="modal-dialog">
+              <div class="modal-content">
+           
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                  <h4 class="modal-title">发布我的话题</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+           
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <div class="d-flex">
+                         <label for="ti">标题:</label><input type="text" class="flex-grow-1" id="ti" v-model="title" style="margin-left: 10px;">
+                    </div>
+                    <p><label for="con">内容</label></p>
+                    <textarea  id="con" maxlength="200" style="height: 80px;width: 100%;margin-top: -20px;" v-model="content"></textarea>
+                    <p>相关的书籍或影视的名字（选填，且必须是花瓣有的数据哦~）</p>
+                    <input id="sub" type="text" style="width: 100%;" v-moel="relati">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="position: relative;left:400px;margin-top: 20px;" @click="submit">发送</button>
+                </div>	  
+              </div>
+            </div>
+          </div>
         <div class="row" style="background-color: #030e11;">
         	<div class="col_md_12 " >
             	<div id="menu">
@@ -40,7 +64,7 @@
     	</div>
     <div class="row" style="background: cornflowerblue">
         <div class="col-md-4 offset-md-6" >
-            <div class="input-group mb-3"  >
+                <div class="input-group mb-3"  >
                 <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
                 <div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
                     <div class="btn-group">
@@ -52,8 +76,10 @@
                             <a class="dropdown-item" href="#">书籍</a>
                             <a class="dropdown-item" href="#">影视</a>
                         </div>
-                    </div>
+                    </div> 
+                    <button type="button" class="btn btn-dark" style="margin-left: 20px;"  data-toggle="modal" data-target="#mytopic">发布我的话题</button>
                 </div>
+               
             </div>
         </div>
     </div>
@@ -95,11 +121,36 @@
             </div>
             </li>
         </ul>
-        </div>
-        
-       
+        </div>  
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var mytopic=new Vue({
+    el:"#mytopic",
+    data:{
+        title:"dd",
+        content:"ddd",
+        relati:"rve"
+    },
+    methods:{
+        submit:function(){
+            var that=this;
+            axios.post("check.html",
+{
+    content:that.content,
+    title:that.title,
+    relati:that.relati
+
+})
+.then(function(response){
+},function(error) {
+})
+        }
+    }
+});</script>
+
 </body>
 
 </html>
