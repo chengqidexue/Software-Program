@@ -11,24 +11,6 @@
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="./js/Move.js"></script>
 	<script src="./iconfont/iconfont.js"></script>
-	<script>
-		window.onload=function(){
-			var lis=document.getElementsByClassName("hh");
-			var btns=document.getElementById("btn").getElementsByTagName("button");
-			for(var i=0;i<btns.length;i++){
-				btns[i].index=i;
-				btns[i].onclick=function(){
-					for(var j=0;j<btns.length;j++)
-					lis[j].style.display="none";
-					lis[this.index].style.display="block";
-					for(var j=0;j<btns.length;j++)
-					btn[j].style.color="black";
-					alert(this.index);
-					btn[this.index].className="breadcrumb-item btn";
-				}
-			}
-		}
-	</script>
 
     <style>
         .hot-group
@@ -93,14 +75,16 @@
 				<h2>消息通知</h2>
             </div>
             <div class="col-md-10 offset-md-1">
-				<nav class="breadcrumb" id="btn">
-					<button class="breadcrumb-item btn active" type="button">私信</button>
-					<button class="breadcrumb-item btn " type="button">举报信息</button>
-				 </nav>
-				<div>
-					<ul style="position: relative;">
-						<li class="hh" style="position: absolute;display: block;">
-							<div>
+				<ul class="nav nav-pills" role="tablist">
+					<li class="nav-item">
+					  <a class="nav-link active" data-toggle="pill" href="#h">私信</a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link" data-toggle="pill" href="#m">举报信息</a>
+					</li>
+				  </ul>
+				  <div class="tab-content">
+					<div id="h" class="tab-pane active"><br>
 							<ul>
 								<li>
 									<div>
@@ -110,108 +94,81 @@
 									</div>
 								</li>
 							</ul>
+					</div>
+					<div id="m" class="tab-pane"><br>
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item">
+							  <a class="nav-link active" data-toggle="tab" href="#home">电影或书籍的评论</a>
+							</li>
+							<li class="nav-item">
+							  <a class="nav-link" data-toggle="tab" href="#menu2">话题</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#menu3">话题的评论</a>
+							  </li>
+						  </ul>
+						  <div class="tab-content">
+							<div id="home" class="tab-pane active"><br>
+								<div class="d-flex" style="margin-bottom: 10px;">
+									<span style="width:24%;">评论内容</span>
+									<span style="width:14%;margin-left: 3px;">电影或书籍</span>
+									<span style="width:14%;margin-left: 3px;">举报标题</span>
+									<span style="width:30%;margin-left: 3px;">详细信息</span>
+								</div>
+								<ul style="font-size: 17px;line-height: 20px;">
+									<li v-for="item in resultList">
+											<div class="d-flex" >
+											<a  data-toggle="tooltip" data-placement="top" title="评论内容!从前有座山" style="width: 24%;color: black;">鼠标停留查看详情</a>
+										<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</a>
+										<p class="break-word" style="width:14%;margin-left: 3px;">hhhhhhh</p>
+										<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+										<button type="button" class="btn">通过</button>
+										<button type="button" class="btn" style="color: indianred;">驳回</button>
+										 </div>	
+									</li>
+								</ul>
 							</div>
-							
-						</li>
-						<li class="hh" style="position: absolute;display: none;">
-							<ul class="nav nav-tabs" role="tablist">
-								<li class="nav-item">
-								  <a class="nav-link active" data-toggle="tab" href="#home">帖子</a>
-								</li>
-								<li class="nav-item">
-								  <a class="nav-link" data-toggle="tab" href="#menu1">电影或书籍的评论</a>
-								</li>
-								<li class="nav-item">
-								  <a class="nav-link" data-toggle="tab" href="#menu2">话题</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" data-toggle="tab" href="#menu3">话题的评论</a>
-								  </li>
-							  </ul>
-							  <div class="tab-content">
-								<div id="home" class="tab-pane active"><br>
-									<div class="d-flex" style="margin-bottom: 10px;">
-										<span style="width:20%;">帖子</span>
-										<span style="width:14%;margin-left: 3px;">来自</span>
-										<span style="width:14%;margin-left: 3px;">举报标题</span>
-										<span style="width:30%;margin-left: 3px;">详细信息</span>
-									</div>
-									<ul style="font-size: 17px;line-height: 20px">
-										<li v-for="item in resultList">
-											<div class="d-flex" >	
-											<a :href="item.tohref" class="break-word" style="width: 20%">{{ item.type }}</a>
-											<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.high }}</a>
-											<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</a>
-											<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-											<button type="button" class="btn">通过</button>
-											<button type="button" class="btn" style="color: indianred;">驳回</button>
-											 </div>	
-										</li>
-									</ul>
+							<div id="menu2" class="tab-pane fade"><br>
+								<div class="d-flex" style="margin-bottom: 10px;">
+									<span style="width:20%;">话题标题</span>
+									<span style="width:14%;margin-left: 3px;">举报标题</span>
+									<span style="width:30%;margin-left: 3px;">详细信息</span>
 								</div>
-								<div id="menu1" class="tab-pane fade"><br>
-									<div class="d-flex" style="margin-bottom: 10px;">
-										<span style="width:24%;">评论内容</span>
-										<span style="width:14%;margin-left: 3px;">电影或书籍</span>
-										<span style="width:14%;margin-left: 3px;">举报标题</span>
-										<span style="width:30%;margin-left: 3px;">详细信息</span>
-									</div>
-									<ul style="font-size: 17px;line-height: 20px;">
-										<li v-for="item in resultList">
-												<div class="d-flex" >
-												<a  data-toggle="tooltip" data-placement="top" title="评论内容!从前有座山" style="width: 24%;color: black;">鼠标停留查看详情</a>
-											<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</a>
-											<p class="break-word" style="width:14%;margin-left: 3px;">hhhhhhh</p>
-											<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-											<button type="button" class="btn">通过</button>
-											<button type="button" class="btn" style="color: indianred;">驳回</button>
-											 </div>	
-										</li>
-									</ul>
+								<ul style="font-size: 17px;line-height: 20px">
+									<li v-for="item in resultList">
+										<div class="d-flex" >	
+										<a :href="item.tohref" class="break-word" style="width: 20%">{{ item.type }}</a>
+										<p class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</p>
+										<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+										<button type="button" class="btn">通过</button>
+										<button type="button" class="btn" style="color: indianred;">驳回</button>
+										 </div>	
+									</li>
+								</ul>
+							</div>
+							<div id="menu3" class="tab-pane fade"><br>
+								<div class="d-flex" style="margin-bottom: 10px;">
+									<span style="width:24%;">评论内容</span>
+									<span style="width:14%;">话题评论</span>
+									<span style="width:14%;">举报标题</span>
+									<span style="width:30%;">详细信息</span>
 								</div>
-								<div id="menu2" class="tab-pane fade"><br>
-									<div class="d-flex" style="margin-bottom: 10px;">
-										<span style="width:20%;">话题标题</span>
-										<span style="width:14%;margin-left: 3px;">来自</span>
-										<span style="width:14%;margin-left: 3px;">举报标题</span>
-										<span style="width:30%;margin-left: 3px;">详细信息</span>
-									</div>
-									<ul style="font-size: 17px;line-height: 20px">
-										<li v-for="item in resultList">
-											<div class="d-flex" >	
-											<a :href="item.tohref" class="break-word" style="width: 20%">{{ item.type }}</a>
-											<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.high }}</a>
-											<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</a>
-											<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-											<button type="button" class="btn">通过</button>
-											<button type="button" class="btn" style="color: indianred;">驳回</button>
-											 </div>	
-										</li>
-									</ul>
-								</div>
-								<div id="menu3" class="tab-pane fade"><br>
-									<div class="d-flex" style="margin-bottom: 10px;">
-										<span style="width:24%;">评论内容</span>
-										<span style="width:14%;">话题评论</span>
-										<span style="width:14%;">举报标题</span>
-										<span style="width:30%;">详细信息</span>
-									</div>
-									<ul style="font-size: 17px;line-height: 20px;">
-										<li v-for="item in resultList">
-												<div class="d-flex" >
-												<a  data-toggle="tooltip" data-placement="top" title="评论内容!从前有座山" style="width: 24%;color: black;">鼠标停留查看详情</a>
-											<a :href="item.fromhref" class="break-word" style="width: 14%;">{{ item.low }}</a>
-											<p class="break-word" style="width:14%">hhhhhhh</p>
-											<p class="break-word" style="width:30%">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-											<button type="button" class="btn">通过</button>
-											<button type="button" class="btn" style="color: indianred;">驳回</button>
-											 </div>	
-										</li>
-									</ul>
-								</div>
-							  </div>
-						</li>
-					</ul>
+								<ul style="font-size: 17px;line-height: 20px;">
+									<li v-for="item in resultList">
+											<div class="d-flex" >
+											<a  data-toggle="tooltip" data-placement="top" title="评论内容!从前有座山" style="width: 24%;color: black;">鼠标停留查看详情</a>
+										<a :href="item.fromhref" class="break-word" style="width: 14%;">{{ item.low }}</a>
+										<p class="break-word" style="width:14%">hhhhhhh</p>
+										<p class="break-word" style="width:30%">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+										<button type="button" class="btn">通过</button>
+										<button type="button" class="btn" style="color: indianred;">驳回</button>
+										 </div>	
+									</li>
+								</ul>
+							</div>
+						  </div>
+					</div>
+				<div>
 				</div>
 			</div>
         </div>
