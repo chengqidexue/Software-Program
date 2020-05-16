@@ -13,8 +13,8 @@
     <script src="./iconfont/iconfont.js"></script>
 </head>
 <body>
-    <div class="container_fluid">
-        <div class="modal fade" id="mytopic" style="position: fixed;top: 30%">
+    <div class="container_fluid" id="mytopic">
+        <div class="modal fade"  style="position: fixed;top: 30%">
             <div class="modal-dialog">
               <div class="modal-content">
            
@@ -65,10 +65,10 @@
     <div class="row" style="background: cornflowerblue">
         <div class="col-md-4 offset-md-6" >
                 <div class="input-group mb-3"  >
-                <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+                <input type="text" class="form-control" v-model="content2" @keyup.enter="ShouyeSearch" placeholder="Search" style="margin: 10px" >
                 <div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
+                        <button type="button" @click="ShouyeSearch" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">全部</a>
                             <a class="dropdown-item" href="#">社会</a>
@@ -111,12 +111,12 @@
             <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
              <div class="d-flex" style="height: 100px;">
                 <img src="jpg/book2.jpg" width="80px" height="100%">
-                <div class="d-flex flex-column p-2" >
+                <div class="d-flex flex-column p-2" v-for="item in resultList">
                     <div>
-                          <a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">标题标题标题标题标</a> 
-                       </div>
-                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">78个讨论</p>
-                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;">7天新增1个讨论 30天新增1个讨论</p>
+						<a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">{{ item.type }}</a>
+					</div>
+                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">{{item.high}}个讨论</p>
+                   <p style="color:#2a6496;font-size: 12px;line-height: 15px;">{{item.low}}天新增{{item.high}}个讨论 {{item.high}}天新增{{item.low}}个讨论</p>
                 </div>
             </div>
             </li>
@@ -127,29 +127,46 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    var mytopic=new Vue({
-    el:"#mytopic",
-    data:{
-        title:"dd",
-        content:"ddd",
-        relati:"rve"
-    },
-    methods:{
-        submit:function(){
-            var that=this;
-            axios.post("check.html",
-{
-    content:that.content,
-    title:that.title,
-    relati:that.relati
 
-})
-.then(function(response){
-},function(error) {
-})
-        }
-    }
-});</script>
+    var mytopic=new Vue({
+		el:"#mytopic",
+		data:{
+			title:"dd",
+			content:"ddd",
+			relati:"rve",
+			content2: '',
+			resultList: [{type:'刀剑神域',high:'2',low:'3',fengxiang:'东风',date:'2020-05-17'}]
+		},
+		methods:{
+			submit:function(){
+				var that=this;
+				axios.post("check.html",
+				{
+					content:that.content,
+					title:that.title,
+					relati:that.relati
+
+				})
+				.then(function(response){
+				},function(error) {
+				})
+			},
+			ShouyeSearch: function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
+
+					})
+			}
+		}
+	});
+</script>
 
 </body>
 
