@@ -84,13 +84,13 @@
 					</li>
 				  </ul>
 				  <div class="tab-content">
-					<div id="h" class="tab-pane active"><br>
+					<div id="tiezi" class="tab-pane active"><br>
 							<ul>
 								<li>
 									<div>
-										<span style="font-size: 20px;"><span class="small">来自</span>&nbsp;<a href="#">张</a></span>
-										<span style="color: gray;">2020:02:02</span>
-										<p class="break-word" style="padding: 0 10px;">hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+										<span style="font-size: 20px;"><span class="small">来自</span>&nbsp;<a href="#">{{author}}</a></span>
+										<span style="color: gray;">{{date}}</span>
+										<p class="break-word" style="padding: 0 10px;">{{content}}</p>
 									</div>
 								</li>
 							</ul>
@@ -107,7 +107,7 @@
 								<a class="nav-link" data-toggle="tab" href="#menu3">话题的评论</a>
 							  </li>
 						  </ul>
-						  <div class="tab-content">
+						  <div class="tab-content" >
 							<div id="home" class="tab-pane active"><br>
 								<div class="d-flex" style="margin-bottom: 10px;">
 									<span style="width:24%;">评论内容</span>
@@ -117,13 +117,13 @@
 								</div>
 								<ul style="font-size: 17px;line-height: 20px;">
 									<li v-for="item in resultList">
-											<div class="d-flex" >
-											<a  data-toggle="tooltip" data-placement="top" title="评论内容!从前有座山" style="width: 24%;color: black;">鼠标停留查看详情</a>
-										<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</a>
-										<p class="break-word" style="width:14%;margin-left: 3px;">hhhhhhh</p>
-										<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-										<button type="button" class="btn">通过</button>
-										<button type="button" class="btn" style="color: indianred;">驳回</button>
+										<div class="d-flex" >
+											<a  data-toggle="tooltip" data-placement="top" title="item.details" style="width: 24%;color: black;">鼠标停留查看详情</a>
+											<a :href="item.fromhref" class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</a>
+											<p class="break-word" style="width:14%;margin-left: 3px;">{{ item.topic }}</p>
+											<p class="break-word" style="width:30%;margin-left: 3px;">{{ item.content }}</p>
+											<button type="button" class="btn">通过</button>
+											<button type="button" class="btn" style="color: indianred;">驳回</button>
 										 </div>	
 									</li>
 								</ul>
@@ -139,7 +139,7 @@
 										<div class="d-flex" >	
 										<a :href="item.tohref" class="break-word" style="width: 20%">{{ item.type }}</a>
 										<p class="break-word" style="width: 14%;margin-left: 3px;">{{ item.low }}</p>
-										<p class="break-word" style="width:30%;margin-left: 3px;">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+										<p class="break-word" style="width:30%;margin-left: 3px;">{{ item.content }}</p>
 										<button type="button" class="btn">通过</button>
 										<button type="button" class="btn" style="color: indianred;">驳回</button>
 										 </div>	
@@ -158,8 +158,8 @@
 											<div class="d-flex" >
 											<a  data-toggle="tooltip" data-placement="top" title="评论内容!从前有座山" style="width: 24%;color: black;">鼠标停留查看详情</a>
 										<a :href="item.fromhref" class="break-word" style="width: 14%;">{{ item.low }}</a>
-										<p class="break-word" style="width:14%">hhhhhhh</p>
-										<p class="break-word" style="width:30%">hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+										<p class="break-word" style="width:14%">{{item.topic}}</p>
+										<p class="break-word" style="width:30%">{{item.content}}</p>
 										<button type="button" class="btn">通过</button>
 										<button type="button" class="btn" style="color: indianred;">驳回</button>
 										 </div>	
@@ -176,11 +176,72 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
+		var search_content = new Vue({
+			el: "#app",
+			data: {
+				content: '',
+				resultList: []
+			},
+			methods: {
+				ShouyeSearch: function () {
+					//这里需要后端的网址
+					var that = this;
+					axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+						.then(function (response) {
+							console.log(that.content);
+							console.log(response);
+							that.resultList = response.data.data.forecast;
+						})
+						.catch(function (err) {
+
+						});
+					window.location.href=' http://www.baidu.com/s?wd='+this.content;
+				}
+			},
+		});
+		var tiezi = new Vue({
+			el:"#tiezi",
+			data:{
+				author:'张',
+				date:'2020-02-02',
+				content:'what about now?what about today?'
+			}
+		});
+		var home = new Vue({
+			el:"#home",
+			data:{
+				resultList:[{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},]
+			}
+		});
+		var menu2 = new Vue({
+			el:"#menu2",
+			data:{
+				resultList:[{low:'qqqwww',type:'233333',content:'jack the ripper'},
+					{low:'qqqwww',type:'233333',content:'jack the ripper'},
+					{low:'qqqwww',type:'233333',content:'jack the ripper'},
+					{low:'qqqwww',type:'233333',content:'jack the ripper'},
+					{low:'qqqwww',type:'233333',content:'jack the ripper'},]
+			}
+		});
+		var menu3 = new Vue({
+			el:"#menu3",
+			data:{
+				resultList:[{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},
+					{details:'评论内容!从前有座山',high:'dddfff',low:'qqqwww',topic:'233333',content:'jack the ripper'},]
+			}
+		});
 	</script>
 	<script>
 		$(document).ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();   
 		});
-		</script>
+	</script>
 </body>
 </html>

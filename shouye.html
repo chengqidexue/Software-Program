@@ -88,13 +88,13 @@
 				<input type="text" v-model="content" @keyup.enter="ShouyeSearch" class="form-control" placeholder="Search" style="margin: 10px" >
 				<div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
 					<div class="btn-group">
-						<button type="button" @click="ShouyeSearch" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
+						<button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown">搜索内容</button>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">全部</a>
-							<a class="dropdown-item" href="#">书籍</a>
-							<a class="dropdown-item" href="#">影视</a>
-							<a class="dropdown-item" href="#">小组</a>
-							<a class="dropdown-item" href="#">话题</a>
+							<a class="dropdown-item" href="#" @click="ShouyeSearch">全部</a>
+							<a class="dropdown-item" href="#" @click="ShouyeSearch">书籍</a>
+							<a class="dropdown-item" href="#" @click="ShouyeSearch">影视</a>
+							<a class="dropdown-item" href="#" @click="ShouyeSearch">小组</a>
+							<a class="dropdown-item" href="#" @click="ShouyeSearch">话题</a>
 						</div>
 					</div>
 				</div>

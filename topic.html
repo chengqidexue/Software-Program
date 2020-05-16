@@ -68,13 +68,13 @@
                 <input type="text" class="form-control" v-model="content2" @keyup.enter="ShouyeSearch" placeholder="Search" style="margin: 10px" >
                 <div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
                     <div class="btn-group">
-                        <button type="button" @click="ShouyeSearch" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">全部</a>
-                            <a class="dropdown-item" href="#">社会</a>
-                            <a class="dropdown-item" href="#">搞笑</a>
-                            <a class="dropdown-item" href="#">书籍</a>
-                            <a class="dropdown-item" href="#">影视</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch" >全部</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch" >社会</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch" >搞笑</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch" >书籍</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch" >影视</a>
                         </div>
                     </div> 
                     <button type="button" class="btn btn-dark" style="margin-left: 20px;"  data-toggle="modal" data-target="#mytopic">发布我的话题</button>
@@ -107,10 +107,10 @@
 
         <div class="col-md-10 offset-md-1" style="background: white;">
             <ul>
-            <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;">
+            <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid; " v-for="item in resultList">
              <div class="d-flex" style="height: 100px;">
                 <img src="jpg/book2.jpg" width="80px" height="100%">
-                <div class="d-flex flex-column p-2" v-for="item in resultList">
+                <div class="d-flex flex-column p-2" >
                     <div>
 						<a href="#" class="break-word" style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">{{ item.type }}</a>
 					</div>
@@ -153,9 +153,9 @@
 			ShouyeSearch: function () {
 				//这里需要后端的网址
 				var that = this;
-				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content2)
 					.then(function (response) {
-						console.log(that.content);
+						console.log(that.content2);
 						console.log(response);
 						that.resultList = response.data.data.forecast;
 					})

@@ -48,21 +48,21 @@
 						<button type="button" class="btn btn-success" @click="ShouyeSearch">搜索</button>
 				</div>
             </div>
-            <p style="color: gray;">总共搜索到{{ resultListLength }}条数据</p>
-        <ul>
-            <li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;" v-for="item in arr" >
-                <div class="card" style="width:280px">
-                    <div style="width: 100%;height: 330px;">
-                        <img class="card-img-top" :src="item.jpg" style="width:100%;height: 100%;">
-                    </div>
-                    <div class="card-body">
-                      <h4 class="card-title">{{ item.name }}</h4>
-                      <p class="card-text">{{ item.jianjie }}</p>
-                      <a :href="item.href" class="btn btn-primary">去看看</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
+            <p style="color: gray;">总共搜索到{{ resultList.length }}条数据</p>
+			<ul>
+				<li class="p-2" style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;" v-for="item in resultList" >
+					<div class="card" style="width:280px">
+						<div style="width: 100%;height: 330px;">
+							<img class="card-img-top" :src="item.jpg" style="width:100%;height: 100%;">
+						</div>
+						<div class="card-body">
+							<h4 class="card-title">{{ item.type }}</h4>
+							<p class="card-text">{{ item.high }}</p>
+							<a :href="item.href" class="btn btn-primary">去看看</a>
+						</div>
+					</div>
+				</li>
+			</ul>
         </div>
 	</div>
 </div>
@@ -73,9 +73,26 @@
 		el: "#app",
 		data: {
             content: '',
-            arr: [{jpg:"jpg/fire2.jpg",name:"蜘蛛侠",jianjie:"简介信息",href:"https://baidu.com"}],
-            hh:"12"
-		}
+			resultList: [{type:'刀剑神域',high:'是小黄人',low:'同仁',fengxiang:'东风',date:'2020-05-17'}],
+            hh:"12",
+			block:true
+		},
+		methods:{
+			ShouyeSearch:function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+						that.block=false;
+					})
+					.catch(function (err) {
+
+					})
+			}
+		},
 	})
 </script>
 </body>

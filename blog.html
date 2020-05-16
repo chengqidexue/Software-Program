@@ -40,17 +40,17 @@
     	</div>
     <div class="row" style="background: cornflowerblue">
         <div class="col-md-4 offset-md-6" >
-            <div class="input-group mb-3"  >
-                <input type="text" class="form-control" placeholder="Search" style="margin: 10px" >
+            <div class="input-group mb-3" id="app">
+                <input type="text" v-model="content" @keyup.enter="ShouyeSearch" class="form-control" placeholder="Search" style="margin: 10px" >
                 <div class="input-group-append" style= "background-color:transparent;border:0; margin: 10px">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
+                        <button type="button"  class="btn btn-success dropdown-toggle" data-toggle="dropdown">搜索内容</button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">全部话题</a>
-                            <a class="dropdown-item" href="#">社会</a>
-                            <a class="dropdown-item" href="#">搞笑</a>
-                            <a class="dropdown-item" href="#">书籍</a>
-                            <a class="dropdown-item" href="#">影视</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch">全部话题</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch">社会</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch">搞笑</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch">书籍</a>
+                            <a class="dropdown-item" href="#" @click="ShouyeSearch">影视</a>
                         </div>
                     </div>
                 </div>
@@ -204,6 +204,29 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+	var search_content = new Vue({
+		el: "#app",
+		data: {
+			content: '',
+			resultList: []
+		},
+		methods: {
+			ShouyeSearch: function () {
+				//这里需要后端的网址
+				var that = this;
+				axios.get('http://wthrcdn.etouch.cn/weather_mini?city='+ that.content)
+					.then(function (response) {
+						console.log(that.content);
+						console.log(response);
+						that.resultList = response.data.data.forecast;
+					})
+					.catch(function (err) {
+
+					});
+				window.location.href=' http://www.baidu.com/s?wd='+this.content;
+			}
+		},
+	});
             var own=new Vue({
             el:"#own",
             data:{
