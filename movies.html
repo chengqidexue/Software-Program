@@ -185,9 +185,35 @@
 		<div class="col-md-12">
 			<div class="layout-box clearfix">
 				<div class="box-title">
-					<h3 class="m-0">中国大陆电影</h3>
+					<h3 class="m-0">中国电影</h3>
 				</div>
 				<ul class="d-flex" id="Chinese_movie">
+					<li class="col-md-2 col-sm-3 col-xs-4" v-for="item in arr">
+						<a class="video-pic loading" data-original="original" href="item.href" title="item.name"><span class="player"></span><span class="score">{{item.score}}</span><span class="note text-bg-r">{{clear}}</span></a>
+						<div class="title">
+							<h5 class="text-overflow"><a href="item.href" title="item.name">{{item.name}}</a></h5>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="layout-box clearfix">
+				<div class="box-title">
+					<h3 class="m-0">美国电影</h3>
+				</div>
+				<ul class="d-flex" id="America_movie">
+					<li class="col-md-2 col-sm-3 col-xs-4" v-for="item in arr">
+						<a class="video-pic loading" data-original="original" href="item.href" title="item.name"><span class="player"></span><span class="score">{{item.score}}</span><span class="note text-bg-r">{{clear}}</span></a>
+						<div class="title">
+							<h5 class="text-overflow"><a href="item.href" title="item.name">{{item.name}}</a></h5>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="layout-box clearfix">
+				<div class="box-title">
+					<h3 class="m-0">英国电影</h3>
+				</div>
+				<ul class="d-flex" id="UK_movie">
 					<li class="col-md-2 col-sm-3 col-xs-4" v-for="item in arr">
 						<a class="video-pic loading" data-original="original" href="item.href" title="item.name"><span class="player"></span><span class="score">{{item.score}}</span><span class="note text-bg-r">{{clear}}</span></a>
 						<div class="title">
@@ -251,6 +277,35 @@
 								{href: "/video/46194.html", name: "叔叔，谁带你回家",score:"9.0"}]
 						},
 					});
+					var America_movie = new Vue({
+			el: "#America_movie",
+			data: {
+				picture:'',
+				original:"http://pic.huayude.com/uploads/vod/2020-04-08/72ffc768717c3549783bc8dbfb1e1d58.jpg",
+				clear:'HD',
+				arr: [{href: "/video/46194.html", name: "哥哥，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "得到，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "弟弟，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "姐姐，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "妹妹，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "叔叔，谁带你回家",score:"9.0"}]
+			},
+		});
+        var UK_movie = new Vue({
+			el: "#UK_movie",
+			data: {
+				picture:'',
+				original:"http://pic.huayude.com/uploads/vod/2020-04-08/72ffc768717c3549783bc8dbfb1e1d58.jpg",
+				clear:'HD',
+				arr: [{href: "/video/46194.html", name: "哥哥，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "得到，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "弟弟，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "姐姐，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "妹妹，谁带你回家",score:"9.0"},
+					{href: "/video/46194.html", name: "叔，谁带你回家",score:"9.0"}]
+			},
+		});
+
 
 				</script>
 </body>
