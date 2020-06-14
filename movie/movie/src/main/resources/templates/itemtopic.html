@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>花瓣--话题</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+</head>
+<body>
+<div class="container_fluid">
+    <div class="modal fade" id="myModal2" style="position: fixed">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">发表评论</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <!--<input type="text" style="width: 100%;font-size: 30px;border: none;" v-model="title"-->
+                           <!--placeholder="标题" id="title">-->
+                    <input id="tid" th:value="${topic.id}" hidden="hidden">
+                    <!--<div style="height: 1px;margin-bottom: 20px;background: cornflowerblue;"></div>-->
+                    <textarea style="height: 400px;width: 100%;font-size: 25px;" maxlength="600" placeholder="评论内容"
+                              v-model="content" id="content"></textarea>
+                    <button type="button" class="btn btn-success" id="submit_tiezi" data-dismiss="modal"
+                            style="margin-left: 80%;margin-top: 10px;width: 130px;">提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{common/bar::header}"></div>
+    <div class="row" style="padding-top: 30px;background: #f4f3f3;">
+        <div class="col-md-7 offset-md-1">
+            <div class="title" style="background: white;">
+                <div class="d-flex p-4">
+                    <div style="width: 100px;height: 100px;border-radius: 5px;overflow: hidden;">
+                        <img src="jpg/fire2.jpg" width="100%" height="100%">
+                    </div>
+                    <div style="margin-left: 30px;">
+                        <h1 class="break-word" style="font-size: 30px;font-weight: bold;">#[[${topic.title}]]#</h1>
+                        <div style="color: gray;margin-top: 25px;">
+                            <span>阅读量[[${topic.readCount}]]</span>
+                            <span style="margin-left: 13px;">讨论[[${tieziTotal}]]</span>
+                            <span style="margin-left: 13px;">相关书籍或影视：<a th:href="@{'/itemTopicInfo?bid='+${topic.bid}+'&type='+${topic.type}}"
+                                                                        style="font-weight: bold;color: black;">[[${name}]]</a></span>
+                        </div>
+                    </div>
+                </div>
+                <p class="break-word p-4">[[${topic.content}]]</p>
+                <div id="canDo" class="d-flex" style="height: 50px;margin-top: 20px;">
+                    <button  type="button" class="btn btn-link "
+                            style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;" data-target="#myModal2" data-toggle="modal"><i
+                            class="iconfont icon-pinglun" ></i>评论
+                    </button>
+
+                </div>
+                <div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:0;overflow: hidden">
+                    <textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="发布评论"
+                              v-model="myping"></textarea>
+                    <button class="btn iconfont icon-fabu btn-dark"
+                            style="font-size: 30px;;margin: 0;width: 15% ;height:100%" ></button>
+                </div>
+            </div>
+            <div class="taolun" style="margin-top: 30px;background: white;">
+                <ul>
+                    <li class="p-4" style="margin-top: 10px;margin-bottom: 10px;background: white;" th:each="item:${listTiezi}">
+                        <div class="d-flex">
+                            <div style="width: 40px;height: 40px;border-radius: 3px;overflow: hidden;">
+                                <img src="jpg/fire1.jpg" width="100%" height="100%">
+                            </div>
+                            <a th:href="@{'/user?id='+${item.uid}}" style="margin-left: 14px;font-weight: bold;color: black;">[[${item.uname}]]</a>
+                            <span style="margin-left:14px;color: gray;">编辑于[[${item.time}]]</span>
+                        </div>
+                        <pre style="margin-top: 10px;margin-left: 5px;">
+              [[${item.content}]]
+                                </pre>
+                        </pre>
+                        <div class="d-flex ">
+                            <p class="flex-grow-1" style="margin-left: 15px;">[[${item.time}]]</p>
+                            <a type="button" class="btn iconfont icon-buoumaotubiao16"
+                               style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;" th:href="@{'/zanTopic?mid='+${topic.id}+'&id='+${item.id}}">赞成([[${item.zan}]])
+                            </a>
+                            <a type="button" class="btn iconfont icon-fandui"
+                               style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;" th:href="@{'/fanduiTopic?mid='+${topic.id}+'&id='+${item.id}}">
+                                反对([[${item.fandui}]])
+                            </a>
+        
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="side-owner p-2" style="background: white;" id="own">
+                <p style="font-size: 15px;margin-left: 20px;">关于发布者</p>
+                <div class="d-flex">
+                    <div style="width: 60px; height: 60px;border-radius: 60px;overflow: hidden;">
+                        <img :src="jpg" width="100%" height="100%">
+                    </div>
+                    <a th:href="@{'/user?id='+${topic.uid}}" class="break-word" style="margin-left: 20px;font-size: 25px;margin-top: 6px;">[[${topic.uname}]]</a>
+                </div>
+                <div class="p-2 d-flex" style="margin-top:10px">
+                    <div style="width: 60px;height: 60px;">
+                        <p style="font-size: 20px;font-weight: bold;">[[${totalUserTiezi}]]</p>
+                        <p style="margin-top: -10px;">评论</p>
+                    </div>
+                    <div style="width: 60px;height: 60px;">
+                        <p style="font-size: 20px;font-weight: bold;">{{ saw }}</p>
+                        <p style="margin-top: -10px;">看过</p>
+                    </div>
+                    <div style="width: 60px;height: 60px;">
+                        <p style="font-size: 20px;font-weight: bold;">[[${totalUserMember}]]</p>
+                        <p style="margin-top: -10px;">小组</p>
+                    </div>
+                </div>
+            </div>
+            <div class="info" style="position: relative;width: 100%;height: 500px;margin-top: 30px;">
+                <a href="#">
+                    <img src="jpg/title.png" width="100%" height="100%">
+                </a>
+                <div class="p-2"
+                     style="position: absolute;right: 20px;bottom: 20px;width: 50%;color:white;font-weight: lighter;;background:rgba(0, 0, 0, 0.2)">
+                    <p class="break-word" style="opacity:1;font-size: 13px;">
+                        从前有座山，山上有座庙，庙里有个小和尚，小和尚说从前有座山，山上有座庙，庙里有个小和尚，小和尚说从前有座山，山上有座庙，庙里有个小和尚，小和尚说</p>
+                </div>
+            </div>
+            <!--<div class="hot-group" style="margin-top: 30px;background: white;border-radius: 20px;" id="hot-group1">-->
+                <!--<div class="big-border"></div>-->
+                <!--<h4 class="p-4" style="font-size: 20px; ">相关话题</h4>-->
+                <!--<ul style="padding:0 20px;font-size: 15px">-->
+                    <!--<li v-for="item in arr" :title="item" style="margin-top: 10px;">-->
+                        <!--<a :href="item.href" style="color: darkslateblue;">{{ item.name }}</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var own = new Vue({
+        el: "#own",
+        data: {
+            href: "https://baidu.com",
+            jpg: "jpg/fire2.jpg",
+            name: "西瓜啊",
+            pinglun: 20,
+            saw: 30,
+            group: 40
+        }
+    });
+    var hot_group1 = new Vue({
+        el: "#hot-group1",
+        data: {
+            arr: [{href: "https://baidu.com", name: "请问有人会做周黑鸭的卤味吗? "}, {
+                href: "https://baidu.com",
+                name: "请问有人会做周黑鸭的卤味吗? "
+            }, {href: "https://baidu.com", name: "请问有人会做周黑鸭的卤味吗? "}, {
+                href: "https://baidu.com",
+                name: "请问有人会做周黑鸭的卤味吗? "
+            }, {href: "https://baidu.com", name: "小情书"}]
+        }
+    });
+    $("#submit_tiezi").click(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "/addTopicComm",
+            data: {
+                "content": $("#content").val(),
+                "tid": $("#tid").val()
+            },
+            success: function (result) {
+                // 只有请求成功（状态码为200）才会执行这个函数
+                //$("#ret").text(result);
+                alert(result);
+                //刷新页面
+                window.location.reload();
+
+            },
+            error: function (result) {
+                // 只有请求不正常（状态码不为200）才会执行
+                //$("#ret").text(result.responseText);
+                alert("失败" + result.responseText);
+
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

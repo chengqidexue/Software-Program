@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row" style="background-color: #030e11;" th:fragment="header">
+    <div class="col_md_12">
+        <div id="menu">
+            <li><a href="/index">花瓣</a></li>
+            <li><a href="/books">书籍</a></li>
+            <li><a href="/movies">影视</a></li>
+            <li><a href="/topic">话题广场</a>
+                <div id="dropdown3" class="dropdown_1">
+                    <div class="col_1">
+                        <ul class="simple">
+                            <li><a href="/addTopic">创建话题</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li id="drop1"><a href="/groups">小组</a>
+                <div id="dropdown1" class="dropdown_1">
+                    <div class="col_1">
+                        <ul class="simple">
+                            <li><a href="/addGroup">创建小组</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="/notice">消息通知</a></li>
+            <li id="drop2">
+                <a href="/user">账号</a>
+                <div id="dropdown2" class="dropdown_1">
+                    <div class="col_1">
+                        <ul class="simple">
+                            <!--<li><a href="#">个人主页</a></li>-->
+                            <!--<li><a href="#">我的小组</a></li>-->
+                            <!--<li><a href="#">我参与的话题</a></li>-->
+                            <li><a href="/quit">退出账号</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="/feedback">联系我们</a></li>
+        </div>
+    </div>
+</div>
+<div class="row" style="background: cornflowerblue" th:fragment="search">
+    <div class="col-md-4 offset-md-6">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" style="margin: 10px" id="searchText">
+            <div class="input-group-append" style="background-color:transparent;border:0; margin: 10px">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success droupdown-toggle" data-toggle="dropdown" id="searchBtn">搜索内容</button>
+                    <div class="dropdown-menu">
+                        <!--<a class="dropdown-item" href="#">全部</a>-->
+                        <a class="dropdown-item" id="search1">书籍</a>
+                        <a class="dropdown-item" id="search2">影视</a>
+                        <a class="dropdown-item" id="search3">话题</a>
+                        <a class="dropdown-item" id="search4">小组</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

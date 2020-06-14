@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>花瓣--联系我们</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/daohang.css">
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="./js/Move.js"></script>
+</head>
+
+<body>
+<div class="container_fluid" >
+	<!--引入顶栏 -->
+	<div th:replace="~{common/bar::header}"></div>
+
+        <!--<div class="row">-->
+            <!--<div class="col-md-12" style="width: 100%;" id="tishi">-->
+                <!--<div class="alert alert-primary fade show" v-if="hasshow">-->
+                    <!--<button type="button" class="close" @click="close">&times;</button>-->
+                    <!--<strong>{{ hh }}</strong> -->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    	<div class="row">
+        	<div class="col-md-6 offset-md-5" style="top: 100px;">
+        		<h2>联系我们</h2>
+            </div>
+            <div class="col-md-6 offset-md-4">
+        		<b>您的宝贵意见就是我们进步的动力！</b>
+            </div>
+            <div class="col-md-6 offset-md-4">
+        		<div>您可以使用下面的表格发送信息给我们。</div>
+            </div>
+            <div class="col-md-6 offset-md-3" id="feedback">
+            	<form>
+					<div style="border: cornflowerblue 20px;margin: 5px;position: relative;left: 0;top: 0;width:100%;height:200px;background: #e6f8e9;">
+						<div style="position: absolute;width:100%;height: 70%">
+							<textarea rows="3" cols="40%" maxlength="100" placeholder="您的宝贵意见" wrap="soft" id="content"
+                        		style="margin: 0;width: 100% ;height:100%;position: relative;float: left;word-wrap:break-word" v-model="content"></textarea>
+						</div>
+						<div class="button-select" style="position: absolute;width: 100%;height:30%;top:75%;padding-left: 5px;padding-right:5px ">
+							<button id="btn" type="button" class="btn btn-primary" style="float: right">提交</button>
+						</div>
+					</div>
+                </form>
+			</div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+		$("#btn").click(function () {
+			$.ajax({
+				type: "POST",
+				dataType: "text",
+				url: "/addFeedback",
+				data: {
+					"content": $("#content").val()
+				},
+				success: function (result) {
+					// 只有请求成功（状态码为200）才会执行这个函数
+					//$("#ret").text(result);
+					alert(result);
+					//刷新页面
+					//window.location.reload();
+
+				},
+				error: function (result) {
+					// 只有请求不正常（状态码不为200）才会执行
+					//$("#ret").text(result.responseText);
+					alert("提交失败" + result.responseText);
+
+				}
+			});
+		});
+    </script>
+</body>
+</html>

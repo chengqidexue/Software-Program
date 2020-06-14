@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>花瓣--添加小组</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .hot-group{
+            border-radius: 7px;
+            overflow: hidden;
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+			position: relative;
+			z-index: 0;
+        }
+        .hot-group:hover{
+            width: 103%;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+        }
+        .hot-group-item{position: relative;width: 100%;height: 90px}
+        .hot-group .pic{position:absolute;width: 30%;height: 100%;left: 0;top: 0}
+        .hot-group .pic img{
+            width: 70%;height: 70%;
+        }
+        .hot-group .info{position:absolute;width:70%;height: 100%;left: 30%;top: 10px}
+        .hot-group .info > a{position: absolute;left: 0;width:100%;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+        .myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
+        .big-border{width: 100%;height:1px;background: cornflowerblue}
+        .switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }
+
+   </style>
+</head>
+<body>
+
+<div class="container_fluid" >
+	<!--引入顶栏 -->
+	<div th:replace="~{common/bar::header}"></div>
+	<div class="col-sm-9">
+	<form action="/addGroup" method="post">
+		<div class="form-group">
+			<label for="name">小组名称</label>
+			<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+			<small id="emailHelp" class="form-text text-muted">请输入小组名称</small>
+		</div>
+		<div class="form-group">
+			<label for="des">描述</label>
+			<input type="text" class="form-control" id="des" name="des">
+		</div>
+		<button type="submit" class="btn btn-primary">确认添加</button>
+	</form>
+		<div class="alert alert-danger" role="alert" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></div>
+	</div>
+
+
+</div>
+
+</body>
+</html>

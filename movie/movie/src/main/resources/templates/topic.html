@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>花瓣--话题广场</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+</head>
+<body>
+<div class="container_fluid">
+    <!--引入顶栏 -->
+    <div th:replace="~{common/bar::header}"></div>
+    <div th:replace="~{common/bar::search}"></div>
+    <div class="row" style="padding: 30px;;background: #f0f0f0;">
+        <div class="col-md-10 offset-md-1" style="background: white;padding-top: 20px;">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/topic">全部话题</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/topic?type=1">书籍</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/topic?type=2">影视</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class=" col-md-10 offset-md-1" style="background: white;">
+            <ul>
+                <li class="p-2"
+                    style="display: inline-block;border: 1px black;width: 49%;border-bottom: 1px #f0f0f0 solid;"
+                    th:each="item:${topicList}">
+                    <div class="d-flex" style="height: 100px;">
+                        <img src="jpg/book2.jpg" width="80px" height="100%">
+                        <div class="d-flex flex-column p-2">
+                            <div>
+                                <a th:href="@{'/itemTopic?id='+${item.id}}" class="break-word"
+                                   style="padding: 2px 5px;;display: inline;background: #99cfff;color: white;font-weight: bolder;line-height: 16px;font-size: 12px">[[${item.title}]]</a>
+                            </div>
+                            <p style="color:#2a6496;font-size: 12px;line-height: 15px;margin-top: 20px;">[[${item.readCount}]]次阅读</p>
+                            <p style="color:#2a6496;font-size: 12px;line-height: 15px;">[[${item.ccount}]]个讨论 30天新增[[${item.ccount}]]个讨论</p>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <form action="search" hidden="hidden" id="formSearch">
+        <input name="search" id="search">
+        <input name="type" id="type">
+    </form>
+</div>
+<script>
+    $("#searchBtn").click(function () {
+        $("#search").val($("#searchText").val());
+        $("#type").val(3);
+        $("#formSearch").submit();
+    });
+</script>
+</body>
+</html>

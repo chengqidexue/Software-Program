@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>花瓣--帖子</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+    <script>
+        window.onload=function()
+		{
+            var osearchtype=document.getElementById("searchtype");
+			var osearchtheitem=document.getElementById("searchtheitem");
+			var timerdropitem;
+			osearchtheitem.onmouseover=osearchtype.onmouseover=function()
+			{
+				osearchtheitem.style.display="block";
+				closeTimeout(timerdropitem);
+			}
+            osearchtheitem.onmouseout=osearchtype.onmouseout=function()
+			{
+                closeTimeout(timerdropitem);
+                timerdropitem=setTimeout
+				(
+					function()
+					{
+                    	osearchtheitem.style.display="none";
+                	}
+					,500
+				);
+            }
+			osearchtheitem.onclick=osearchtype.onclick=function()
+			{
+                if(osearchtheitem.style.display=="block")
+                { 
+					osearchtheitem.style.display="none";
+				} 
+                else
+				{
+					osearchtheitem.style.display="none";
+				} 
+            }
+        }
+    </script>
+    <style>
+        #canDo
+		{
+            background: rgba(105, 113, 216, 0.05);
+        }
+        #canDo button:hover
+		{
+            background: rgba(105, 113, 216, 0.1);
+        }
+    </style>
+</head>
+<body>
+<!--引入顶栏 -->
+<div th:replace="~{common/bar::header}"></div>
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-md-6 offset-md-1">
+                <div class="article" style="width:100%" id="article" >
+					<h1 style="font-size: 29px;font-weight: bold;word-wrap: break-word">{{ title }}</h1>
+                        <div class="topic-doc" style="width: 100%;">
+                            <div class="d-flex flex-row-reverse ">
+                                <span class="submit-time p-2" style="font-size: 16px;">{{ date }}</span>
+                            </div>
+							<div id="topic-content"style="margin:20px">								
+                                <p style="word-wrap: break-word">{{ content }}</p>
+							</div>
+						</div>
+					<div id="canDo" class="d-flex" style="height: 50px;margin-top: 20px;">
+                        <button id="ping" @click="ping" type="button" class="btn btn-link " style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-pinglun" ></i>评论({{ pinglun }})</button>
+                        <button type="button" @click="dianzan" class="btn btn-link" style="font-size: 20px;padding-left: 10px;padding-right: 10px;color: black;"><i class="iconfont icon-buoumaotubiao16" ></i>点赞({{ like }})</button>
+                    </div>
+                    <div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:0;overflow: hidden">
+                        <textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="发布评论" v-model="myping"></textarea>
+                        <button class="btn iconfont icon-fabu btn-dark" style="font-size: 30px;;margin: 0;width: 15% ;height:100%;" @click="submitping"></button>   
+                    </div>
+                </div>
+                <div class="topic-reply p-3" id="pinglun">
+                    <h4>评论</h4>
+                    <ul>
+                        <li v-for="(item,index) in arr">
+                            <div class="d-flex" style="width: 100%">
+                                <div class="p-2" style="width:130px;">
+                                    <img :src="item.jpg" width="50px" height="50px" style="margin-left: 30px;">
+                                    <p class="text-center" style="margin-bottom: -2px;word-wrap: break-word"><a :href="item.href" style="color: #030e11;">{{ item.name }}</a></p>
+                                </div>
+                                <div style="width: 1px;height: 80px;;background: slategray;">
+                                </div>
+                                <div class="p-2" style="margin-left: 2%;width: 75%;">
+                                    <p style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">{{ item.pinglun }}</p>
+                                    <div class="d-flex ">
+                                        <p class="flex-grow-1" style="margin-left: 15px;">{{ item.time }}</p>
+                                        <button type="button" class="btn iconfont icon-buoumaotubiao16" @click="dianzan(item,index)" :style="{'color':(item.hasdianzan ? '#bd2c00' :'black')}">点赞({{ item.likenumber }})</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 offset-md-1">
+                <div class="side-owner p-2" style="background: snow;" id="own">
+                        <div class="d-flex">
+                            <div style="width: 60px; height: 60px;border-radius: 60px;overflow: hidden;">
+                            <img :src="jpg" width="100%" height="100%">
+                        </div>
+                        <a :href="href" class="break-word" style="margin-left: 20px;font-size: 25px;margin-top: 6px;">{{ name }}</a>
+                        </div>
+                        <div class="p-2 d-flex" style="margin-top:10px">
+                        <div style="width: 60px;height: 60px;">
+                        <p class="text-center" style="font-size: 20px;">{{ pinglun }}</p>
+                        <p style="margin-top: -10px;">评论</p>
+                        </div>
+                        <div style="width: 60px;height: 60px;">
+                            <p style="font-size: 20px;">{{ saw }}</p>
+                            <p style="margin-top: -10px;">看过</p>
+                        </div>
+                        <div style="width: 60px;height: 60px;">
+                            <p style="font-size: 20px;">{{ group }}</p>
+                            <p style="margin-top: -10px;">小组</p>
+                        </div>
+                        </div> 
+                </div>
+                <div class="side-group-join p-2" style="background: snow;margin-top: 30px;" id="group">
+                    <div class="bd d-flex">
+                        <div style="width: 100px;height: 100px;border-radius: 10px;overflow: hidden;position: relative;">
+                            <img :src="jpg" width="80px" height="80px" class="allcenter">
+                        </div>
+                        <a :href="href" class="break-word p-2 lead font-weight-bold" style="color: black;">{{ name }}</a>
+                    </div>
+                    <div class="ft d-flex flex-row-reverse"  style="margin-right: 20px;position: relative;">
+                        <button type="button" class="btn btn-dark" @click="join">加入小组</button>
+                        <span class="p-2">已有{{ number }}人加入小组</span>
+                    </div>
+                </div>
+                <div class="may-like" style="margin-top: 50px;" id="may_like">
+                    <h4>猜你想看</h4>
+                    <ul>
+                        <li class="p-2" style="border-bottom: royalblue;" v-for="item in arr">
+                            <a :href="item.tohref">{{ item.toname }}</a>&nbsp;&nbsp;来自<a :href="item.ownhref" class="break-word" style="color: black;">&nbsp;&nbsp;{{ item.ownname }}</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="more-topic" style="margin-top: 50px;" id="more">
+                    <a :href="href" style="position: absolute;right: 10%;">更多评论</a>
+                    <h4>更多讨论</h4>
+                    <ul>
+                        <li class="p-2" style="border-bottom: royalblue;" v-for="item in arr">
+                            <a :href="item.tohref">{{ item.toname }}</a>&nbsp;&nbsp;来自<a :href="item.ownhref" class="break-word" style="color: black;">&nbsp;&nbsp;{{ item.ownname }}</a>
+                            <div style="width: 100%;height:0.5px;background: cornflowerblue;opacity: 0.4;"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    	var pinglun=new Vue
+		({
+            el:"#pinglun",
+            data:
+			{
+                arr:[{jpg:"jpg/fire2.jpg",name:"鸡蛋啊",pinglun:"hhh",time:"2020/01/03 22:20",likenumber:20,hasdianzan:true,href:"https://baidu.com"}]
+            },
+            methods:
+			{
+                dianzan:function(item,index)
+				{
+	                if(!item.hasdianzan)
+					{
+	                    axios.post
+						(
+							"check.html",
+	        				{
+	            				title:"title"
+	        				}
+						)   
+	        			.then
+						(
+							function(response)
+							{
+	            				item.hasdianzan=!item.hasdianzan;
+	            				item.likenumber+=1;
+	        				}
+							,function(error){}
+						);
+	        		}
+	        		else
+					{          
+	             		axios.post
+						(
+							"check.html",
+	        				{
+	            				title:"title"
+	        				}
+						)   
+	        			.then
+						(
+							function(response)
+							{
+	            				item.hasdianzan=!item.hasdianzan;
+	            				item.likenumber-=1;
+	        				}
+							,function(error){}
+						);
+	        		}
+				}
+	        }
+	    });
+	    var article=new Vue
+		({
+	        el:"#article",
+	        data:
+			{
+	            title:"自由 流量",
+	            content:"qick to mu自驾群召集小伙伴中，也来几个会烧烤的小伙伴呀哈哈哈群里大多人只会吃了。自驾群召集小伙伴中，也来几个会烧烤的小伙伴呀哈哈哈群里大多人只会吃了。自驾群召集小伙伴中，也来几个会烧烤的小伙伴呀哈哈哈群里大多人只会吃了。自驾群召集小伙伴中，也来几个会烧烤的小伙伴呀哈哈哈群里大多人只会吃了。",
+	            pinglun:20,
+	            like:30,
+	            date:"2020/04/03 12:00",
+	            myping:""
+	        },
+	        methods:
+			{
+	            ping:function()
+				{
+	                this.myping="";
+	            	var opinglun=document.getElementById("inputPingLun");
+	                if(opinglun.offsetHeight==0)
+	                { 
+	                     Mouse(opinglun,140,'height');
+	                } 
+	                else
+					{
+						Mouse(opinglun,0,'height');
+					} 
+	            },
+	            submitping:function()
+				{
+	                var that=this;
+	                axios.post
+					(
+						"https://baidu.com",
+	        			{
+	            			pinglun:that.myping
+	        			}
+					)
+	        		.then
+					(
+						function(response)
+						{
+	            			that.pinglun+=1;
+	            			var hh={jpg:"jpg/fire2.jpg",name:"鸡蛋啊",pinglun:that.myping,time:new Date().toLocaleString(),like:0,dislike:0};
+	            			that.myping="";
+	            			pinglun.arr.push(hh);
+	        			}
+						,function(error)
+						{
+	            			console.log(err);
+	        			}
+					)
+	            },
+	            dianzan:function()
+				{
+	                var that=this;
+	                axios.post
+					(
+						"https://baidu.com",{}
+					)
+	        		.then
+					(
+						function(response)
+						{
+	            			that.like+=1;
+	        			}
+						,function(error)
+						{
+	            			console.log(err);
+	        			}
+					)
+	            }
+	        }
+	    });
+	    var own=new Vue
+		({
+	        el:"#own",
+	        data:
+			{
+	            href:"https://baidu.com",
+	            jpg:"jpg/fire2.jpg",
+	            name:"西瓜啊",
+	            pinglun:20,
+	            saw:30,
+	            group:40
+	        }
+	    });
+	    var group=new Vue
+		({
+	        el:"#group",
+	        data:
+			{
+	            jpg:"jpg/fire2.jpg",
+	            href:"https://baidu.com",
+	            name:"花好人间花好人间",
+	            number:12
+	        },
+	        methods:
+			{
+	            join:function()
+				{
+	                axios.post
+					(
+						"https://baidu.com",{}
+					)
+	        		.then
+					(
+						function(response){},
+						function(error)
+						{
+	            			console.log(err);
+	        			}
+					)
+	            }
+	        }
+	    });
+	    var may_like=new Vue
+		({
+	        el:"#may_like",
+	        data:
+			{
+	            arr:[{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"}]
+	        }
+	    });
+	    var more=new Vue
+		({
+	        el:"#more",
+	        data:
+			{
+	            href:"https://baidu.com",
+	            arr:[{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"},{toname:"媒体团队",tohref:"https://baidu.com",ownname:"泫然一波",ownhref:"https://baidu.com"}]
+	        }
+	    })
+    </script>
+</body>
+</html>

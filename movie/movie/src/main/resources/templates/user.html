@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>花瓣--个人主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="iconfont/iconfont.js"></script>
+    <script>
+        window.onload = function () {
+            var oUidaohang = document.getElementById('daohang');
+            var oLisdaohang = oUidaohang.getElementsByTagName('li');
+            var oUidaohangcontent = document.getElementById('daohangcontent');
+            var oLisdaohangcontent = oUidaohangcontent.getElementsByTagName('li');
+            for (var j = 0; j < oLisdaohang.length; j++) {
+                oLisdaohangcontent[j].style.display = 'none';
+            }
+            oLisdaohangcontent[0].style.display = 'block';
+            for (var i = 0; i < oLisdaohang.length; i++) {
+                oLisdaohang[i].index = i;
+                oLisdaohang[i].onclick = function () {
+                    for (var j = 0; j < oLisdaohang.length; j++) {
+                        oLisdaohangcontent[j].style.display = 'none';
+                    }
+                    oLisdaohangcontent[this.index].style.display = 'block';
+                }
+            }
+        }
+    </script>
+    <style>
+        .taolun ul li div a {
+            text-decoration: none;
+            color: #030e11
+        }
+
+        .taolun ul li div .tooupper::before {
+            content: '\e725 ';
+            font-family: 'iconfont';
+        }
+
+        .taolun ul li div .tooupper {
+            color: #CC5C5D
+        }
+
+        .taolun ul li div a:visited {
+            color: steelblue;
+        }
+
+        .taolun ul li div a:hover {
+            color: #CC5C5D;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container_fluid">
+    <!--引入顶栏 -->
+    <div th:replace="~{common/bar::header}"></div>
+    <div style="background:linear-gradient(#68aadc,snow 200px,white 500px);position: absolute;z-index:-1;height: 500px;width: 100%;"></div>
+    <div class="row" style="margin-top: 70px;">
+        <div class="col-md-8 offset-md-2">
+            <div id="info" class="d-flex mb-3"
+                 style="background:url(jpg/backgroundgeren.jpg) no-repeat 0 0;background-size:100% 100%;;width: 100%;height: 200px;">
+                <div class="p-2" style="width: 25% ;height:80%;">
+                    <div style="position:relative;left:20%;top:30px;width: 100px;height:100px;border-radius:100px;-webkit-border-radius:100px; -moz-border-radius:100px;overflow: hidden">
+                        <img :src="jpg" alt="头像"
+                             style="width:100px;height: 100px; display: block; ; border-radius:100px;">
+                    </div>
+                </div>
+                <div class="p-2 flex-grow-1" style="margin-top:30px ">
+                    <input id="id" th:value="${uid}" hidden="hidden">
+                    <h4 class="lead">[[${name}]]</h4>
+                    <p>已发布过[[${commentsCount}]]条评论</p>
+                    <p>已点过10个在看</p>
+                    <p>已参加过[[${totalMember}]]个小组</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2" id="pinglun">
+            <p class="font-weight-bold ">留言墙</p>
+            <div id="inputPingLun" class="d-flex" style="position: relative;width:100%;height:140px;overflow: hidden">
+                <textarea class="flex-grow-1" cols="40%" maxlength="300" style="height:100%" placeholder="写留言..."
+                          v-model="topeople" id="content"></textarea>
+                <button class="btn iconfont icon-fabu btn-dark"
+                        style="font-size: 30px;;margin: 0;width:80px ;height:100%;margin-right: 30px;"
+                        @click="submitliu"></button>
+            </div>
+            <ul style="margin-top:50px">
+                <li th:each="item:${notesList}">
+                    <div class="d-flex" style="width: 100%">
+                        <div class="p-2" style="width:90px;">
+                            <img src="/jpg/book2.jpg" width="70px" height="70px">
+                            <p class="text-center" style="margin-bottom: -2px;"><a th:href="@{'/user?id='+${item.uid}}"
+                                                                                   style="color: black;">[[${item.uname}]]</a></p>
+                        </div>
+                        <div style="margin-left: 3px;width: 0.5px;height: 80px;;background: slategray;">
+                        </div>
+                        <div class="p-2" style="margin-left: 2%;width: 75%;">
+                            <p class="p-2"
+                               style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;">
+                                [[${item.content}]]</p>
+                            <p style="margin-left: 15px;">[[${item.datetime}]]</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var info = new Vue({
+        el: "#info",
+        data: {
+            jpg: "jpg/book2.jpg",
+            name: "西瓜啊",
+            pinglun: 12,
+            saw: 1,
+            group: 4
+        }
+    });
+    var pinglun = new Vue({
+        el: "#pinglun",
+        data: {
+            topeople: "",
+            arr: [{jpg: "jpg/book2.jpg", name: "是西瓜", content: "hh", date: "2020/05/05", href: "https://baidu.com"}]
+        },
+        methods: {
+            submitliu: function () {
+                var that = this;
+                axios({
+                    method: 'post',
+                    url: "addNotes",
+                    data: {
+                        content: document.getElementById("content").value,
+                        buid: document.getElementById("id").value
+                    },
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj) {
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        }
+                        return str.join("&");
+                    }
+                }).then(function (response) {
+                    //alert(response.data);
+                    window.location.reload();
+                }, function (error) {
+                    alert(error.data);
+                    window.location.reload();
+                })
+            },
+        }
+    });
+</script>
+
+<script>
+    $("#quit").click(function () {
+        alert("确认退出嘛？")
+    });
+</script>
+</body>
+</html>

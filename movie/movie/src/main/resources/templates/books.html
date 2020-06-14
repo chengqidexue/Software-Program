@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>花瓣--书籍广场</title>
+
+    <link href="./bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="./css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/white.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="./js/Move.js"></script>
+    <script src="iconfont/iconfont.js"></script>
+    <!--<script type="text/javascript">-->
+    <!--var cms = {-->
+    <!--root: "/",-->
+    <!--murl: "",-->
+    <!--public: "/public/tpl/",-->
+    <!--sid: "1",-->
+    <!--cid: "1",-->
+    <!--id: ""-->
+    <!--};-->
+    <!--</script>-->
+    <!--<script>-->
+    <!--var now;-->
+    <!--var oLis;-->
+    <!--var timerchange;-->
+    <!--var timer;-->
+    <!--var oTiaomu;-->
+    <!--var oLiTiaoMu;-->
+    <!--window.onload = function () {-->
+    <!--var ophoplace = document.getElementById('phospace');-->
+    <!--var oUl = document.getElementById('redian');-->
+    <!--oTiaomu = document.getElementById('tiaomu');-->
+    <!--oLiTiaoMu = getByClass(oTiaomu, 'tags');-->
+    <!--oLis = oUl.getElementsByTagName('img');-->
+    <!--now = 0;-->
+    <!--oLis[now].style.opacity = 1;-->
+    <!--oLis[now].style.filter = 'alpha(opacity:100)';-->
+    <!--changeStyle();-->
+    <!--timerchange = setInterval(function () {-->
+    <!--changeOpacity();-->
+    <!--}, 2000);-->
+    <!--for (var i = 0; i < oLiTiaoMu.length; i++) {-->
+    <!--oLis[i].onmouseover = function () {-->
+    <!--clearInterval(timerchange);-->
+    <!--};-->
+    <!--oLis[i].onmouseout = function () {-->
+    <!--timerchange = setInterval(function () {-->
+    <!--changeOpacity();-->
+    <!--}, 2000);-->
+    <!--};-->
+    <!--oLiTiaoMu[i].index = i;-->
+    <!--oLiTiaoMu[i].onmouseover = function () {-->
+    <!--if (now != this.index) {-->
+    <!--oLis[now].style.opacity = 0;-->
+    <!--oLis[now].style.filter = 'alpha(opacity:0)';-->
+    <!--oLis[now].timer = null;-->
+    <!--now = this.index;-->
+    <!--changeStyle();-->
+    <!--Mouse(oLis[now], 100, 'opacity');-->
+    <!--} else if (oLis[now].style.opacity == 1 || oLis[now].style.filter == 'alpha(opacity:100)') {-->
+    <!--oLis[now].timer = null;-->
+    <!--clearInterval(timerchange);-->
+    <!--timerchange = setInterval(function () {-->
+    <!--changeOpacity();-->
+    <!--}, 2000);-->
+    <!--}-->
+    <!--};-->
+    <!--}-->
+    <!--};-->
+
+    <!--function changeOpacity() {-->
+    <!--var flag = 0;-->
+    <!--if (oLis[now].style.opacity == 1 || oLis[now].style.filter == 'alpha(opacity:100)') {-->
+    <!--now++;-->
+    <!--if (now > 5) {-->
+    <!--now = 0;-->
+    <!--}-->
+    <!--oLis[now].style.opacity = 0;-->
+    <!--oLis[now].style.filter = 'alpha(opacity:0)';-->
+    <!--Mouse(oLis[now], 100, 'opacity');-->
+    <!--flag = 1;-->
+    <!--}-->
+    <!--if (flag) {-->
+    <!--changeStyle();-->
+    <!--}-->
+    <!--}-->
+
+    <!--function changeStyle() {-->
+    <!--for (var i = 0; i < oLis.length; i++) {-->
+    <!--oLis[i].style.display = 'none';-->
+    <!--oLis[now].style.display = 'block';-->
+    <!--oLiTiaoMu[i].style.background = 'rgba(0,0,0,0.1)';-->
+    <!--oLiTiaoMu[now].style.background = 'rgba(0,0,0,0.5)';-->
+
+    <!--}-->
+    <!--}-->
+    <!--</script>-->
+    <style>
+        .tags a {
+            color: white
+        }
+    </style>
+</head>
+
+<body>
+<div class="container_fluid">
+    <!--引入顶栏 -->
+    <div th:replace="~{common/bar::header}"></div>
+    <div th:replace="~{common/bar::search}"></div>
+</div>
+<!--头部结束-->
+<!--幻灯模块-->
+<div class="container">
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-12">
+            <div class="layout-box clearfix">
+                <div class="box-title">
+                    <h3 class="m-0">热门书籍</h3>
+                </div>
+                <ul class="d-flex">
+                    <li class="col-md-2 col-sm-3 col-xs-4 " th:each="item:${list}"><a class="video-pic loading"
+                                                                                      th:href="@{'/book?id='+${item.id}}"
+                                                                                      th:title="${item.name}"><span
+                            class="player"></span><span class="score">[[${item.star}]]</span><span
+                            class="note text-bg-r">HD</span></a>
+                        <img th:src="${item.img}" style="width: 130px;height: 200px;left: 0;top: 0;display:block;">
+                        <div class="title">
+                            <h5 class="text-overflow"><a th:href="@{'/book?id='+${item.id}}" th:title="${item.name}">[[${item.name}]]</a>
+                            </h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <form action="search" hidden="hidden" id="formSearch">
+        <input name="search" id="search">
+        <input name="type" id="type">
+    </form>
+</div>
+<script>
+    $("#searchBtn").click(function () {
+        $("#search").val($("#searchText").val());
+        $("#type").val(1);
+        $("#formSearch").submit();
+    });
+</script>
+</body>
+
+</html>

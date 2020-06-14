@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>花瓣--添加话题</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .hot-group {
+            border-radius: 7px;
+            overflow: hidden;
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            z-index: 0;
+        }
+
+        .hot-group:hover {
+            width: 103%;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hot-group-item {
+            position: relative;
+            width: 100%;
+            height: 90px
+        }
+
+        .hot-group .pic {
+            position: absolute;
+            width: 30%;
+            height: 100%;
+            left: 0;
+            top: 0
+        }
+
+        .hot-group .pic img {
+            width: 70%;
+            height: 70%;
+        }
+
+        .hot-group .info {
+            position: absolute;
+            width: 70%;
+            height: 100%;
+            left: 30%;
+            top: 10px
+        }
+
+        .hot-group .info > a {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .myborder {
+            width: 100%;
+            height: 1px;
+            background: #b3d4fc;
+            overflow: hidden
+        }
+
+        .big-border {
+            width: 100%;
+            height: 1px;
+            background: cornflowerblue
+        }
+
+        .switch-item {
+            width: 30px;
+            height: 30px;
+            background: lightsteelblue;
+            border-radius: 3px;
+            overflow: hidden;
+            opacity: 0.4;
+            filter: alpha(40);
+            margin: 5px
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container_fluid">
+    <!--引入顶栏 -->
+    <div th:replace="~{common/bar::header}"></div>
+    <div class="col-sm-9">
+        <div>
+            <div class="form-group">
+                <label for="title">话题名称</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="content">正文</label>
+                <textarea class="form-control" rows="3" id="content" name="content"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">相关的书籍或影视的名字（选填，且必须是花瓣有的数据哦~）
+                </label>
+                <input type="text" class="form-control" id="name" name="name" onchange="getMBList(this)">
+            </div>
+            <input id="bid" name="bid" hidden="hidden" value="-1">
+            <input id="type" name="type" value="3" hidden="hidden">
+            <button id="sbt" class="btn btn-primary">确认添加</button>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    function getMBList(data) {
+        // alert(data.value);
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "/searchMB",
+            data: {
+                "search": data.value
+            },
+            success: function (result) {
+                // 只有请求成功（状态码为200）才会执行这个函数
+                //$("#ret").text(result);
+                var data = JSON.parse(result);
+                c = 0;
+                for (var i in data) {
+                    c++;
+                    $("#bid").attr("value", data[i].id);
+                    $("#type").attr("value", data[i].type);
+                    break;
+                }
+                if (c == 0) {
+                    alert("查询不到书籍或影视信息");
+                }
+
+
+            },
+            error: function (result) {
+                // 只有请求不正常（状态码不为200）才会执行
+                //$("#ret").text(result.responseText);
+                alert("获取数据失败" + result.responseText);
+
+            }
+        });
+    }
+
+    $("#sbt").click(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "/addTopic",
+            data: {
+                "title": $("#title").val(),
+                "content": $("#content").val(),
+                "bid": $("#bid").val(),
+                "type": $("#type").val()
+            },
+            success: function (result) {
+                // 只有请求成功（状态码为200）才会执行这个函数
+                //$("#ret").text(result);
+                alert(result);
+                //刷新页面
+                window.location.reload();
+
+            },
+            error: function (result) {
+                // 只有请求不正常（状态码不为200）才会执行
+                //$("#ret").text(result.responseText);
+                alert("失败" + result.responseText);
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

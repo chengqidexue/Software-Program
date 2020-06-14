@@ -1,0 +1,16 @@
+server.:
+  port: 8090
+spring:
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    suffix: .html
+    prefix: classpath:/templates/
+    mode: HTML
+    servlet:
+      content-type: text/html
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/movie?serverTimezone=Asia/Shanghai
+    username: root
+    password: yhb13579@
+    driver-class-name: com.mysql.cj.jdbc.Driver

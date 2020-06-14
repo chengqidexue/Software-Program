@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>花瓣--电影</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Move.js"></script>
+    <script src="iconfont/iconfont.js"></script>
+</head>
+<body>
+<div class="alert alert-primary" id="jubaotongzhi"
+     style="display: none;position: fixed;top: 0;z-index: 100000;width: 100%;height: 60px;font-size: 20px;">
+    举报成功，我们将会认真审核您的举报
+</div>
+<div class="modal fade" style="position: fixed;top: 30%;width: 630px;left: 30%;" id="jubao">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">举报违规评论</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <div class="d-flex">
+                    <label for="title">举报标题</label>
+                    <div class="flex-grow-1">
+                        <input id="title" type="text" v-model="title"
+                               style="margin-left: 10px;border: none;width: 90%;">
+                        <div style="background: cornflowerblue;height: 1px;margin-right: 30px;margin-left: 10px;"></div>
+                    </div>
+                </div>
+                <p>详细描述：</p>
+                <textarea maxlength="100" style="width: 93%;" v-model="content"></textarea>
+                <button type="button" class="btn btn-success" @click="submit" data-dismiss="modal"
+                        style="margin-left: 80%;margin-top: 10px;">提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container_fluid">
+    <!--引入顶栏 -->
+    <div th:replace="~{common/bar::header}"></div>
+    <!--<div th:replace="~{common/bar::search}"></div>-->
+
+    <div style="background: #066591;width: 100%;height: 228px;position: absolute"></div>
+    <div class="row" style="margin-top: 40px">
+        <div class="col-md-8 offset-md-2">
+            <div style="padding:5%;height: 550px;;width: 100%;background:linear-gradient(rgb(241, 248, 239),white);position: relative"
+                 id="info">
+                <div style="background: white;position:absolute;width: 30%;height: 80%;padding: 1%;border-radius: 20px;border:black 2px;overflow: hidden;box-shadow:0 0 20px rgba(0,0,0,0.5);">
+                    <img th:src="${movie.img}" style="width: 100%;height: 100%;border-radius: 20px;overflow: hidden">
+                    <input hidden="hidden" id="id" th:value="${movie.id}">
+                </div>
+                <div style="position: absolute;left: 40%;height: 100%;overflow: hidden">
+                    <h1 class="p-2">[[${movie.name}]]</h1>
+                    <p class="p-2" style="background: black;color: white;font-size:19px;">[[${movie.len}]]分钟 -
+                        [[${movie.type}]] - [[${movie.time}]][[${movie.place}]]上映</p>
+                    <div class="d-flex flex-fill" style="background:#066591 ;position: relative;">
+                        <span class="p-2 " style="color: white;font-size: 17px;">[[${movie.numstars}]]位演员</span>
+                        <span class="p-2 " style="color: white;font-size: 17px;">[[${totalComm}]]条影评</span>
+                        <span class="p-2 " style="color: white;font-size: 17px;">[[${movie.want}]]热度</span>
+                        <div style="background: #030e11;width:80px;height: 80px;position: absolute;;right: 0;top: -15px;">
+                            <p class="text-center font-weight-bold" style="font-size: 40px;color: white;">
+                                [[${movie.star}]]<span class="small"></span></p>
+                            <p class="text-center font-weight-light"
+                               style="font-size: 15px;margin-top: -20px;color: white;">总分10分</p>
+                        </div>
+                    </div>
+                    <div style="position: relative;width:100%;height: 80px;margin-top:10px">
+                        <ul style="margin-bottom: -6px;" id="stars">
+                            <li v-for="(item,index) in arr" style="display: inline-block;">
+                                <button type="button" class="btn iconfont icon-shixinwujiaoxing p-2"
+                                        style="font-size:30px;" @click="dianzan(index)"></button>
+                            </li>
+                            <button type="button" class="btn btn-dark" @click="wantsee">想看</button>
+                        </ul>
+                        <textarea cols="40%" maxlength="100"
+                                  style="margin: 0;width: 80% ;height:100%;position: relative;float: left;"
+                                  v-model="content" placeholder="发布短评"></textarea>
+                        <button type="button" class="btn" @click="submit"
+                                style="margin: 0;width: 10% ;height:100%; background: white;position: relative;float: left">
+                            <i class="iconfont icon-fabu allcenter" style="font-size: 30px;"></i></button>
+                    </div>
+                    <div style="margin-top: 65px;width: 100%;height: 70px;">
+                        <div style="position: absolute;;width: 30%;height:100%">
+                            <p class=" text-center" style="font-size: 17px;">[[${totalComm}]]份评分 </p>
+                            <p class=" text-center" style="font-size: 17px;">[[${movie.want}]]人想看 </p>
+                        </div>
+                        <div style="position: relative;width:50%;left: 40%;top: -10px;">
+                            <div>
+                                <div class="d-flex align-items-center" style="position: relative;"><span>一星</span>
+                                    <div style="margin-left: 10px;background:cornflowerblue;width: 100px;height:2px ;"></div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center" style="position: relative;"><span>二星</span>
+                                        <div style="margin-left: 10px;background:cornflowerblue;width: 100px;height:2px ;"></div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex align-items-center" style="position: relative;">
+                                            <span>三星</span>
+                                            <div style="margin-left: 10px;background:cornflowerblue;width: 100px;height:2px ;"></div>
+                                        </div>
+                                        <div>
+                                            <div class="d-flex align-items-center" style="position: relative;">
+                                                <span>四星</span>
+                                                <div style="margin-left: 10px;background:cornflowerblue;width: 100px;height:2px ;"></div>
+                                            </div>
+                                            <div>
+                                                <div class="d-flex align-items-center" style="position: relative;">
+                                                    <span>五星</span>
+                                                    <div style="margin-left: 10px;background:cornflowerblue;width: 100px;height:2px ;"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2" style="height: 300px;position: relative" id="moreInfo">
+            <div style="position: absolute;width: 60%;height: auto;">
+                <div class="d-flex-inline">
+                    <span class="p-2 font-weight-bold">导演:</span>
+                    <span class="p-2" style="margin-left: 10px;">[[${movie.dir}]]</span>
+                    <div class="d-flex-inline">
+                        <span class="p-2 font-weight-bold">编剧:</span>
+                        <span class="p-2" style="margin-left: 10px;">[[${movie.make}]]</span>
+                    </div>
+                    <div class="d-flex-inline">
+                        <span class="p-2 font-weight-bold">国家地区:</span>
+                        <span class="p-2" style="margin-left: 10px;">[[${movie.nation}]]</span>
+                    </div>
+                    <div class="d-flex-inline">
+                        <span class="p-2 font-weight-bold">发行公司:</span>
+                        <span class="p-2" style="margin-left: 10px;">[[${movie.comp}]]</span>
+                    </div>
+                    <div class="d-flex-inline">
+                        <span class="p-2 font-weight-bold">更多片名:</span>
+                        <span class="p-2" style="margin-left: 10px;">[[${movie.more}]]</span>
+                    </div>
+                    <div class="d-flex-inline">
+                        <p class="p-2 font-weight-bold">剧情:</p>
+                        <p class="p-2" style="margin-left: 10px;margin-top: -20px;">[[${movie.des}]]</p>
+                    </div>
+                </div>
+            </div>
+            <!--<div style="position: absolute;width: 30%;left: 65%;">-->
+            <!--<p style="font-size: 20px;font-weight: bold;">主演</p>-->
+            <!--<ul>-->
+            <!--<li v-for="item in arr" :title="item">-->
+            <!--<div class="d-flex" style="height:80px;width: 100%;;padding-top: 3%;">-->
+            <!--<img :src="item.jpg" width="30%" height="80%" >-->
+            <!--<p style="margin-left: 4px;font-weight: bolder;">{{ item.actor }}</br> 饰 {{ item.obj }}</p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="row" style="margin-top: 40px">
+        <div class="col-md-8 offset-md-2" id="duanping">
+            <p style="position: absolute;right: 0;color: gray;">全部（[[${totalComm}]]条）</p>
+            <h4>[[${movie.name}]]的短评</h4>
+            <ul th:each="item:${commList}">
+                <li v-for="(item,index) in arr" :title="item">
+                    <div class="d-flex" style="width: 100%">
+                        <div class="p-2" style="width:70px;">
+                            <img src="jpg/fire2.jpg" width="100%" height="70px">
+                        </div>
+                        <div class="p-2" style="width: 14%;left: 12%;">
+                            <a th:href="@{'/user?id='+${item.uid}}" style="margin-bottom: -2px;color: black;">[[${item.uname}]]</a>
+                            <ul>
+                                <li th:each="index:${#numbers.sequence(1,item.star)}" title="item" style="display:inline-block;"
+                                    v-if="index<item.like">
+                                    <i class="iconfont icon-shixinwujiaoxing " style="font-size:14px;color: coral;"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="width: 1px;height: 80px;;background: slategray;"></div>
+                        <div class="p-2" style="margin-left: 2%;width: 75%;">
+                            <p class="p-2"
+                               style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;margin-top: -15px;">
+                                [[${item.content}]]</p>
+                            <div class="d-flex ">
+                                <p class="flex-grow-1" style="margin-left: 15px;">[[${item.time}]]</p>
+                                <a type="button" class="btn iconfont icon-buoumaotubiao16"
+                                        style="font-size:16px;color: cornflowerblue;margin-left:13px;" th:href="@{'/zanMovie?mid='+${movie.id}+'&id='+${item.id}}">点赞([[${item.zan}]])
+                                </a>
+                                <a type="button" class="btn iconfont icon-fandui"
+                                        style="font-size:16px;margin-left:13px;color: black;" th:href="@{'/fanduiMovie?mid='+${movie.id}+'&id='+${item.id}}">
+                                    反对([[${item.fandui}]])
+                                </a>
+                                <button type="button" class="btn iconfont icon-ziyuan"
+                                        style="font-size:16px;color:red;margin-left:13px;" data-target="#jubao"
+                                        data-toggle="modal">举报</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="row" style="margin-top: 40px">
+        <div class="col-md-8 offset-md-2" id="topic">
+            <p style="position: absolute;right: 0;color: gray;">全部（[[${totalTopic}]]条）</p>
+            <h4>[[${movie.name}]]的话题</h4>
+            <ul>
+                <li th:each="item:${topicList}">
+                    <div class="d-flex" style="width: 100%">
+                        <div class="p-2" style="width:70px;">
+                            <img src="jpg/fire2.jpg" width="100%" height="70px">
+                            <p class="text-center" style="margin-bottom: -2px;"><a th:href="@{'/user?id='+${item.uid}}" style="color: #030e11;">[[${item.uname}]]</a></p>
+                        </div>
+                        <div style="width: 1px;height: 80px;;background: slategray;margin-left:20px;"></div>
+                        <div class="p-2 flex-grow-1" style="margin-left: 2%;">
+                            <a th:href="@{'/itemTopic?id='+${item.tid}}"
+                               style="margin-left: 2%;margin-bottom: 5px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;color: dodgerblue;">#[[${item.title}]]#</a>
+                            <p class="p-2"
+                               style="margin-left: 2%;margin-bottom: -3px;width: 100%;word-wrap: break-word;word-break: break-all;overflow: hidden;margin-top: -15px;height: 60px;overflow: hidden;">
+                                [[${item.content}]]</p>
+                            <div class="d-flex ">
+                                <p class="flex-grow-1" style="margin-left: 15px">[[${item.time}]]</p>
+                                <a type="button" class="btn iconfont icon-buoumaotubiao16"
+                                   style="font-size:16px;color: cornflowerblue;margin-left:13px;" th:href="@{'/zanTopic?mid='+${movie.id}+'&id='+${item.id}+'&type=2'}">点赞([[${item.zan}]])
+                                </a>
+                                <a type="button" class="btn iconfont icon-fandui"
+                                   style="font-size:16px;margin-left:13px;color: black;" th:href="@{'/fanduiTopic?mid='+${movie.id}+'&id='+${item.id}+'&type=2'}">
+                                    反对([[${item.fandui}]])
+                                </a>
+                
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var duanping = new Vue({
+        el: "#duanping",
+        data: {
+            name: "疾速追杀",
+            star: [1, 2, 3, 4, 5],
+            arr: [{
+                jpg: "jpg/fire2.jpg",
+                href: "https://baidu.com",
+                own: "西瓜",
+                like: 5,
+                pinglun: "hhh",
+                time: "2020/03/03",
+                likeNumber: 12,
+                dislikeNumber: 20
+            }],
+            number: 100,
+        },
+        methods: {
+            tolike: function (index) {
+                var that = this;
+                axios.post("https://baidu.com",
+                    {})
+                    .then(function (response) {
+                        that.arr[index].likeNumber += 1;
+                    }, function (error) {
+                        console.log(err);
+                    })
+            },
+            todislike: function (index) {
+                var that = this;
+                axios.post("https://baidu.com",
+                    {})
+                    .then(function (response) {
+                        that.arr[index].dislikeNumber += 1;
+                    }, function (error) {
+                        console.log(err);
+                    })
+            }
+        }
+    });
+    var info = new Vue({
+        el: "#info",
+        data:{
+            arr:[0,1,2,3,4],
+            star:0
+        },
+        methods: {
+            dianzan: function (index) {
+                index += 1;
+                var oli = document.getElementById("stars").getElementsByTagName("li");
+                for (var i = 0; i < this.arr.length; i++) {
+                    oli[i].getElementsByTagName("button")[0].style.color = "";
+                }
+                for (var i = 0; i < index; i++) {
+                    oli[i].getElementsByTagName("button")[0].style.color = "yellow";
+                }
+                this.star = index;
+                this.want += 1;
+            },
+            submit: function () {
+                var that = this;
+                axios({
+                    method: 'post',
+                    url: "addMovieComm",
+                    data: {
+                        content: that.content,
+                        star: that.star,
+                        bid: document.getElementById("id").value
+                    },
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj) {
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        }
+                        return str.join("&");
+                    }
+                }).then(function (response) {
+                    //that.like+=1;
+                    // var hh={jpg:"jpg/fire2.jpg",own:"西瓜",like:0,pinglun:that.content,time:new Date().toLocaleString(),likeNumber:0,dislikeNumber:0,like:that.star}
+                    // duanping.arr.push(hh);
+                    // duanping.number+=1;
+                    alert(response.data);
+                    window.location.reload();
+                }, function (error) {
+                    alert(error.data);
+                    window.location.reload();
+                })
+            },
+            //     axios.post("addMovieComm",
+            //         {
+            //             content: that.content,
+            //             star: that.star,
+            //             bid: document.getElementById("id").value
+            //         })
+            //         .then(function (response) {
+            //             //that.like+=1;
+            //             // var hh={jpg:"jpg/fire2.jpg",own:"西瓜",like:0,pinglun:that.content,time:new Date().toLocaleString(),likeNumber:0,dislikeNumber:0,like:that.star}
+            //             // duanping.arr.push(hh);
+            //             // duanping.number+=1;
+            //             alert(response.data);
+            //             window.location.reload();
+            //         }, function (error) {
+            //             alert(error.data);
+            //             window.location.reload();
+            //         })
+            // },
+            wantsee: function () {
+                var that = this;
+                axios({
+                    method: 'post',
+                    url: "addMovieWant",
+                    data: {
+                        id: document.getElementById("id").value
+                    },
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj) {
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        }
+                        return str.join("&");
+                    }
+                }).then(function (response) {
+                    alert(response.data);
+                    window.location.reload();
+                }, function (error) {
+                    alert(error.data);
+                    window.location.reload();
+                })
+            }
+
+        }
+    });
+    var moreInfo = new Vue({
+        el: "#moreInfo",
+        data: {
+            director: "杰克",
+            writer: "john",
+            country: "美国",
+            company: "likeit",
+            otherName: "冲啊",
+            plot: "从前啊",
+            arr: [{jpg: "jpg/book3.jpg", actor: "john", obj: "jack"}, {
+                jpg: "jpg/book3.jpg",
+                actor: "john",
+                obj: "jack"
+            }, {jpg: "jpg/book3.jpg", actor: "john", obj: "jack"}]
+        }
+    });
+    var topic = new Vue({
+        el: "#topic",
+        data: {
+            name: "疾速追杀",
+            number: 123,
+            arr: [{
+                jpg: "jpg/fire2.jpg",
+                own: "西瓜",
+                ownhref: "https://baidu.com",
+                pinglun: "hhh",
+                time: "2020/03/03",
+                likeNumber: 12,
+                dislikeNumber: 20,
+                href: "https://baidu.com"
+            }]
+        },
+        methods: {
+            tolike: function (index) {
+                var that = this;
+                axios.post("check.html",
+                    {})
+                    .then(function (response) {
+                        that.arr[index].likeNumber += 1;
+                    }, function (error) {
+                        console.log(err);
+                    })
+            },
+            todislike: function (index) {
+                var that = this;
+                axios.post("https://baidu.com",
+                    {})
+                    .then(function (response) {
+                        that.arr[index].dislikeNumber += 1;
+                    }, function (error) {
+                        console.log(err);
+                    })
+            }
+        }
+    });
+    var jubao = new Vue({
+        el: "#jubao",
+        data: {
+            content: "",
+            title: ""
+        },
+        methods: {
+            submit: function () {
+                if(this.content.length<15)
+                alert("详细描述字数不够15")
+                else{
+                    var hh=document.getElementById("jubaotongzhi");
+                    hh.style.display="block";
+                    setTimeout(function(){
+                        hh.style.display="none";
+                    },1000);
+                    this.content="";
+                    this.title="";
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

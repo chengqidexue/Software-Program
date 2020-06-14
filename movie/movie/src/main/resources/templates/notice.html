@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>花瓣--消息通知</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/daohang.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="./js/Move.js"></script>
+    <script src="./iconfont/iconfont.js"></script>
+    <style>
+        .hot-group
+		{
+            border-radius: 7px;
+            overflow: hidden;
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+            transition: width 1s;
+            transition: height 1s;
+        }
+        .hot-group:hover
+		{
+            width: 103%;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+        }
+        .hot-group-item{position: relative;width: 100%;height: 90px}
+        .hot-group .pic{position:absolute;width: 30%;height: 100%;left: 0;top: 0}
+        .hot-group .pic img
+		{
+            width: 70%;height: 70%;
+        }
+        .hot-group .info{position:absolute;width:70%;height: 100%;left: 30%;top: 10px}
+        .hot-group .info > a{position: absolute;left: 0;width:100%;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
+        .myborder{width: 100%;height: 1px;background: #b3d4fc;overflow: hidden}
+        .big-border{width: 100%;height:1px;background: cornflowerblue}
+        .switch-item{width: 30px;height: 30px;background: lightsteelblue;border-radius: 3px;overflow: hidden;opacity: 0.4;filter: alpha(40);margin: 5px }
+    </style>
+</head>
+
+<body>
+<div class="container_fluid" >
+	<!--引入顶栏 -->
+	<div th:replace="~{common/bar::header}"></div>
+	<div th:replace="~{common/bar::search}"></div>
+</div>
+    <div class="container_fluid">
+    	<div class="row">
+        	<div class="col-md-6 offset-md-5">
+        		<h2>消息通知</h2>
+            </div>
+            <div class="col-md-6 offset-md-4">
+        		<div>最近活动：有未读通知的页面</div>
+            </div>
+            <div class="col-md-6 offset-md-3"  th:each="item:${list}">
+            	<div class="channel-item mb-2" style="position: relative">
+                	<h3><a href="#" style="font-size: 25px;color:black; " th:text="${item.title}"></a> </h3>
+                	<div class="block-info p-2" style="width: 100%;background: snow">
+                    	<p style="word-wrap: break-word" th:text="${item.content}">
+                        </p>
+                	</div>
+                	<div class="source d-flex">
+                    	<span class="from p-2">来自<a href="#" class="fromhref p-2" th:text="${item.from}"></a></span>
+                    	<span class="pubtime p-2 mr-auto" th:text="${item.time}"></span>
+                	</div>
+                	<div class="myborder">
+                	</div>
+            	</div>
+
+            	</div>
+            	<div style="width: 100%;margin: 30px;position: relative">
+                	<div class="allcenter d-flex align-items-center">
+                    	<i class="iconfont icon-shangyiyeqianyiye" style="font-size: 30px;color: cornflowerblue"></i>
+                    	<div class="switch-item text-center">1</div>
+                    	<div class="switch-item text-center">2</div>
+                    	<div class="switch-item text-center">3</div>
+                    	<div class="switch-item text-center">4</div>
+                    	<div class="switch-item text-center">...</div>
+                    	<div class="switch-item text-center">10</div>
+                    	<i class="iconfont icon-xiayiyehouyiye" style="font-size: 30px;color: cornflowerblue"></i>
+                	</div>
+            	</div>
+        	</div>
+        </div>
+    </div>
+</body>
+</html>
